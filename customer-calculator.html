@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X6PF6V7EWT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-X6PF6V7EWT');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-M236P7BB');</script>
+<!-- End Google Tag Manager -->
+<title>Investment Estimator | Digital Masterminds</title>
+<meta name="description" content="Estimate the investment and expected return of a Digital Masterminds package for your industry.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preload" href="/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/assets/fonts/poppins-700.woff2" as="font" type="font/woff2" crossorigin><style id="dmm-fonts">@font-face{font-family:'Poppins';font-style:normal;font-weight:500;font-display:swap;src:url(/assets/fonts/poppins-500.woff2) format('woff2')}@font-face{font-family:'Poppins';font-style:normal;font-weight:600;font-display:swap;src:url(/assets/fonts/poppins-600.woff2) format('woff2')}@font-face{font-family:'Poppins';font-style:normal;font-weight:700;font-display:swap;src:url(/assets/fonts/poppins-700.woff2) format('woff2')}@font-face{font-family:'Poppins';font-style:normal;font-weight:800;font-display:swap;src:url(/assets/fonts/poppins-800.woff2) format('woff2')}@font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url(/assets/fonts/inter-400.woff2) format('woff2')}@font-face{font-family:'Inter';font-style:normal;font-weight:500;font-display:swap;src:url(/assets/fonts/inter-500.woff2) format('woff2')}@font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url(/assets/fonts/inter-600.woff2) format('woff2')}@font-face{font-family:'Inter';font-style:normal;font-weight:700;font-display:swap;src:url(/assets/fonts/inter-700.woff2) format('woff2')}</style>
+<style>
+/* Layout: sticky results column beside a stepwise input panel; violet DMM palette, near-black ink, lavender surfaces */
+:root{
+  --bg:#f6f3fc; --surface:#ffffff; --surface2:#efe9fb; --ink:#171321; --ink2:#524a68; --line:#ddd3f2;
+  --violet:#6d28d9; --violet-deep:#4c1d95; --violet-soft:#e6dcfa; --on-violet:#ffffff;
+  --good:#17803d; --warn:#92400e; --bad:#b91c1c; --warn-bg:#fdf0dc; --good-bg:#e1f5e8;
+  --f-display:'Poppins',system-ui,sans-serif; --f-body:'Inter',system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:15px/1.5 var(--f-body);margin:0;padding-block:28px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1180px;margin:0 auto}
+h1,h2,h3{font-family:var(--f-display);margin:0;text-wrap:balance;letter-spacing:-.01em}
+h1{font-size:clamp(26px,4vw,38px);line-height:1.1}
+h2{font-size:18px;margin-bottom:14px}
+h3{font-size:15px}
+.eyebrow{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--violet);font-weight:600;margin-bottom:8px}
+.lede{color:var(--ink2);max-width:62ch;margin:10px 0 0}
+.preview-flag{display:inline-block;background:var(--warn-bg);color:var(--warn);border-radius:999px;padding:4px 12px;font-size:12px;font-weight:600;margin-bottom:14px}
+.grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:24px;margin-top:26px;align-items:start}
+@media(max-width:900px){.grid{grid-template-columns:minmax(0,1fr)}}
+.grid>*,.panel,.two>*,.row2>*{min-width:0}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px}
+.panel+.panel{margin-top:18px}
+.results{position:sticky;top:12px}
+@media(max-width:900px){.results{position:static}}
+label.f{display:block;font-size:13px;font-weight:600;margin:16px 0 6px}
+label.f:first-of-type{margin-top:0}
+.hint{font-weight:400;color:var(--ink2);font-size:12.5px}
+select,input[type=number]{width:100%;font:inherit;color:var(--ink);background:var(--surface2);border:1px solid var(--line);border-radius:10px;padding:10px 12px;min-height:42px}
+select:focus-visible,input:focus-visible,button:focus-visible{outline:2px solid var(--violet);outline-offset:2px}
+.seg{display:grid;gap:8px}
+.seg.c3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.seg.c2{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:520px){.seg.c3{grid-template-columns:1fr}}
+.seg button{font:inherit;text-align:left;background:var(--surface2);color:var(--ink);border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer;min-height:44px}
+.seg button b{display:block;font-family:var(--f-display);font-size:14px}
+.seg button span{display:block;font-size:12px;color:var(--ink2);margin-top:2px}
+.seg button[aria-pressed=true]{border-color:var(--violet);background:var(--violet-soft)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:520px){.row2{grid-template-columns:1fr}}
+.btn-link{background:none;border:0;color:var(--violet);font:inherit;font-size:12.5px;font-weight:600;cursor:pointer;padding:4px 0}
+.big{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.stat{background:var(--surface2);border-radius:14px;padding:14px}
+.stat .n{font-family:var(--f-display);font-size:24px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.15}
+.stat .l{font-size:12.5px;color:var(--ink2);margin-top:4px}
+.stat.hero{background:var(--violet);color:var(--on-violet)}
+.stat.hero .l{color:var(--on-violet);opacity:.85}
+table{width:100%;border-collapse:collapse;font-size:13.5px;font-variant-numeric:tabular-nums}
+th,td{text-align:right;padding:8px 8px;border-bottom:1px solid var(--line)}
+th:first-child,td:first-child{text-align:left}
+th{font-size:12px;color:var(--ink2);font-weight:600}
+.tw{overflow-x:auto}
+.bars{display:grid;gap:10px;margin-top:8px}
+.bar{display:grid;grid-template-columns:110px 1fr;gap:10px;align-items:center;font-size:13px}
+.bar .track{background:var(--surface2);border-radius:8px;height:26px;overflow:hidden;display:flex}
+.bar .seg1,.bar .seg2,.bar .seg3{height:100%}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--ink2);margin-top:8px}
+.dot{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.c-setup{background:#8b5cf6}.c-ret{background:#5b21b6}.c-media{background:#c4b5fd}.c-ret2{background:#17803d}
+.tag{display:inline-block;font-size:11px;font-weight:600;border-radius:999px;padding:2px 8px;margin-left:6px;vertical-align:1px}
+.tag.src{background:var(--good-bg);color:var(--good)}
+.tag.asm{background:var(--warn-bg);color:var(--warn)}
+.note{font-size:12.5px;color:var(--ink2)}
+.alert{background:var(--warn-bg);color:var(--warn);border-radius:10px;padding:10px 12px;font-size:13px;margin-top:12px}
+ul.chk{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:13.5px}
+ul.chk li{padding-left:22px;position:relative}
+ul.chk li:before{content:'';position:absolute;left:3px;top:.45em;width:6px;height:10px;border:solid var(--violet);border-width:0 2px 2px 0;transform:rotate(45deg) translateY(-3px)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:700px){.two{grid-template-columns:1fr}}
+details{border-top:1px solid var(--line);padding-top:12px;margin-top:16px}
+summary{cursor:pointer;font-weight:600;font-size:14px}
+.foot{font-size:12.5px;color:var(--ink2);margin-top:26px;max-width:90ch}
+.foot a,.srcs a{color:var(--violet)}
+.srcs{font-size:12.5px;color:var(--ink2);display:grid;gap:4px;margin-top:8px}
+.int{background:var(--surface2);border:1px dashed var(--violet);border-radius:14px;padding:16px;margin-top:18px}
+.plats{display:grid;gap:8px}
+.plat{display:flex;gap:10px;align-items:flex-start;background:var(--surface2);border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer}
+.plat input,.chkrow input{margin-top:3px;accent-color:var(--violet)}
+.plat b{font-size:14px;display:block}.plat span{font-size:12px;color:var(--ink2)}
+.plat.on{border-color:var(--violet);background:var(--violet-soft)}
+.chkrow{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;margin-top:14px;cursor:pointer}
+.disc{border:1px solid var(--line);border-radius:14px;padding:16px;margin-top:22px;background:var(--surface)}
+.disc h2{font-size:15px;margin-bottom:6px}
+.disc p{font-size:12.5px;color:var(--ink2);margin:8px 0 0;max-width:100ch}
+.draftflag{display:inline-block;background:var(--warn-bg);color:var(--warn);border-radius:8px;padding:6px 10px;font-size:12px;font-weight:600}
+.toggle{display:flex;align-items:center;gap:8px;font-size:13px;margin-top:20px}
+@media(prefers-reduced-motion:no-preference){.stat .n{transition:opacity .15s}}
+
+input[type=text],input[type=email],input[type=tel]{width:100%;font:inherit;color:var(--ink);background:var(--surface2);border:1px solid var(--line);border-radius:10px;padding:10px 12px;min-height:42px}
+input[type=text]:focus-visible,input[type=email]:focus-visible,input[type=tel]:focus-visible{outline:2px solid var(--violet);outline-offset:2px}
+.gate{margin-top:22px}
+.sitebar{background:var(--surface);border-bottom:1px solid var(--line)}
+.sitebar .in{max-width:1180px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0}
+.sitebar img{height:44px;width:auto;display:block}
+.sitebar a.back{font-size:13px;color:var(--violet);font-weight:600;text-decoration:none}
+.btn{background:var(--violet);color:var(--on-violet);border:0;border-radius:999px;padding:12px 24px;font:600 15px var(--f-body);cursor:pointer;min-height:44px;margin-top:16px}
+.btn:disabled{opacity:.55;cursor:not-allowed}
+.gate{max-width:760px}
+.gate .note a,.chkrow a{color:var(--violet)}
+body{padding-top:0}
+.pad{padding-top:28px}
+</style>
+<style id="dmm-loader-css">html.dmm-seen #dmm-loader{display:none!important}
+#dmm-loader{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;background:radial-gradient(circle at 50% 46%,#1d1336 0%,#0a0812 42%,#000 100%);transition:opacity .45s ease,visibility .45s ease}
+#dmm-loader.done{opacity:0;visibility:hidden;pointer-events:none}
+#dmm-loader.reveal{pointer-events:none}
+#dmm-loader .dl-scene{position:relative;width:240px;height:240px;perspective:900px}
+#dmm-loader .dl-stage{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateX(-14deg)}
+#dmm-loader .dl-glow{position:absolute;inset:40px;border-radius:50%;background:radial-gradient(circle,rgba(167,139,250,.75),rgba(124,58,237,.25) 45%,rgba(124,58,237,0) 70%);animation:dlPulse 1.2s ease-in-out infinite;transform:translateZ(-60px)}
+#dmm-loader .dl-spin{position:absolute;left:50%;top:50%;width:130px;height:91px;margin:-46px 0 0 -65px;transform-style:preserve-3d;animation:dlSpin 2.6s cubic-bezier(.6,.05,.4,.95) infinite}
+#dmm-loader .dl-l{position:absolute;inset:0;width:100%;height:100%;transform:translateZ(var(--z)) scale(var(--s))}
+#dmm-loader .dl-orb{position:absolute;left:50%;top:50%;border-radius:50%;transform-style:preserve-3d}
+#dmm-loader .dl-orb i{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,rgba(167,139,250,0) 0deg,rgba(167,139,250,0) 200deg,#8b5cf6 320deg,#fff 360deg);-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 3px),#000 calc(100% - 2px));mask:radial-gradient(farthest-side,transparent calc(100% - 3px),#000 calc(100% - 2px));animation:dlRot 1.3s linear infinite;box-shadow:0 0 18px rgba(139,92,246,.35)}
+#dmm-loader .dl-orb b{position:absolute;left:50%;top:-5px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:#fff;box-shadow:0 0 12px 4px rgba(196,181,253,.9)}
+#dmm-loader .o1{width:210px;height:210px;margin:-105px 0 0 -105px;transform:rotateX(74deg) rotateY(-10deg)}
+#dmm-loader .o2{width:176px;height:176px;margin:-88px 0 0 -88px;transform:rotateX(68deg) rotateY(38deg)}
+#dmm-loader .o2 i{animation-duration:1.9s;animation-direction:reverse;opacity:.7}
+#dmm-loader .o3{width:150px;height:150px;margin:-75px 0 0 -75px;transform:rotateX(80deg) rotateY(-46deg)}
+#dmm-loader .o3 i{animation-duration:2.6s;opacity:.5}
+#dmm-loader .o1 .sp,#dmm-loader .o2 .sp,#dmm-loader .o3 .sp{position:absolute;inset:0;animation:dlRot 2.2s linear infinite}
+#dmm-loader .o2 .sp{animation-duration:3.1s;animation-direction:reverse}
+#dmm-loader .o3 .sp{animation-duration:4s}
+#dmm-loader .dl-floor{position:absolute;left:50%;bottom:6px;width:150px;height:26px;margin-left:-75px;border-radius:50%;background:radial-gradient(closest-side,rgba(139,92,246,.55),rgba(139,92,246,0));animation:dlFloor 2.6s cubic-bezier(.6,.05,.4,.95) infinite}
+#dmm-loader .dl-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@property --dlr{syntax:'<length>';inherits:false;initial-value:0px}
+#dmm-loader .dl-charge{position:absolute;inset:-30px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.95) 0%,rgba(216,200,255,.75) 14%,rgba(139,92,246,.35) 38%,rgba(139,92,246,0) 66%);opacity:.12;transform:scale(.55);animation:dlCharge 1s cubic-bezier(.55,0,.85,.4) forwards}
+#dmm-loader .dl-rays{position:absolute;inset:-120px;border-radius:50%;background:repeating-conic-gradient(from 0deg,rgba(196,181,253,.0) 0deg 9deg,rgba(196,181,253,.22) 11deg 13deg,rgba(196,181,253,0) 15deg 24deg);-webkit-mask:radial-gradient(closest-side,#000 18%,transparent 72%);mask:radial-gradient(closest-side,#000 18%,transparent 72%);opacity:0;animation:dlRays 1s ease-in forwards,dlRot 14s linear infinite}
+#dmm-loader .dl-flash{position:absolute;left:50%;top:50%;width:240px;height:240px;margin:-120px 0 0 -120px;border-radius:50%;background:radial-gradient(circle,#fff 0%,rgba(233,221,255,.9) 22%,rgba(167,139,250,.45) 48%,rgba(139,92,246,0) 70%);opacity:0;pointer-events:none}
+#dmm-loader.reveal{-webkit-mask:radial-gradient(circle at 50% 50%,transparent var(--dlr),#000 calc(var(--dlr) + 120px));mask:radial-gradient(circle at 50% 50%,transparent var(--dlr),#000 calc(var(--dlr) + 120px));animation:dlOpen 1s cubic-bezier(.7,0,.25,1) forwards}
+#dmm-loader.reveal .dl-flash{animation:dlFlash 1s ease-out forwards}
+#dmm-loader.reveal .dl-scene{animation:dlOut .6s ease-in forwards}
+@keyframes dlCharge{to{opacity:1;transform:scale(1.15)}}
+@keyframes dlRays{to{opacity:1}}
+@keyframes dlOpen{0%{--dlr:0px}100%{--dlr:160vmax}}
+@keyframes dlFlash{0%{opacity:0;transform:scale(.6)}25%{opacity:1;transform:scale(1.6)}100%{opacity:0;transform:scale(9)}}
+@keyframes dlOut{to{opacity:0;transform:scale(1.35)}}
+@keyframes dlSpin{0%{transform:rotateY(0) translateY(0)}50%{transform:rotateY(180deg) translateY(-6px)}100%{transform:rotateY(360deg) translateY(0)}}
+@keyframes dlRot{to{transform:rotate(360deg)}}
+@keyframes dlPulse{0%,100%{transform:translateZ(-60px) scale(.85);opacity:.55}50%{transform:translateZ(-60px) scale(1.12);opacity:1}}
+@keyframes dlFloor{0%,100%{transform:scaleX(1);opacity:.9}25%,75%{transform:scaleX(.55);opacity:.6}50%{transform:scaleX(.95);opacity:.7}}
+@media (prefers-reduced-motion:reduce){#dmm-loader *{animation:none!important}}
+</style><script>try{if(localStorage.getItem('dmm_seen'))document.documentElement.classList.add('dmm-seen')}catch(e){}</script><style id="a11y-css">.skip-link{position:absolute;left:12px;top:-60px;z-index:10000;padding:10px 16px;border-radius:10px;background:#6d28d9;color:#fff;font:600 14px Inter,system-ui,sans-serif;text-decoration:none;transition:top .15s}.skip-link:focus{top:12px;outline:3px solid #c4b5fd;outline-offset:2px}:focus-visible{outline:3px solid #8b5cf6;outline-offset:2px}.engine .eyebrow{color:var(--lavender)}.engine .eyebrow::before{background:var(--lavender)}</style><link rel="canonical" href="https://www.dmmkt.tech/customer-calculator"><meta property="og:type" content="website"><meta property="og:site_name" content="Digital Masterminds"><meta property="og:title" content="Investment Estimator | Digital Masterminds"><meta property="og:description" content="Estimate your monthly investment in digital marketing and AI agents with the Digital Masterminds calculator."><meta property="og:url" content="https://www.dmmkt.tech/customer-calculator"><meta property="og:image" content="https://www.dmmkt.tech/assets/og-image.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><link rel="icon" href="/favicon.ico" sizes="48x48"><link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><meta name="theme-color" content="#0a0812"></head>
+<body><a class="skip-link" href="#main">Skip to main content</a>
+<div id="dmm-loader" role="status" aria-live="polite"><div class="dl-scene" aria-hidden="true"><div class="dl-floor"></div><div class="dl-stage"><div class="dl-rays"></div><div class="dl-charge"></div><div class="dl-glow"></div><div class="dl-orb o1"><div class="sp"><i></i><b></b></div></div><div class="dl-orb o2"><div class="sp"><i></i><b></b></div></div><div class="dl-orb o3"><div class="sp"><i></i></div></div><div class="dl-spin"><img class="dl-l" style="--z:-8.07px;--s:0.900" src="/assets/logo-3d-loader.webp" alt="" width="320" height="223"><img class="dl-l" style="--z:-7.22px;--s:0.945" src="/assets/logo-3d-loader-edge.webp" alt="" width="320" height="223"><img class="dl-l" style="--z:-6.38px;--s:0.961" src="/assets/logo-3d-loader-edge.webp" alt="" width="320" height="223"><img class="dl-l" style="--z:-5.52px;--s:0.973" src="/assets/logo-3d-loader-edge.webp" alt="" width="320" height="223"><img class="dl-l" style="--z:-4.67px;--s:0.982" src="/assets/logo-3d-loader-edge.webp" alt="" width="320" height="223"><img class="dl-l" style="--z:-3.82px;--s:0.988" src="/assets/logo-3d-loader-edge.webp" alt="" width="320" height="223"><img class="dl-l" style="--z:-2.98px;--s:0.993" src="/assets/logo-3d-loader-edge.webp" alt="" width="320" height="223"><img class="dl-l" style="--z:-2.12px;--s:0.996" src="/assets/logo-3d-loader-edge.webp" alt="" width="320" height="223"><img class="dl-l" style="--z:-1.27px;--s:0.999" src="/assets/logo-3d-loader-edge.webp" alt="" width="320" height="223"><img class="dl-l" style="--z:-0.42px;--s:1.000" src="/assets/logo-3d-loader-edge.webp" alt="" width="320" height="223"><img class="dl-l" style="--z:0.42px;--s:1.000" src="/assets/logo-3d-loader-edge.webp" alt="" width="320" height="223"><img class="dl-l" style="--z:1.27px;--s:0.999" src="/assets/logo-3d-loader-edge.webp" alt="" width="320" height="223"><img class="dl-l" style="--z:2.12px;--s:0.996" src="/assets/logo-3d-loader-edge.webp" alt="" width="320" height="223"><img class="dl-l" style="--z:2.98px;--s:0.993" src="/assets/logo-3d-loader-edge.webp" alt="" width="320" height="223"><img class="dl-l" style="--z:3.82px;--s:0.988" src="/assets/logo-3d-loader-edge.webp" alt="" width="320" height="223"><img class="dl-l" style="--z:4.67px;--s:0.982" src="/assets/logo-3d-loader-edge.webp" alt="" width="320" height="223"><img class="dl-l" style="--z:5.52px;--s:0.973" src="/assets/logo-3d-loader-edge.webp" alt="" width="320" height="223"><img class="dl-l" style="--z:6.38px;--s:0.961" src="/assets/logo-3d-loader-edge.webp" alt="" width="320" height="223"><img class="dl-l" style="--z:7.22px;--s:0.945" src="/assets/logo-3d-loader-edge.webp" alt="" width="320" height="223"><img class="dl-l" style="--z:8.07px;--s:0.900" src="/assets/logo-3d-loader.webp" alt="" width="320" height="223"></div></div></div><div class="dl-flash"></div><span class="dl-sr">Loading</span></div>
+<script>(function(){var l=document.getElementById('dmm-loader');if(!l)return;if(document.documentElement.classList.contains('dmm-seen')){l.style.display='none';return}var t0=Date.now(),d=false,MIN=1000;function fin(){l.style.display='none';try{localStorage.setItem('dmm_seen','1')}catch(e){}}function go(){if(d)return;d=true;var rm=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;if(rm||!(window.CSS&&('registerProperty' in CSS))){l.classList.add('done');setTimeout(fin,500);return}l.classList.add('reveal');setTimeout(fin,1050)}function done(){setTimeout(go,Math.max(0,MIN-(Date.now()-t0)))}if(document.readyState==='complete')done();else window.addEventListener('load',done);setTimeout(go,6000);window.addEventListener('pageshow',function(e){if(e.persisted){d=true;fin()}})})();</script>
+<header class="sitebar"><div class="in" style="padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))"><a href="/"><img src="/assets/logo-dark.webp" alt="Digital Masterminds"></a><a class="back" href="tel:+19174982737" aria-label="Call Digital Masterminds" style="margin-right:16px">Call us</a><a class="back" href="/">Back to site</a></div></header>
+<main id="main" tabindex="-1" class="wrap pad">
+  <div class="eyebrow">Investment Estimator</div>
+  <h1>See what a package could cost, and what it could return.</h1>
+  <p class="lede">Pick your industry and a package. The estimate uses published ad-cost benchmarks for your field, plus the AI agent volume each package covers. Your diagnosis replaces these averages with your own numbers.</p>
+
+
+  <section id="gate" class="panel gate" aria-labelledby="h-gate">
+    <h2 id="h-gate">Unlock the calculator</h2>
+    <p class="note">Tell us where to send your estimate. A DMM strategist reviews it with you. No obligation.</p>
+    <form id="gateForm" novalidate>
+      <div class="row2">
+        <div><label class="f" for="gFirst">First name</label><input id="gFirst" name="firstname" type="text" autocomplete="given-name" required></div>
+        <div><label class="f" for="gLast">Last name</label><input id="gLast" name="lastname" type="text" autocomplete="family-name" required></div>
+        <div><label class="f" for="gEmail">Work email</label><input id="gEmail" name="email" type="email" autocomplete="email" required></div>
+        <div><label class="f" for="gCompany">Business name</label><input id="gCompany" name="company" type="text" autocomplete="organization" required></div>
+        <div><label class="f" for="gPhone">Phone <span class="hint">optional</span></label><input id="gPhone" name="phone" type="tel" autocomplete="tel"></div>
+        <div><label class="f" for="gSite">Website <span class="hint">optional</span></label><input id="gSite" name="website" type="text" autocomplete="url"></div>
+      </div>
+      <label class="chkrow"><input type="checkbox" id="gConsent"> <span>I agree that Digital Masterminds may contact me about my estimate. See our <a href="/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a>.*</span></label>
+      <button class="btn" type="submit">Unlock the calculator</button>
+      <p class="note" id="gateMsg" role="status"></p>
+      <p class="note" id="previewMode" hidden>Preview mode: the form is not connected to the CRM yet, so nothing is sent.</p>
+    </form>
+  </section>
+  <div id="calcApp" hidden>
+  <div class="grid">
+    <div>
+      <section class="panel" aria-labelledby="h-biz">
+        <h2 id="h-biz">1. Your business</h2>
+        <label class="f" for="ind">Industry</label>
+        <select id="ind"></select>
+
+        <label class="f">Services <span class="hint">choose what you want priced</span></label>
+        <div class="seg c3" id="mix">
+          <button type="button" data-v="bundle" aria-pressed="true"><b>Bundle</b><span>Marketing + AI agents</span></button>
+          <button type="button" data-v="dm" aria-pressed="false"><b>Marketing</b><span>Digital marketing only</span></button>
+          <button type="button" data-v="ai" aria-pressed="false"><b>AI agents</b><span>Corestack only</span></button>
+        </div>
+
+        <label class="f">Package</label>
+        <div class="seg c3" id="tier"></div>
+
+        <label class="f">Main goal</label>
+        <div class="seg c3" id="goal">
+          <button type="button" data-v="leads" aria-pressed="true"><b>Leads</b><span>Form fills and inquiries</span></button>
+          <button type="button" data-v="appts" aria-pressed="false"><b>Bookings</b><span>Appointments or consults</span></button>
+          <button type="button" data-v="calls" aria-pressed="false"><b>Calls</b><span>Phone inquiries</span></button>
+        </div>
+
+        <label class="f">Where to advertise <span class="hint">ad budget is split across what you pick, not multiplied</span></label>
+        <div class="plats" id="plats"></div>
+
+        <label class="f" for="hz">Time horizon</label>
+        <select id="hz"><option value="6">6 months</option><option value="12">12 months</option></select>
+      </section>
+
+      <section class="panel" aria-labelledby="h-num">
+        <h2 id="h-num">2. Your numbers <span class="hint">start with our defaults, then edit</span></h2>
+        <div class="row2">
+          <div><label class="f" for="spend">Monthly ad spend ($)</label><input id="spend" type="number" min="0" step="100"><button class="btn-link" type="button" id="useRec">Use recommended for this package</button></div>
+          <div><label class="f" for="ltv">Gross profit per new customer ($)</label><input id="ltv" type="number" min="0" step="50"></div>
+          <div><label class="f" for="close">Leads that become customers (%)</label><input id="close" type="number" min="1" max="100" step="1"></div>
+          <div><label class="f" for="exist">Inquiries you get today per month</label><input id="exist" type="number" min="0" step="10"></div>
+          <div><label class="f" for="rate">Staff cost per hour, fully loaded ($)</label><input id="rate" type="number" min="0" step="1"></div>
+          <div><label class="f" for="ramp">Ramp-up months at half results</label><select id="ramp"><option value="0">0 (none)</option><option value="1">1</option><option value="2" selected>2</option><option value="3">3</option></select></div>
+        </div>
+        <div id="spendAlert"></div>
+        <h3 style="margin-top:22px">Web and landing pages</h3>
+        <div class="row2">
+          <div><label class="f" for="pages">Products or services you want to promote</label><input id="pages" type="number" min="0" max="30" step="1"></div>
+          <div><label class="f" for="site">Your website</label><select id="site"><option value="have">I already have a site</option><option value="need">I need a new site</option></select></div>
+        </div>
+        <label class="chkrow" id="appRow" hidden><input type="checkbox" id="app"> I'm interested in custom technology or app development for my business</label>
+      </section>
+    </div>
+
+    <div class="results">
+      <section class="panel" aria-live="polite">
+        <h2>Your estimate <span class="hint" id="subtitle"></span></h2>
+        <div class="big" id="kpis"></div>
+
+        <div id="webNote" class="note" style="margin-top:14px"></div>
+        <div class="bars" id="bars"></div>
+        <div class="legend"><span><i class="dot c-setup"></i>One-time setup</span><span><i class="dot c-ret"></i>Monthly retainer</span><span><i class="dot c-media"></i>Ad spend paid to platforms</span><span><i class="dot c-ret2"></i>Estimated return</span></div>
+
+        <h3 style="margin-top:22px">Range of outcomes <span class="hint">per month, after ramp-up</span></h3>
+        <div class="tw"><table id="scen"></table></div>
+        <p class="note" id="scenNote"></p>
+      </section>
+
+      <section class="panel">
+        <h2>Paid search and paid social for your industry</h2>
+        <div class="tw"><table id="bench"></table></div>
+        <p class="note" id="benchNote"></p>
+      </section>
+
+      <section class="panel" id="aiPanel">
+        <h2>AI agent volume in this package</h2>
+        <div class="big" id="aiKpis"></div>
+        <div class="tw" style="margin-top:12px"><table id="agents"></table></div>
+        <p class="note" id="aiNote"></p>
+      </section>
+
+      <section class="panel">
+        <h2>What this package includes</h2>
+        <div class="two" id="incl"></div>
+      </section>
+
+      <section class="panel" id="sendPanel" aria-labelledby="h-send">
+        <h2 id="h-send">Send this estimate to a strategist</h2>
+        <p class="note">We save your selections and numbers so your diagnosis starts from them. Nothing is purchased by sending.</p>
+        <button class="btn" type="button" id="sendBtn">Send my estimate</button>
+        <p class="note" id="sendMsg" role="status"></p>
+        <details id="sendPreview" hidden><summary>What would be sent (preview mode)</summary><pre id="sendJson" style="white-space:pre-wrap;font-size:11.5px;overflow-x:auto"></pre></details>
+      </section>
+    </div>
+  </div>
+
+  </div>
+
+  <section class="disc" aria-labelledby="h-disc">
+    <span class="draftflag">Draft language. Every line marked * needs attorney review before this is shown to a prospect.</span>
+    <h2 id="h-disc" style="margin-top:12px">Important information*</h2>
+    <p>* <b>No guarantee of results.</b> This tool produces estimates only. Digital Masterminds does not guarantee any number of leads, customers, bookings, calls, revenue, savings, return on investment, search rankings, or AI answer-engine visibility. Actual results depend on many factors outside our control, including your market, offer, pricing, seasonality, competition, website, staff follow-up, and changes made by advertising platforms.</p>
+    <p>* <b>Estimates, not earnings claims.</b> Figures shown are illustrative projections built from the inputs on this page. They are not statements of what you or any other client have earned or will earn, and they are not based on Digital Masterminds client results.</p>
+    <p>* <b>Third-party data.</b> Advertising costs and conversion rates come from published third-party reports (see sources below). We have not independently audited them. They may be out of date, may describe a different market, campaign objective, or business size than yours, and in some cases are proxies or placeholders, as marked. Where no reliable industry figure exists, we say so and label the figure an assumption.</p>
+    <p>* <b>Assumptions you can edit.</b> Items tagged "assumption" are Digital Masterminds planning defaults, including the share of leads that become customers, value per customer, lead quality by platform, time saved per conversation, and AI usage levels. Changing them changes the result. Return figures reflect gross profit as you enter it, not revenue.</p>
+    <p>* <b>Pricing requires a diagnosis.</b> Setup fees, retainers, and add-on prices on this page are illustrative. Final scope and pricing are set only after a diagnosis of your business and are confirmed in a written agreement. Landing-page add-ons, new website builds, and custom application development are scoped and quoted separately.</p>
+    <p>* <b>Advertising spend is separate.</b> Ad spend is paid directly to the advertising platforms, is not part of Digital Masterminds fees, and is not a guaranteed amount needed to achieve any result. Platform prices change without notice.</p>
+    <p>* <b>Regulated industries.</b> Advertising for health, medical aesthetics, legal, financial, and tax services is subject to platform policies and professional or government rules. You are responsible for your own advertising compliance. Digital Masterminds does not provide legal, medical, tax, or financial advice.</p>
+    <p>* <b>Trademarks.</b> Google, Meta, Facebook, Instagram, TikTok, Reddit, Quora, and other names are trademarks of their owners. Their use here identifies advertising platforms only and does not imply partnership, sponsorship, or endorsement.</p>
+  </section>
+  <div class="srcs" id="srcs"></div>
+</main>
+
+
+<script>(function(){try{var keys=['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid','li_fat_id','fbclid','msclkid'];var q=new URLSearchParams(location.search),p={},found=false;keys.forEach(function(k){if(q.get(k)){p[k]=q.get(k);found=true}});if(found){var ref=document.referrer&&document.referrer.indexOf(location.hostname)===-1?document.referrer:'';sessionStorage.setItem('dmm_attr',JSON.stringify({p:p,landing:location.pathname,referrer:ref}))}}catch(e){}})();</script>
+<script>
+(function(){
+/* ---------- DATA ---------- */
+// Platform model. q = lead quality vs Google search leads (assumption; med spa lead-to-booking runs 25-40% on Meta vs 40-60% on Google per Web Tonic citing BestPPC).
+var PLAT={
+ g:{name:'Google Search',role:'Intent: people already looking for you',q:1},
+ m:{name:'Meta (Facebook & Instagram)',role:'Demand creation and retargeting',q:.65},
+ t:{name:'TikTok',role:'Awareness, top of funnel',q:.40,cpc:.79,ctr:.61,cpm:4.80,cpl:41.1,src:0,note:'CPM and CTR are Lebesgue 2026 ecommerce averages and CPC is derived from them. No lead-cost benchmark by industry is published, so cost per lead is a placeholder (CPC divided by an assumed 1.9% conversion rate).'},
+ r:{name:'Reddit',role:'Authority and decision-stage research',q:.55,cpc:.59,ctr:.50,cpm:2.95,cpl:29.5,src:0,note:'CPC and CTR are reported platform averages from secondary sources (ShNo citing FanIQ and AdBacklog). No lead-cost benchmark by industry is published, so cost per lead is a placeholder (CPC divided by an assumed 2% conversion rate).'},
+ q:{name:'Quora',role:'Authority and decision-stage research',q:.60,cpc:1.50,ctr:1.00,cpm:15.0,cpl:34.2,src:0,note:'No reliable average CPC, CPM or cost per lead is published. Every Quora figure is a placeholder (Meta all-industry lead cost plus 25%).'}
+};
+var BASE_META_CPL=27.39; // WordStream/LocaliQ 2026 all-industry Facebook lead campaigns
+var IND={
+ 'med-spas':{name:'MedSpas',niche:1.0,
+  se:{cpc:4.62,ctr:6.75,cvr:10.35,cpl:39.25,lbl:'LocaliQ 2026, Beauty & Personal Care'},
+  so:{cpc:2.97,ctr:1.35,cpl:50.91,src:1,lbl:'WordStream/LocaliQ 2026 Facebook lead campaigns, Beauty & Personal Care'},
+  spend:[2000,3500,6000],ltv:1500,close:12,exist:80,appt:.50,call:.30,
+  spendSrc:true,spendNote:'Web Tonic (citing TooPixels, 2026): $2,000 to $5,000 a month for a single location, $5,000 to $15,000+ for multi-site. Non-surgical lead cost reported at $20 to $60 and cost per booked consultation at $90 to $250.',
+  cac:'Published fully loaded CAC for injectables: $120 to $300 (HubXpert 2026, via Web Tonic).',ltvSrc:false},
+ 'health-wellness':{name:'Health & Wellness',niche:.95,
+  se:{cpc:6.17,ctr:5.81,cvr:6.94,cpl:67.36,lbl:'LocaliQ 2026, Health & Fitness'},
+  so:{cpc:1.84,ctr:3.09,cpl:27.11,src:1,lbl:'WordStream/LocaliQ 2026 Facebook lead campaigns, Health & Fitness'},
+  spend:[1500,3000,5500],ltv:900,close:15,exist:70,appt:.45,call:.30,spendSrc:false,spendNote:'No published minimum for this category. Ladder is a DMM planning assumption scaled from the MedSpa and professional-services ranges.',cac:'',ltvSrc:false},
+ 'construction-home-services':{name:'Construction & Home Services',niche:1.0,
+  se:{cpc:8.33,ctr:6.47,cvr:8.05,cpl:90.92,lbl:'LocaliQ 2026, Home & Home Improvement'},
+  so:{cpc:2.18,ctr:2.14,cpl:42.95,src:1,lbl:'WordStream/LocaliQ 2026 Facebook lead campaigns, Home & Home Improvement'},
+  spend:[2000,4000,8000],ltv:3500,close:12,exist:50,appt:.55,call:.55,spendSrc:false,spendNote:'No single published minimum. Ladder is a DMM planning assumption. Trade-level search CPL (LocaliQ client data, 2020 to 2021) ranged from about $29 for pools and spas to $101 for roofing, so spend needs to scale with the trade.',cac:'',ltvSrc:false},
+ 'law-firms':{name:'Law Firms',niche:1.1,
+  se:{cpc:9.87,ctr:5.87,cvr:5.55,cpl:131.63,lbl:'LocaliQ 2026, Attorneys & Legal Services'},
+  so:{cpc:1.80,ctr:2.70,cpl:41.09,src:0,lbl:'Placeholder: no 2026 lead-campaign benchmark published for legal. Uses the all-industry lead average ($27.39) plus 50% for a higher-consideration service'},
+  spend:[3000,5000,10000],ltv:4000,close:10,exist:40,appt:.45,call:.50,spendSrc:true,spendNote:'Web Tonic (citing Deelo, 2026): $5,000 a month recommended for personal injury, and under $3,000 a month rarely gives enough data to optimize. Personal injury CPC runs far above the blended legal average.',
+  cac:'Published cost per signed case: $850 to $1,200 for general legal, $1,500 to $5,000+ for personal injury (Web Tonic 2026).',ltvSrc:false},
+ 'franchises-multi-locations':{name:'Franchises & Multi-Location',niche:1.2,
+  se:{cpc:5.42,ctr:6.64,cvr:8.18,cpl:66.69,lbl:'WordStream/LocaliQ 2026, all-industry average'},
+  so:{cpc:1.80,ctr:2.70,cpl:27.39,src:1,lbl:'WordStream/LocaliQ 2026 Facebook lead campaigns, all-industry average (no franchise category)'},
+  spend:[1500,3000,6000],ltv:3000,close:10,exist:120,appt:.35,call:.35,spendSrc:false,spendNote:'Per location. No franchise-specific benchmark is published, so this uses all-industry averages. Home-service and fitness franchises run higher.',cac:'',ltvSrc:false},
+ 'real-estate':{name:'Real Estate',niche:1.0,
+  se:{cpc:3.22,ctr:7.61,cvr:3.70,cpl:102.51,lbl:'LocaliQ 2026, Real Estate'},
+  so:{cpc:1.27,ctr:4.17,cpl:13.74,src:1,lbl:'WordStream/LocaliQ 2026 Facebook lead campaigns, Real Estate'},
+  spend:[1500,3000,6000],ltv:5000,close:3,exist:60,appt:.40,call:.25,spendSrc:false,spendNote:'No published minimum. Ladder is a DMM planning assumption. Real estate leads close at low rates, so volume matters more than in other fields.',cac:'',ltvSrc:false},
+ 'architects':{name:'Architects',niche:1.0,
+  se:{cpc:5.87,ctr:6.10,cvr:4.85,cpl:93.69,lbl:'LocaliQ 2026, Business Services (US stand-in: no architect-specific US benchmark exists)'},
+  so:{cpc:1.80,ctr:2.70,cpl:27.39,src:0,lbl:'Business Services proxy: no lead-campaign benchmark is published for it (traffic campaigns: $0.70 CPC, 1.64% CTR), so the all-industry lead average is used'},
+  spend:[1000,2500,5000],ltv:10000,close:4,exist:25,appt:.35,call:.30,spendSrc:true,spendNote:'Budget range only comes from a UK guide (about £1,000 to £2,500 a month for small practices, £2,500 to £6,000 for medium firms, converted and rounded). No US architect benchmark exists, so cost and conversion figures use Business Services.',cac:'',ltvSrc:false},
+ 'cpas':{name:'CPAs',niche:1.0,
+  se:{cpc:6.50,ctr:9.83,cvr:7.60,cpl:85,lbl:'Web Tonic 2026 (CPA firms, CPL $65 to $101) and LocaliQ Finance & Insurance CTR'},
+  so:{cpc:1.80,ctr:2.70,cpl:41.09,src:0,lbl:'Finance & Insurance proxy: no lead-campaign benchmark is published for it, so the all-industry lead average ($27.39) plus 50% is used'},
+  spend:[1000,2500,5000],ltv:3000,close:15,exist:60,appt:.45,call:.35,spendSrc:true,spendNote:'Web Tonic: $1,000 to $2,000 a month supports one tightly targeted campaign, and about $5,000+ gives room to test broader keywords. Tax demand is seasonal, so cost per lead is lowest in September and October.',
+  cac:'Published cost per acquisition: about $132 to $217 depending on season (Web Tonic 2026).',ltvSrc:true},
+ 'other-businesses':{name:'Other Service Businesses',niche:1.0,
+  se:{cpc:5.87,ctr:6.10,cvr:4.85,cpl:93.69,lbl:'LocaliQ 2026, Business Services'},
+  so:{cpc:1.80,ctr:2.70,cpl:27.39,src:0,lbl:'Business Services proxy: no lead-campaign benchmark is published for it, so the all-industry lead average is used'},
+  spend:[1500,3000,5500],ltv:2000,close:12,exist:50,appt:.40,call:.35,spendSrc:false,spendNote:'General planning ladder. Your diagnosis sets the real range for your market.',cac:'',ltvSrc:false}
+};
+var TIERS=[
+ {id:'foundation',name:'Foundation',sub:'Establish a presence',split:.85,
+  dm:{setup:2500,ret:1500},ai:{setup:1500,ret:800},allow:400,pages:0,
+  agents:[['Lead Response',.6,1],['Scheduling & Reminders',.3,.7]],
+  
+  dmList:['Tune-up of your existing website (no new landing pages included)','Google Business Profile and local listings set up and cleaned','Review requests after every visit or job','Brand and high-intent search ads at a starter budget','Tracking set up: GA4, tag manager, call and form tracking','Monthly performance summary'],
+  aiList:['Lead Response Agent','Scheduling & Reminder Agent','Up to 400 conversations a month','Monthly summary of what the agents handled']},
+ {id:'growth',name:'Growth',sub:'Be visible',split:.70,
+  dm:{setup:3500,ret:2500},ai:{setup:3000,ret:1800},allow:1200,pages:1,
+  agents:[['Lead Response',.5,1],['Scheduling & Reminders',.25,.7],['Intake & Qualification',.35,1.2],['Nurture & Follow-Up',.3,.6],['Review & Reputation',.12,.4]],
+  
+  dmList:['Everything in Foundation','1 new landing page for your top offer included','SEO plus AI answer-engine (AEO and GEO) content on a monthly cadence','Search ads on your core service keywords','Social retargeting and awareness to stay visible','Email and SMS follow-up to leads and past customers','Competitor benchmarking','Weekly performance reporting'],
+  aiList:['Everything in Foundation','Industry intake and qualification agent','Nurture and follow-up for leads and past customers','Review and reputation agent','Up to 1,200 conversations a month','Weekly reporting']},
+ {id:'full',name:'Full Journey',sub:'Goal-based performance',split:.60,
+  dm:{setup:5000,ret:4000},ai:{setup:5000,ret:3500},allow:3000,pages:3,
+  agents:[['Lead Response',.4,1],['Scheduling & Reminders',.2,.7],['Intake & Qualification',.3,1.2],['Nurture & Follow-Up',.25,.6],['Review & Reputation',.1,.4],['AI Voice Agent',.2,2.2],['Video Avatar & Content',.05,2.5]],
+  
+  dmList:['Everything in Growth','Up to 3 landing pages included, with testing','Aggressive paid search and paid social managed to your goal (leads, bookings or calls)','Creative and landing-page testing every month','Call tracking and booking attribution','Market analysis: share of voice and competitive intelligence','Paid search technical support','Live reporting and ongoing tuning'],
+  aiList:['Everything in Growth','AI voice agent for calls and after-hours inquiries','Interactive AI video avatar with multilingual greetings','Content and creative agents','Client dashboard for agent activity and results','Custom application development, scoped and quoted separately','Up to 3,000 conversations a month','Live reporting and ongoing tuning']}
+];
+var SCEN=[{k:'Conservative',cpl:1.25,cl:.75},{k:'Expected',cpl:1,cl:1},{k:'Optimistic',cpl:.8,cl:1.2}];
+// AI usage assumptions (edit to match vendor invoices)
+var AI={tokIn:9000,tokOut:1600,minSaved:6,uplift:.10,ramp:.5};
+var SRC=[
+ ['LocaliQ, 2026 Search Advertising Benchmarks (Google, updated June 2026)','https://localiq.com/blog/search-advertising-benchmarks/'],
+ ['WordStream/LocaliQ 2026 Facebook lead-campaign benchmarks, as reproduced by Coupler','https://blog.coupler.io/facebook-ads-statistics/'],
+ ['LocaliQ, Home Services Advertising Benchmarks (client data 2020 to 2021)','https://localiq.com/blog/home-services-advertising-benchmarks/'],
+ ['Lebesgue, TikTok Ads Benchmarks 2026 update (ecommerce averages)','https://lebesgue.io/tiktok-ads/tiktok-ads-benchmarks'],
+ ['ShNo, Reddit Ads Statistics (secondary compilation)','https://www.shno.co/marketing-statistics/reddit-ads-statistics'],
+ ['ShNo, Quora Ads Statistics (bid floors only)','https://www.shno.co/marketing-statistics/quora-ads-statistics'],
+ ['Web Tonic, Google Ads for Med Spas (2026)','https://www.webtonic.io/blog/medical-spa-aesthetics-google-ads-statistics'],
+ ['Web Tonic, Google Ads in Tax & Accounting (2026)','https://www.webtonic.io/blog/tax-accounting-google-ads-statistics'],
+ ['Web Tonic, Personal Injury Law Google Ads Statistics (2026)','https://www.webtonic.io/blog/personal-injury-law-google-ads-statistics'],
+ ['Web Tonic, Franchise Google Ads Statistics (2026)','https://www.webtonic.io/blog/franchise-google-ads-statistics'],
+ ['Whitehat SEO, Architect Google Ads and PPC (UK budget range only)','https://whitehat-seo.co.uk/blog/architect-google-ads-ppc']
+];
+
+/* ---------- STATE ---------- */
+var S={ind:'med-spas',mix:'bundle',tier:1,goal:'leads',hz:6,spend:0,ltv:0,close:0,exist:0,rate:25,ramp:2,spendTouched:false,plat:{g:true,m:true,t:false,r:false,q:false},pages:3,site:'have',app:false};
+var PAGE_FEE=750; // placeholder add-on price per extra landing page
+var $=function(id){return document.getElementById(id)};
+var fm=function(n){return '$'+Math.round(n).toLocaleString('en-US')};
+var fn=function(n,d){return n.toLocaleString('en-US',{maximumFractionDigits:d==null?0:d})};
+var pct=function(n,d){return n.toFixed(d==null?1:d)+'%'};
+function tag(src){return '<span class="tag '+(src?'src':'asm')+'">'+(src?'sourced':'assumption')+'</span>'}
+
+/* ---------- MODEL ---------- */
+function activePlat(){
+ var p=S.plat,social=['m','t','r','q'].filter(function(k){return p[k]});
+ var g=!!p.g;
+ if(!g&&!social.length)g=true;
+ return {g:g,social:social};
+}
+function model(sc){
+ var I=IND[S.ind],T=TIERS[S.tier];
+ var dmOn=S.mix!=='ai',aiOn=S.mix!=='dm';
+ var spend=dmOn?S.spend:0;
+ var ap=activePlat();
+ var gShare=ap.g?(ap.social.length?T.split:1):0;
+ var sShare=1-gShare;
+ var rows=[],leads=0,eff=0,leadsS=0,leadsP=0;
+ function add(key,share,cpl,cpc,ctr,cpm,src,lbl){
+  var sp=spend*share,ld=sp/(cpl*sc.cpl);
+  rows.push({key:key,name:PLAT[key].name,role:PLAT[key].role,spend:sp,cpc:cpc,ctr:ctr,cpm:cpm,cpl:cpl,leads:ld,q:PLAT[key].q,src:src,lbl:lbl});
+  leads+=ld;eff+=ld*PLAT[key].q;
+  if(key==='g')leadsS+=ld;else leadsP+=ld;
+ }
+ if(ap.g)add('g',gShare,I.se.cpl,I.se.cpc,I.se.ctr,I.se.cpc*I.se.ctr*10,1,I.se.lbl);
+ var ratio=I.so.cpl/BASE_META_CPL;
+ ap.social.forEach(function(k){
+  var sh=sShare/ap.social.length;
+  if(k==='m')add('m',sh,I.so.cpl,I.so.cpc,I.so.ctr,I.so.cpc*I.so.ctr*10,I.so.src,I.so.lbl);
+  else{var P=PLAT[k];add(k,sh,P.cpl*ratio,P.cpc,P.ctr,P.cpm,0,P.note)}
+ });
+ var closeR=Math.min(1,S.close/100*sc.cl);
+ var custPaid=eff*closeR;
+ var appts=eff*I.appt,calls=leads*I.call;
+ var hard=custPaid*S.ltv;
+ var convs=aiOn?(leads+S.exist):0;
+ var handled=Math.min(convs,T.allow);
+ var hours=handled*AI.minSaved/60;
+ var soft=hours*S.rate;
+ var upl=aiOn?S.exist*closeR*AI.uplift*S.ltv:0;
+ var nf=I.niche;
+ var extraPages=dmOn?Math.max(0,S.pages-T.pages):0;
+ var pageCost=extraPages*PAGE_FEE;
+ var setup=((dmOn?T.dm.setup:0)+(aiOn?T.ai.setup:0))*nf+pageCost;
+ var ret=((dmOn?T.dm.ret:0)+(aiOn?T.ai.ret:0))*nf;
+ var H=S.hz;
+ var rev=0,c=-setup,pay=null;
+ for(var m=1;m<=24;m++){
+  var f=m<=S.ramp?AI.ramp:1;
+  var inc=(hard+upl)*f+soft;
+  c+=inc-ret-spend;
+  if(pay===null&&c>=0)pay=m;
+  if(m<=H)rev+=inc;
+ }
+ var inv=setup+ret*H+spend*H;
+ return {rows:rows,leads:leads,leadsS:leadsS,leadsP:leadsP,appts:appts,calls:calls,cust:custPaid,hard:hard,soft:soft,upl:upl,hours:hours,convs:convs,handled:handled,
+  setup:setup,ret:ret,spend:spend,H:H,inv:inv,rev:rev,net:rev-inv,roi:inv>0?(rev-inv)/inv:0,pay:pay,extraPages:extraPages,pageCost:pageCost,
+  cacMedia:custPaid>0?spend/custPaid:0,cacFull:custPaid>0?(spend+(dmOn?T.dm.ret*nf:0))/custPaid:0,gShare:gShare};
+}
+
+/* ---------- RENDER ---------- */
+function build(){
+ var s=$('ind');s.innerHTML=Object.keys(IND).map(function(k){return '<option value="'+k+'">'+IND[k].name+'</option>'}).join('');
+ $('plats').innerHTML=['g','m','t','r','q'].map(function(k){var P=PLAT[k];return '<label class="plat" data-k="'+k+'"><input type="checkbox" data-k="'+k+'"'+(S.plat[k]?' checked':'')+'><div><b>'+P.name+'</b><span>'+P.role+(k==='t'||k==='r'||k==='q'?' · placeholder data':'')+'</span></div></label>'}).join('');
+ $('tier').innerHTML=TIERS.map(function(t,i){return '<button type="button" data-v="'+i+'" aria-pressed="'+(i==S.tier)+'"><b>'+t.name+'</b><span>'+t.sub+'</span></button>'}).join('');
+}
+function applyIndustry(){
+ var I=IND[S.ind];S.ltv=I.ltv;S.close=I.close;S.exist=I.exist;
+ S.spend=I.spend[S.tier];S.spendTouched=false;syncInputs();
+}
+function syncInputs(){$('spend').value=S.spend;$('ltv').value=S.ltv;$('close').value=S.close;$('exist').value=S.exist;$('rate').value=S.rate;$('ramp').value=S.ramp;$('pages').value=S.pages;$('site').value=S.site;$('app').checked=S.app}
+function pressed(id,val){var b=$(id).querySelectorAll('button');for(var i=0;i<b.length;i++)b[i].setAttribute('aria-pressed',String(b[i].getAttribute('data-v')==val))}
+
+function render(){
+ var I=IND[S.ind],T=TIERS[S.tier];
+ var R=model(SCEN[1]),Lo=model(SCEN[0]),Hi=model(SCEN[2]);
+ var dmOn=S.mix!=='ai',aiOn=S.mix!=='dm';
+ $('subtitle').textContent=I.name+' · '+T.name+' · '+S.hz+' months';
+ // alerts
+ var min=I.spend[0],al='';
+ if(dmOn&&S.spend<min)al='<div class="alert">This ad spend is under the starter level for '+I.name+' ('+fm(min)+' a month). Below that, campaigns rarely collect enough data to improve, so results get unreliable.</div>';
+ $('spendAlert').innerHTML=al;
+ var spendRow=$('spend').closest('div');spendRow.style.opacity=dmOn?1:.45;$('spend').disabled=!dmOn;
+ // KPIs
+ var roiTxt=R.inv>0?(R.roi>=0?'+':'')+Math.round(R.roi*100)+'%':'n/a';
+ var pay=R.pay?'Month '+R.pay:'Beyond 24 mo';
+ $('kpis').innerHTML=
+  '<div class="stat hero"><div class="n">'+fm(R.inv)+'</div><div class="l">Total investment over '+S.hz+' months</div></div>'+
+  '<div class="stat"><div class="n">'+fm(R.setup)+'</div><div class="l">One-time setup</div></div>'+
+  '<div class="stat"><div class="n">'+fm(R.ret)+'<span style="font-size:14px;font-weight:500">/mo</span></div><div class="l">Monthly retainer</div></div>'+
+  '<div class="stat"><div class="n">'+(dmOn?fm(R.spend)+'<span style="font-size:14px;font-weight:500">/mo</span>':'$0')+'</div><div class="l">Ad spend to platforms</div></div>'+
+  '<div class="stat"><div class="n">'+fm(R.rev)+'</div><div class="l">Estimated return over '+S.hz+' months</div></div>'+
+  '<div class="stat"><div class="n">'+roiTxt+'</div><div class="l">Estimated net return · payback '+pay+'</div></div>';
+ // web layer
+ var wn='';
+ if(dmOn){
+  wn='<b>Landing pages:</b> you want to promote '+S.pages+' product'+(S.pages==1?'':'s')+' or service'+(S.pages==1?'':'s')+'. '+T.name+' includes '+T.pages+(T.pages==1?' page':' pages')+'. '+(R.extraPages>0?R.extraPages+' additional '+(R.extraPages==1?'page is':'pages are')+' quoted at '+fm(PAGE_FEE)+' each ('+fm(R.pageCost)+' one-time, included in setup above) '+tag(false)+'.':'No additional pages needed.');
+  if(S.site==='need')wn+=' <b>New website:</b> a full site build is scoped and quoted separately after your diagnosis.';
+ }
+ if(S.tier===2){ if(S.app&&true)wn+=' <b>Custom technology:</b> you flagged interest. Application development is scoped and quoted separately and is not part of this estimate.'}
+ $('webNote').innerHTML=wn;
+ $('appRow').hidden=(S.tier!==2);
+ var pcls=$('plats').querySelectorAll('.plat');for(var q=0;q<pcls.length;q++){var kk=pcls[q].getAttribute('data-k');pcls[q].classList.toggle('on',!!S.plat[kk])}
+ var pg=$('pages').closest('div');pg.style.opacity=dmOn?1:.45;$('pages').disabled=!dmOn;
+ // bars
+ var max=Math.max(R.inv,R.rev,1);
+ var w=function(v){return (v/max*100).toFixed(1)+'%'};
+ $('bars').innerHTML=
+  '<div class="bar"><span>Investment</span><div class="track"><div class="seg1 c-setup" style="width:'+w(R.setup)+'"></div><div class="seg2 c-ret" style="width:'+w(R.ret*R.H)+'"></div><div class="seg3 c-media" style="width:'+w(R.spend*R.H)+'"></div></div></div>'+
+  '<div class="bar"><span>Estimated return</span><div class="track"><div class="seg1 c-ret2" style="width:'+w(Math.max(R.rev,0))+'"></div></div></div>';
+ // scenarios
+ var goalKey={leads:['Leads a month','leads'],appts:['Bookings a month','appts'],calls:['Calls a month','calls']}[S.goal];
+ var rows=[[goalKey[0],function(m){return fn(m[goalKey[1]])}],
+  ['New customers a month',function(m){return fn(m.cust,1)}],
+  ['Revenue from new customers a month',function(m){return fm(m.hard+m.upl)}],
+  ['Staff time savings a month',function(m){return fm(m.soft)}],
+  ['Net return over '+S.hz+' months',function(m){return (m.net<0?'-':'')+fm(Math.abs(m.net))}]];
+ $('scen').innerHTML='<tr><th></th>'+SCEN.map(function(x){return '<th>'+x.k+'</th>'}).join('')+'</tr>'+
+  rows.map(function(r){return '<tr><td>'+r[0]+'</td>'+[Lo,R,Hi].map(function(m){return '<td>'+r[1](m)+'</td>'}).join('')+'</tr>'}).join('');
+ $('scenNote').textContent='Conservative assumes ad costs 25% above average and 25% fewer leads closing. Optimistic assumes costs 20% below and 20% more closing. Ramp-up applies to ad results only. Return counts gross profit, not revenue.';
+ // benchmarks
+ $('bench').innerHTML='<tr><th>Platform</th><th>CPC</th><th>CTR</th><th>CPM*</th><th>CPL</th><th>Monthly leads</th></tr>'+
+  R.rows.map(function(r){return '<tr><td>'+r.name+(r.src?'':' <span class="tag asm">'+(r.key==='m'?'proxy':'placeholder')+'</span>')+'<br><span class="note">'+r.role+'</span></td><td>$'+r.cpc.toFixed(2)+'</td><td>'+r.ctr+'%</td><td>$'+r.cpm.toFixed(0)+'</td><td>$'+r.cpl.toFixed(0)+'</td><td>'+fn(r.leads)+'</td></tr>'}).join('');
+ var cac=R.cust>0?'Media-only cost per customer about '+fm(R.cacMedia)+'; with the marketing retainer about '+fm(R.cacFull)+'. ':'';
+ var split=Math.round(R.gShare*100);
+ var platNotes=R.rows.map(function(r){return '<li><b>'+r.name+':</b> '+(r.key==='g'?I.se.lbl:r.lbl)+(r.key==='g'||r.key==='m'?'':'')+'.</li>'}).join('');
+ var qual=R.rows.map(function(r){return r.name.split(' ')[0]+' '+Math.round(r.q*100)+'%'}).join(', ');
+ $('benchNote').innerHTML=(dmOn?(R.rows.length>1?'Ad spend is '+split+'% Google search and '+(100-split)+'% shared evenly across the other platforms you picked. ':'All ad spend goes to the one platform you picked. ')+'Leads are counted at a quality weight versus search leads ('+qual+') '+tag(false)+'. '+cac:'Marketing is not included in this selection. ')+'<ul style="margin:8px 0 8px 18px;padding:0">'+platNotes+'</ul>*CPM is calculated as CPC × CTR × 1,000. '+(I.cac?I.cac+' ':'')+(R.rows.some(function(r){return r.key==='t'||r.key==='r'||r.key==='q'})?'TikTok, Reddit and Quora cost per lead is scaled by how this industry compares with the Meta average, and is a placeholder until reliable per-industry data exists. ':'')+'<br>Ad spend ladder '+tag(I.spendSrc)+' <b>Starter '+fm(I.spend[0])+' · Moderate '+fm(I.spend[1])+' · Aggressive '+fm(I.spend[2])+'</b> a month. '+I.spendNote;
+ // AI
+ $('aiPanel').style.display=aiOn?'':'none';
+ if(aiOn){
+  var tokM=R.handled*(AI.tokIn+AI.tokOut)/1e6;
+  var use=T.allow?Math.min(100,R.convs/T.allow*100):0;
+  $('aiKpis').innerHTML=
+   '<div class="stat"><div class="n">'+fn(T.allow)+'</div><div class="l">Conversations included each month</div></div>'+
+   '<div class="stat"><div class="n">'+fn(R.convs)+'</div><div class="l">Estimated conversations for you ('+Math.round(use)+'% of allowance)</div></div>'+
+   '<div class="stat"><div class="n">~'+tokM.toFixed(1)+'M</div><div class="l">Estimated AI tokens a month</div></div>'+
+   '<div class="stat"><div class="n">'+fn(R.hours)+' hrs</div><div class="l">Staff time freed a month</div></div>';
+  $('agents').innerHTML='<tr><th>Agent</th><th>Share of conversations</th><th>Tokens a month</th></tr>'+
+   T.agents.map(function(a){var tk=R.handled*a[1]*a[2]*(AI.tokIn+AI.tokOut);return '<tr><td>'+a[0]+'</td><td>'+Math.round(a[1]*100)+'%</td><td>'+fn(tk/1e3)+'K</td></tr>'}).join('');
+  var over=R.convs>T.allow?'<div class="alert">Your estimated volume is above this package\'s allowance. Overage is reviewed case by case, or you can move up a package.</div>':'';
+  $('aiNote').innerHTML='Volume is leads from ads plus the inquiries you get today. Each conversation is modeled at about '+fn(AI.tokIn)+' input and '+fn(AI.tokOut)+' output tokens '+tag(false)+'. Agents can share a conversation, so shares add to more than 100%. Staff time saved is modeled at '+AI.minSaved+' minutes per conversation '+tag(false)+'. Faster first response is modeled as '+Math.round(AI.uplift*100)+'% more of your current inquiries becoming customers '+tag(false)+'.'+over;
+ }
+ // included
+ $('incl').innerHTML=
+  (dmOn?'<div><h3>Digital marketing</h3><ul class="chk" style="margin-top:10px">'+T.dmList.map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul></div>':'')+
+  (aiOn?'<div><h3>AI agents on the Corestack</h3><ul class="chk" style="margin-top:10px">'+T.aiList.map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul></div>':'');
+}
+
+/* ---------- EVENTS ---------- */
+function bindSeg(id,key,num){
+ $(id).addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
+  var v=b.getAttribute('data-v');S[key]=num?+v:v;pressed(id,v);
+  if(key==='tier'&&!S.spendTouched){S.spend=IND[S.ind].spend[S.tier];$('spend').value=S.spend}
+  render()});
+}
+function init(){
+ build();applyIndustry();
+ $('ind').addEventListener('change',function(){S.ind=this.value;applyIndustry();render()});
+ bindSeg('mix','mix');bindSeg('tier','tier',true);bindSeg('goal','goal');
+ $('hz').addEventListener('change',function(){S.hz=+this.value;render()});
+ [['spend','spend'],['ltv','ltv'],['close','close'],['exist','exist'],['rate','rate']].forEach(function(p){
+  $(p[0]).addEventListener('input',function(){var v=parseFloat(this.value);S[p[1]]=isNaN(v)||v<0?0:v;if(p[0]==='spend')S.spendTouched=true;render()})});
+ $('ramp').addEventListener('change',function(){S.ramp=+this.value;render()});
+ $('plats').addEventListener('change',function(e){var k=e.target.getAttribute('data-k');if(!k)return;S.plat[k]=e.target.checked;
+  var any=false;for(var x in S.plat)if(S.plat[x])any=true;if(!any){S.plat.g=true;e.target.checked=(k==='g')}
+  var cbs=$('plats').querySelectorAll('input');for(var i=0;i<cbs.length;i++)cbs[i].checked=!!S.plat[cbs[i].getAttribute('data-k')];render()});
+ $('pages').addEventListener('input',function(){var v=parseInt(this.value,10);S.pages=isNaN(v)||v<0?0:Math.min(v,30);render()});
+ $('site').addEventListener('change',function(){S.site=this.value;render()});
+ $('app').addEventListener('change',function(){S.app=this.checked;render()});
+ $('useRec').addEventListener('click',function(){S.spend=IND[S.ind].spend[S.tier];S.spendTouched=false;$('spend').value=S.spend;render()});
+ $('srcs').innerHTML='<b>Sources</b>'+SRC.map(function(s){return '<a href="'+s[1]+'" target="_blank" rel="noopener">'+s[0]+'</a>'}).join('');
+ render();
+}
+window.DMM_CALC={payload:function(){
+ var I=IND[S.ind],T=TIERS[S.tier],R=model(SCEN[1]),Lo=model(SCEN[0]),Hi=model(SCEN[2]),ap=activePlat();
+ var names={m:'meta',t:'tiktok',r:'reddit',q:'quora'};
+ var plats=(ap.g?['google']:[]).concat(ap.social.map(function(k){return names[k]}));
+ var rd=function(n){return Math.round(n)};
+ return {schema:'dmm.calc.v1',
+  inputs:{industry:S.ind,industryName:I.name,servicesMix:S.mix,package:T.id,packageName:T.name,goal:S.goal,horizonMonths:S.hz,platforms:plats,monthlyAdSpend:S.spend,
+   valuePerCustomer:S.ltv,closeRatePct:S.close,existingInquiries:S.exist,hourlyRate:S.rate,rampMonths:S.ramp,productsOrServices:S.pages,websiteStatus:S.site,customAppInterest:(S.tier===2&&S.app)},
+  results:{setupFee:rd(R.setup),monthlyRetainer:rd(R.ret),monthlyAdSpendUsed:rd(R.spend),totalInvestment:rd(R.inv),estimatedReturn:rd(R.rev),estimatedRoiPct:rd(R.roi*100),
+   paybackMonth:R.pay,leadsPerMonth:rd(R.leads),customersPerMonth:Math.round(R.cust*10)/10,aiConversationsPerMonth:rd(R.convs),
+   scenarios:{conservative:{customers:Math.round(Lo.cust*10)/10,net:rd(Lo.net)},expected:{customers:Math.round(R.cust*10)/10,net:rd(R.net)},optimistic:{customers:Math.round(Hi.cust*10)/10,net:rd(Hi.net)}}},
+  addOns:{extraLandingPages:R.extraPages,newWebsite:S.site==='need',customApp:(S.tier===2&&S.app),extraAdPlatforms:plats.filter(function(p){return p==='tiktok'||p==='reddit'||p==='quora'})}};
+}};
+
+init();
+})();
+</script>
+<script>
+(function(){
+  var PORTAL_ID="246894641";
+  var CALC_FORM_GUID="";      // HubSpot form GUID for the calculator form (create it, then paste the GUID here)
+  var N8N_WEBHOOK="";         // n8n webhook URL (production) that receives the full JSON payload
+  var $=function(i){return document.getElementById(i)};
+  var preview=!CALC_FORM_GUID&&!N8N_WEBHOOK;
+  if(preview)$('previewMode').hidden=false;
+  function hutk(){var m=document.cookie.match(/hubspotutk=([^;]+)/);return m?m[1]:undefined}
+  function attr(){try{return JSON.parse(sessionStorage.getItem('dmm_attr')||'{}')}catch(e){return {}}}
+  function contact(){try{return JSON.parse(sessionStorage.getItem('dmm_calc_contact')||'null')}catch(e){return null}}
+  function unlock(){$('gate').hidden=true;$('calcApp').hidden=false;try{sessionStorage.setItem('dmm_calc_unlocked','1')}catch(e){}window.scrollTo(0,0)}
+  function hsPost(fields){
+    if(!CALC_FORM_GUID)return Promise.resolve('skipped');
+    var a=attr().p||{};['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid','fbclid','msclkid','li_fat_id'].forEach(function(k){if(a[k])fields.push({name:k,value:a[k]})});
+    return fetch('https://api.hsforms.com/submissions/v3/integration/submit/'+PORTAL_ID+'/'+CALC_FORM_GUID,{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({fields:fields,context:{hutk:hutk(),pageUri:location.href,pageName:document.title}})}).then(function(r){if(!r.ok)throw new Error('hubspot '+r.status);return 'ok'});
+  }
+  function hook(obj){
+    if(!N8N_WEBHOOK)return Promise.resolve('skipped');
+    return fetch(N8N_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(obj)}).then(function(r){if(!r.ok)throw new Error('n8n '+r.status);return 'ok'});
+  }
+  function f(n,v){return {name:n,value:String(v==null?'':v)}}
+  var gf=$('gateForm');
+  gf.addEventListener('submit',function(e){
+    e.preventDefault();
+    var c={firstname:$('gFirst').value.trim(),lastname:$('gLast').value.trim(),email:$('gEmail').value.trim(),company:$('gCompany').value.trim(),phone:$('gPhone').value.trim(),website:$('gSite').value.trim()};
+    var m=$('gateMsg');
+    if(!c.firstname||!c.lastname||!c.company){m.textContent='Please fill in your name and business name.';return}
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(c.email)){m.textContent='Please enter a valid email address.';return}
+    if(!$('gConsent').checked){m.textContent='Please agree to be contacted so we can send your estimate.';return}
+    m.textContent='One moment...';
+    var fields=Object.keys(c).filter(function(k){return c[k]}).map(function(k){return f(k,c[k])});
+    Promise.all([hsPost(fields),hook({schema:'dmm.calc.lead.v1',submittedAt:new Date().toISOString(),contact:c,attribution:attr(),page:location.pathname})])
+      .then(function(){try{sessionStorage.setItem('dmm_calc_contact',JSON.stringify(c))}catch(e){}unlock()})
+      .catch(function(){m.textContent='Something went wrong. Please try again, or email us.'});
+  });
+  try{if(sessionStorage.getItem('dmm_calc_unlocked')==='1')unlock()}catch(e){}
+  $('sendBtn').addEventListener('click',function(){
+    var c=contact()||{},p=window.DMM_CALC.payload(),msg=$('sendMsg'),btn=this;
+    p.contact=c;p.attribution=attr();p.submittedAt=new Date().toISOString();p.page=location.pathname;
+    var i=p.inputs,r=p.results;
+    var fields=[f('email',c.email),f('firstname',c.firstname),f('lastname',c.lastname),f('company',c.company),
+      f('calc_industry',i.industry),f('calc_services_mix',i.servicesMix),f('calc_package',i.package),f('calc_goal',i.goal),f('calc_horizon_months',i.horizonMonths),
+      f('calc_ad_platforms',i.platforms.join(';')),f('calc_monthly_ad_spend',i.monthlyAdSpend),f('calc_value_per_customer',i.valuePerCustomer),f('calc_close_rate_pct',i.closeRatePct),
+      f('calc_existing_inquiries',i.existingInquiries),f('calc_products_services',i.productsOrServices),f('calc_website_status',i.websiteStatus),f('calc_custom_app_interest',i.customAppInterest),
+      f('calc_setup_fee',r.setupFee),f('calc_monthly_retainer',r.monthlyRetainer),f('calc_total_investment',r.totalInvestment),f('calc_est_return',r.estimatedReturn),
+      f('calc_est_roi_pct',r.estimatedRoiPct),f('calc_payback_month',r.paybackMonth),f('calc_est_leads_month',r.leadsPerMonth),f('calc_est_customers_month',r.customersPerMonth),
+      f('calc_est_conversations',r.aiConversationsPerMonth),f('calc_add_on_pages',p.addOns.extraLandingPages),f('calc_submitted_at',p.submittedAt),f('calc_payload_json',JSON.stringify(p))];
+    if(!c.email){msg.textContent='Please unlock the calculator first.';return}
+    if(preview){$('sendJson').textContent=JSON.stringify(p,null,2);$('sendPreview').hidden=false;msg.textContent='Preview mode: nothing was sent. The data below is what would go to the CRM.';return}
+    btn.disabled=true;msg.textContent='Sending...';
+    Promise.all([hsPost(fields),hook(p)]).then(function(){msg.textContent='Sent. A DMM strategist will follow up by email.';}).catch(function(){btn.disabled=false;msg.textContent='Something went wrong. Please try again, or email us.'});
+  });
+})();
+</script>
+<!-- LinkedIn Insight Tag -->
+<script type="text/javascript">
+_linkedin_partner_id = "11122105";
+window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
+window._linkedin_data_partner_ids.push(_linkedin_partner_id);
+</script><script type="text/javascript">
+(function(l) {
+if (!l){window.lintrk = function(a,b){window.lintrk.q.push([a,b])};
+window.lintrk.q=[]}
+var s = document.getElementsByTagName("script")[0];
+var b = document.createElement("script");
+b.type = "text/javascript";b.async = true;
+b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js";
+s.parentNode.insertBefore(b, s);})(window.lintrk);
+</script>
+<noscript>
+<img height="1" width="1" style="display:none;" alt="" src="https://px.ads.linkedin.com/collect/?pid=11122105&fmt=gif" />
+</noscript>
+
+</body>
+</html>

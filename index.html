@@ -1,0 +1,1458 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><style>.engine-panel .wheel-anim{ display:block; width:100%; max-width:560px; aspect-ratio:1/1; margin:0 auto; } .engine-panel .wheel-anim svg{ display:block; width:100%; height:100%; }</style><style id="dmm-loader-css">html.dmm-seen #dmm-loader{display:none!important}
+#dmm-loader{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;background:radial-gradient(circle at 50% 46%,#1d1336 0%,#0a0812 42%,#000 100%);transition:opacity .45s ease,visibility .45s ease}
+#dmm-loader.done{opacity:0;visibility:hidden;pointer-events:none}
+#dmm-loader.reveal{pointer-events:none}
+#dmm-loader .dl-scene{position:relative;width:240px;height:240px;perspective:900px}
+#dmm-loader .dl-stage{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateX(-14deg)}
+#dmm-loader .dl-glow{position:absolute;inset:40px;border-radius:50%;background:radial-gradient(circle,rgba(167,139,250,.75),rgba(124,58,237,.25) 45%,rgba(124,58,237,0) 70%);animation:dlPulse 1.2s ease-in-out infinite;transform:translateZ(-60px)}
+#dmm-loader .dl-spin{position:absolute;left:50%;top:50%;width:130px;height:91px;margin:-46px 0 0 -65px;transform-style:preserve-3d;animation:dlSpin 2.6s cubic-bezier(.6,.05,.4,.95) infinite}
+#dmm-loader .dl-l{position:absolute;inset:0;width:100%;height:100%;transform:translateZ(var(--z)) scale(var(--s))}
+#dmm-loader .dl-orb{position:absolute;left:50%;top:50%;border-radius:50%;transform-style:preserve-3d}
+#dmm-loader .dl-orb i{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,rgba(167,139,250,0) 0deg,rgba(167,139,250,0) 200deg,#8b5cf6 320deg,#fff 360deg);-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 3px),#000 calc(100% - 2px));mask:radial-gradient(farthest-side,transparent calc(100% - 3px),#000 calc(100% - 2px));animation:dlRot 1.3s linear infinite;box-shadow:0 0 18px rgba(139,92,246,.35)}
+#dmm-loader .dl-orb b{position:absolute;left:50%;top:-5px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:#fff;box-shadow:0 0 12px 4px rgba(196,181,253,.9)}
+#dmm-loader .o1{width:210px;height:210px;margin:-105px 0 0 -105px;transform:rotateX(74deg) rotateY(-10deg)}
+#dmm-loader .o2{width:176px;height:176px;margin:-88px 0 0 -88px;transform:rotateX(68deg) rotateY(38deg)}
+#dmm-loader .o2 i{animation-duration:1.9s;animation-direction:reverse;opacity:.7}
+#dmm-loader .o3{width:150px;height:150px;margin:-75px 0 0 -75px;transform:rotateX(80deg) rotateY(-46deg)}
+#dmm-loader .o3 i{animation-duration:2.6s;opacity:.5}
+#dmm-loader .o1 .sp,#dmm-loader .o2 .sp,#dmm-loader .o3 .sp{position:absolute;inset:0;animation:dlRot 2.2s linear infinite}
+#dmm-loader .o2 .sp{animation-duration:3.1s;animation-direction:reverse}
+#dmm-loader .o3 .sp{animation-duration:4s}
+#dmm-loader .dl-floor{position:absolute;left:50%;bottom:6px;width:150px;height:26px;margin-left:-75px;border-radius:50%;background:radial-gradient(closest-side,rgba(139,92,246,.55),rgba(139,92,246,0));animation:dlFloor 2.6s cubic-bezier(.6,.05,.4,.95) infinite}
+#dmm-loader .dl-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@property --dlr{syntax:'<length>';inherits:false;initial-value:0px}
+#dmm-loader .dl-charge{position:absolute;inset:-30px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.95) 0%,rgba(216,200,255,.75) 14%,rgba(139,92,246,.35) 38%,rgba(139,92,246,0) 66%);opacity:.12;transform:scale(.55);animation:dlCharge 1s cubic-bezier(.55,0,.85,.4) forwards}
+#dmm-loader .dl-rays{position:absolute;inset:-120px;border-radius:50%;background:repeating-conic-gradient(from 0deg,rgba(196,181,253,.0) 0deg 9deg,rgba(196,181,253,.22) 11deg 13deg,rgba(196,181,253,0) 15deg 24deg);-webkit-mask:radial-gradient(closest-side,#000 18%,transparent 72%);mask:radial-gradient(closest-side,#000 18%,transparent 72%);opacity:0;animation:dlRays 1s ease-in forwards,dlRot 14s linear infinite}
+#dmm-loader .dl-flash{position:absolute;left:50%;top:50%;width:240px;height:240px;margin:-120px 0 0 -120px;border-radius:50%;background:radial-gradient(circle,#fff 0%,rgba(233,221,255,.9) 22%,rgba(167,139,250,.45) 48%,rgba(139,92,246,0) 70%);opacity:0;pointer-events:none}
+#dmm-loader.reveal{-webkit-mask:radial-gradient(circle at 50% 50%,transparent var(--dlr),#000 calc(var(--dlr) + 120px));mask:radial-gradient(circle at 50% 50%,transparent var(--dlr),#000 calc(var(--dlr) + 120px));animation:dlOpen 1s cubic-bezier(.7,0,.25,1) forwards}
+#dmm-loader.reveal .dl-flash{animation:dlFlash 1s ease-out forwards}
+#dmm-loader.reveal .dl-scene{animation:dlOut .6s ease-in forwards}
+@keyframes dlCharge{to{opacity:1;transform:scale(1.15)}}
+@keyframes dlRays{to{opacity:1}}
+@keyframes dlOpen{0%{--dlr:0px}100%{--dlr:160vmax}}
+@keyframes dlFlash{0%{opacity:0;transform:scale(.6)}25%{opacity:1;transform:scale(1.6)}100%{opacity:0;transform:scale(9)}}
+@keyframes dlOut{to{opacity:0;transform:scale(1.35)}}
+@keyframes dlSpin{0%{transform:rotateY(0) translateY(0)}50%{transform:rotateY(180deg) translateY(-6px)}100%{transform:rotateY(360deg) translateY(0)}}
+@keyframes dlRot{to{transform:rotate(360deg)}}
+@keyframes dlPulse{0%,100%{transform:translateZ(-60px) scale(.85);opacity:.55}50%{transform:translateZ(-60px) scale(1.12);opacity:1}}
+@keyframes dlFloor{0%,100%{transform:scaleX(1);opacity:.9}25%,75%{transform:scaleX(.55);opacity:.6}50%{transform:scaleX(.95);opacity:.7}}
+@media (prefers-reduced-motion:reduce){#dmm-loader *{animation:none!important}}
+</style><script>try{if(localStorage.getItem('dmm_seen'))document.documentElement.classList.add('dmm-seen')}catch(e){}</script><style id="a11y-css">.skip-link{position:absolute;left:12px;top:-60px;z-index:10000;padding:10px 16px;border-radius:10px;background:#6d28d9;color:#fff;font:600 14px Inter,system-ui,sans-serif;text-decoration:none;transition:top .15s}.skip-link:focus{top:12px;outline:3px solid #c4b5fd;outline-offset:2px}:focus-visible{outline:3px solid #8b5cf6;outline-offset:2px}.engine .eyebrow{color:var(--lavender)}.engine .eyebrow::before{background:var(--lavender)}</style><style id="call-css">.foot-call{display:inline-flex;align-items:center;margin-top:16px;padding:9px 16px;border-radius:999px;border:1px solid rgba(196,181,253,.45);color:#E9DDFF;font:600 14px Inter,system-ui,sans-serif;text-decoration:none}.foot-call:hover{background:rgba(139,92,246,.18);border-color:#c4b5fd;color:#fff}.call-btn{display:inline-flex;align-items:center}</style><title>Digital Masterminds | Digital Marketing and AI Agents for Service Businesses</title>
+<link rel="preload" href="/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/assets/fonts/poppins-700.woff2" as="font" type="font/woff2" crossorigin><style id="dmm-fonts">@font-face{font-family:'Poppins';font-style:normal;font-weight:500;font-display:swap;src:url(/assets/fonts/poppins-500.woff2) format('woff2')}@font-face{font-family:'Poppins';font-style:normal;font-weight:600;font-display:swap;src:url(/assets/fonts/poppins-600.woff2) format('woff2')}@font-face{font-family:'Poppins';font-style:normal;font-weight:700;font-display:swap;src:url(/assets/fonts/poppins-700.woff2) format('woff2')}@font-face{font-family:'Poppins';font-style:normal;font-weight:800;font-display:swap;src:url(/assets/fonts/poppins-800.woff2) format('woff2')}@font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url(/assets/fonts/inter-400.woff2) format('woff2')}@font-face{font-family:'Inter';font-style:normal;font-weight:500;font-display:swap;src:url(/assets/fonts/inter-500.woff2) format('woff2')}@font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url(/assets/fonts/inter-600.woff2) format('woff2')}@font-face{font-family:'Inter';font-style:normal;font-weight:700;font-display:swap;src:url(/assets/fonts/inter-700.woff2) format('woff2')}</style>
+<style>
+/* =========================================================
+   DIGITAL MASTERMINDS — MARTECH SOLUTIONS
+   Design system v2 — built from brand asset pack:
+   monochromatic violet spectrum, glossy/frosted 3D icon
+   language, dark bookend header/footer with light body.
+   ========================================================= */
+
+:root{
+  /* -- core hues (monochromatic purple spectrum) -- */
+  --violet-deep: #4C1D95;     /* line work / shadows */
+  --violet: #6D28D9;
+  --amethyst: #8B5CF6;        /* medium amethyst */
+  --lavender: #C9B6F5;        /* pastel lavender */
+  --lavender-pale: #EDE6FA;   /* near-white lavender */
+  --white-hot: #FFFFFF;
+
+  /* -- text -- */
+  --ink: #171321;             /* stark near-black for headers */
+  --ink-soft: #5B546C;        /* muted grey-purple secondary */
+  --ink-faint: #8B84A0;
+
+  /* -- surfaces -- */
+  --surface: rgba(255,255,255,0.78);
+  --surface-solid: #FFFFFF;
+  --border-soft: rgba(76,29,149,0.14);
+  --border-strong: rgba(76,29,149,0.28);
+
+  /* -- dark bookend (header/footer) matched to logo asset bg -- */
+  --dark: #171B1E;
+  --dark-raised: #1F2327;
+  --dark-border: #2C3135;
+  --dark-text-soft: #A9A4B4;
+
+  --font-display: 'Poppins', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  --radius: 16px;
+  --radius-lg: 24px;
+  --max: 1180px;
+}
+
+*{ box-sizing: border-box; }
+html{ scroll-behavior: smooth; }
+body{
+  margin:0;
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+  background: url('/assets/bg-gradient.webp') center top / cover fixed no-repeat, #F4EFFB;
+}
+
+img{ max-width:100%; display:block; }
+a{ color:inherit; text-decoration:none; }
+
+.wrap{ max-width: var(--max); margin: 0 auto; padding: 0 32px; }
+
+/* ---------- eyebrow / labels ---------- */
+.eyebrow{
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 12.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--violet);
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom: 18px;
+}
+.eyebrow::before{
+  content:"";
+  width: 22px; height: 2px;
+  background: var(--amethyst);
+  display:inline-block;
+  border-radius: 2px;
+}
+.eyebrow.on-dark{ color: var(--lavender); }
+.eyebrow.on-dark::before{ background: var(--lavender); }
+
+/* ---------- header / nav (dark bookend, white-font logo) ---------- */
+header{
+  position: sticky; top:0; z-index: 50;
+  background: rgba(23,27,30,0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--dark-border);
+}
+.nav{
+  display:flex; align-items:center; justify-content:space-between;
+  padding: 14px 32px;
+  max-width: var(--max); margin:0 auto;
+}
+.logo-lockup{ display:flex; align-items:center; }
+.logo-lockup img{ height: 64px; width:auto; }
+
+.nav-links{
+  display:flex; gap: 30px; align-items:center;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--dark-text-soft);
+}
+.nav-links a:hover{ color: #fff; }
+.nav-links a.active{ color: #fff; }
+
+.btn{
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 14.5px;
+  padding: 11px 22px;
+  border-radius: 999px;
+  display:inline-flex; align-items:center; gap:8px;
+  transition: transform .15s ease, box-shadow .2s ease, border-color .2s ease;
+  cursor:pointer; border:none;
+  position: relative;
+  overflow: hidden;
+}
+.btn-primary{
+  background: linear-gradient(135deg, var(--violet), var(--amethyst));
+  color: #fff;
+  box-shadow: 0 8px 22px rgba(109,40,217,0.35), inset 0 1px 0 rgba(255,255,255,0.4);
+}
+.btn-primary:hover{ transform: translateY(-1px); box-shadow: 0 10px 26px rgba(109,40,217,0.45), inset 0 1px 0 rgba(255,255,255,0.5); }
+.btn-ghost{
+  background: rgba(255,255,255,0.06);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.22);
+}
+.btn-ghost:hover{ border-color: #fff; }
+.btn-ghost.on-light{
+  background: var(--surface-solid);
+  color: var(--violet-deep);
+  border: 1px solid var(--border-strong);
+}
+.btn-ghost.on-light:hover{ border-color: var(--violet-deep); }
+
+.nav-toggle{ display:none; background:none; border:none; color:#fff; font-size:22px; cursor:pointer; }
+
+/* ---------- hero ---------- */
+.hero{ position:relative; z-index:1; padding: 90px 0 70px; }
+.hero-grid{ display:grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; align-items:center; }
+h1{
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(34px, 4.6vw, 54px);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin: 0 0 22px;
+  color: var(--ink);
+}
+h1 em{ font-style: normal; color: var(--violet); }
+.hero p.lede{ font-size: 18px; color: var(--ink-soft); max-width: 46ch; margin: 0 0 34px; }
+.cta-row{ display:flex; gap: 14px; flex-wrap:wrap; }
+
+/* ---------- glossy icon badge (approximates the frosted-glass icon style) ---------- */
+.icon-badge{
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size: 24px;
+  background: radial-gradient(circle at 32% 28%, #ffffff 0%, var(--lavender) 42%, var(--amethyst) 78%, var(--violet) 100%);
+  border: 1.5px solid var(--violet-deep);
+  box-shadow: inset 0 2px 4px rgba(255,255,255,0.9), inset 0 -6px 10px rgba(76,29,149,0.35), 0 6px 16px rgba(109,40,217,0.22);
+  color: var(--violet-deep);
+  flex-shrink:0;
+}
+.icon-badge.sm{ width:40px; height:40px; font-size:18px; }
+
+/* ---------- fanned deck (hero visual) ---------- */
+.deck{ position:relative; height: 380px; }
+.deck-card{
+  position:absolute;
+  width: 232px;
+  padding: 22px;
+  background: var(--surface);
+  backdrop-filter: blur(6px);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  box-shadow: 0 20px 44px rgba(76,29,149,0.16), inset 0 1px 0 rgba(255,255,255,0.9);
+  transition: transform .35s ease;
+}
+.deck-card .num{ font-family: var(--font-body); font-weight:700; font-size: 11px; letter-spacing:.08em; color: var(--amethyst); }
+.deck-card h4{ font-family: var(--font-display); font-size: 17px; font-weight: 600; margin: 10px 0 6px; color: var(--ink); }
+.deck-card p{ font-size: 13px; color: var(--ink-soft); margin:0; }
+.deck:hover .deck-card{ transform: translateY(-6px) rotate(var(--r)) translateX(var(--x)); }
+
+/* ---------- sections ---------- */
+section{ position:relative; z-index:1; padding: 86px 0; }
+section.tight{ padding: 56px 0; }
+.section-head{ max-width: 640px; margin-bottom: 48px; }
+h2{
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(27px, 3.2vw, 38px);
+  line-height: 1.18;
+  margin: 0 0 16px;
+  color: var(--ink);
+}
+h2 em{ font-style: normal; color: var(--violet); }
+.section-head p{ color: var(--ink-soft); font-size: 16.5px; }
+
+.divider{ border:none; border-top: 1px solid var(--border-soft); margin: 0; }
+
+/* ---------- problem strip ---------- */
+.problem-grid{ display:grid; grid-template-columns: repeat(3,1fr); gap: 26px; }
+.problem-card{
+  padding: 28px;
+  background: var(--surface);
+  backdrop-filter: blur(6px);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  box-shadow: 0 10px 30px rgba(76,29,149,0.06);
+}
+.problem-card .tag{ font-family: var(--font-body); font-weight:700; font-size: 11.5px; color: var(--amethyst); letter-spacing:.08em; text-transform:uppercase; }
+.problem-card h3{ font-family: var(--font-display); font-weight:600; font-size:19px; margin: 10px 0 8px; color: var(--ink); }
+.problem-card p{ color: var(--ink-soft); font-size: 14.5px; margin:0; }
+
+/* ---------- engine section (dark bookend panel for contrast) ---------- */
+.engine{ background: var(--dark); border-top: 1px solid var(--dark-border); border-bottom: 1px solid var(--dark-border); color:#fff; }
+.engine h2, .engine .section-head p{ color:#fff; }
+.engine .section-head p{ color: var(--dark-text-soft); }
+.engine-grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items:center; }
+.engine-feats{ display:grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 30px; }
+.engine-feat{ display:flex; gap:12px; align-items:flex-start; }
+.engine-feat .dot{ width:7px; height:7px; border-radius:50%; background: var(--lavender); margin-top: 8px; flex-shrink:0; }
+.engine-feat h5{ font-size: 14.5px; font-weight:600; margin:0 0 4px; color:#fff; }
+.engine-feat p{ font-size: 13.5px; color: var(--dark-text-soft); margin:0; }
+
+.engine-panel{
+  background: var(--dark-raised);
+  border: 1px solid var(--dark-border);
+  border-radius: var(--radius-lg);
+  padding: 30px;
+}
+.engine-panel img{ border-radius: var(--radius); }
+.engine-panel .cap{ font-size: 13px; color: var(--dark-text-soft); margin-top: 16px; text-align:center; }
+
+/* ---------- "one team" capability section ---------- */
+.team-panel{
+  background: var(--surface);
+  backdrop-filter: blur(6px);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  box-shadow: 0 20px 50px rgba(76,29,149,0.1);
+}
+.team-panel img{ border-radius: var(--radius); }
+
+/* ---------- process ---------- */
+.process-grid{ display:grid; grid-template-columns: repeat(4,1fr); gap: 26px; }
+.process-step{ padding-top: 20px; border-top: 3px solid var(--lavender); }
+.process-step .step-num{ font-family: var(--font-display); font-weight:700; font-size: 26px; color: var(--amethyst); }
+.process-step h4{ font-size:16.5px; font-weight:600; margin: 10px 0 8px; color: var(--ink); }
+.process-step p{ font-size: 14px; color: var(--ink-soft); margin:0; }
+
+/* ---------- industries grid (home) ---------- */
+.ind-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.ind-card{
+  padding: 30px;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  background: var(--surface);
+  backdrop-filter: blur(6px);
+  transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease;
+  display:flex; flex-direction:column; height:100%;
+  box-shadow: 0 10px 30px rgba(76,29,149,0.06);
+}
+.ind-card:hover{ border-color: var(--violet); transform: translateY(-3px); box-shadow: 0 18px 40px rgba(76,29,149,0.16); }
+.ind-card .icon-badge{ margin-bottom: 16px; }
+.ind-card h3{ font-family: var(--font-display); font-weight:600; font-size: 21px; margin:0 0 10px; color: var(--ink); }
+.ind-card p{ color: var(--ink-soft); font-size: 14.5px; margin:0 0 18px; flex-grow:1; }
+.ind-card .go{ font-size: 13.5px; font-weight:700; color: var(--violet); }
+
+/* ---------- friction pills (industry pages) ---------- */
+.pills{ display:flex; flex-wrap:wrap; gap:12px; }
+.pill{
+  padding: 10px 18px;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--violet-deep);
+  background: var(--surface-solid);
+}
+
+/* ---------- agent solution cards ---------- */
+.agent-list{ display:flex; flex-direction:column; gap: 18px; }
+.agent-card{
+  display:grid; grid-template-columns: auto 1fr auto;
+  gap: 22px; align-items:center;
+  padding: 26px 28px;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  background: var(--surface);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 10px 26px rgba(76,29,149,0.05);
+}
+.agent-icon-col{ display:flex; flex-direction:column; align-items:center; gap:8px; width: 90px; text-align:center; }
+.agent-icon-col .badge{ margin-bottom:0; }
+.agent-card.featured{ border-color: var(--violet); background: var(--surface-solid); box-shadow: 0 14px 34px rgba(76,29,149,0.14); }
+.agent-card .badge{ font-family: var(--font-body); font-weight:700; font-size: 10.5px; letter-spacing:.1em; color: var(--violet); text-transform:uppercase; margin-bottom:8px; display:block; }
+.agent-card h4{ font-family: var(--font-display); font-size:20px; font-weight:600; margin:0 0 6px; color: var(--ink); }
+.agent-card p{ color: var(--ink-soft); font-size: 14.5px; margin:0; max-width: 52ch; }
+.agent-card .arrow{ font-size: 20px; color: var(--violet); }
+
+/* ---------- fit block ---------- */
+.fit-grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.fit-col{ padding: 30px; border-radius: var(--radius); border:1px solid var(--border-soft); background: var(--surface); backdrop-filter: blur(6px); }
+.fit-col.yes{ border-color: var(--violet); background: linear-gradient(180deg, rgba(139,92,246,0.08), rgba(255,255,255,0.6)); }
+.fit-col h4{ font-family:var(--font-display); font-weight:600; font-size:18px; margin:0 0 16px; color: var(--ink); }
+.fit-col ul{ margin:0; padding-left: 18px; color: var(--ink-soft); font-size: 14.5px; }
+.fit-col li{ margin-bottom: 8px; }
+
+/* ---------- stats strip ---------- */
+.stats{ display:grid; grid-template-columns: repeat(4,1fr); background: var(--dark); }
+.stat{ padding: 40px 20px; text-align:center; border-left: 1px solid var(--dark-border); }
+.stat:first-child{ border-left:none; }
+.stat .num{ font-family: var(--font-display); font-size: 32px; font-weight:700; color: var(--lavender); }
+.stat .lbl{ font-size: 13px; color: var(--dark-text-soft); margin-top:6px; }
+
+/* ---------- FAQ ---------- */
+.faq-item{ border-top: 1px solid var(--border-soft); padding: 22px 0; }
+.faq-item:last-child{ border-bottom: 1px solid var(--border-soft); }
+.faq-item summary{
+  cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center;
+  font-family: var(--font-display); font-size: 17px; font-weight:600; color: var(--ink);
+}
+.faq-item summary::-webkit-details-marker{ display:none; }
+.faq-item summary::after{ content:"+"; font-size:22px; color: var(--violet); }
+.faq-item[open] summary::after{ content:"–"; }
+.faq-item p{ margin: 14px 0 0; color: var(--ink-soft); font-size: 14.5px; max-width: 65ch; }
+
+/* ---------- pricing ---------- */
+.price-grid{ display:grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+.price-card{
+  padding: 32px; border-radius: var(--radius-lg); border: 1px solid var(--border-soft);
+  background: var(--surface); backdrop-filter: blur(6px);
+  display:flex; flex-direction:column;
+  box-shadow: 0 10px 30px rgba(76,29,149,0.06);
+}
+.price-card.reco{ border-color: var(--violet); background: var(--surface-solid); position:relative; box-shadow: 0 18px 40px rgba(76,29,149,0.18); }
+.price-card.reco::before{
+  content:"Most common"; position:absolute; top:-13px; left:28px;
+  background: linear-gradient(135deg, var(--violet), var(--amethyst)); color:#fff; font-size:11px; font-weight:700;
+  padding:4px 12px; border-radius:999px; letter-spacing:.06em;
+}
+.price-card h3{ font-family:var(--font-display); font-size:22px; font-weight:700; margin:0 0 6px; color: var(--ink); }
+.price-card .price{ font-family: var(--font-body); font-weight:600; color: var(--violet); font-size: 14px; margin-bottom:18px; }
+.price-card ul{ list-style:none; padding:0; margin:0 0 24px; flex-grow:1; }
+.price-card li{ font-size:14px; color: var(--ink-soft); padding: 8px 0; border-top:1px solid var(--border-soft); }
+.price-card li:first-child{ border-top:none; }
+
+/* ---------- final CTA ---------- */
+.final-cta{ text-align:center; padding: 86px 0; }
+.final-cta h2{ max-width: 640px; margin: 0 auto 26px; }
+.final-cta .cta-row{ justify-content:center; }
+
+/* ---------- footer (dark bookend) ---------- */
+footer{ background: var(--dark); border-top: 1px solid var(--dark-border); padding: 50px 0 34px; color: var(--dark-text-soft); }
+.foot-grid{ display:flex; justify-content:space-between; flex-wrap:wrap; gap: 30px; margin-bottom: 34px; }
+.foot-cols{ display:flex; gap: 60px; flex-wrap:wrap; }
+.foot-col h5{ font-family: var(--font-body); font-weight:700; font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color: #A39DB3; margin: 0 0 14px; }
+.foot-col a{ display:block; font-size: 14px; color: var(--dark-text-soft); margin-bottom: 10px; }
+.foot-col a:hover{ color: #fff; }
+.foot-bottom{ font-size: 13px; color: #A39DB3; border-top: 1px solid var(--dark-border); padding-top: 24px; }
+.foot-logo img{ height: 60px; margin-bottom: 12px; }
+
+/* ---------- responsive ---------- */
+@media (max-width: 900px){
+  .hero-grid{ grid-template-columns: 1fr; }
+  .deck{ height: 300px; margin-top: 20px;}
+  .problem-grid, .ind-grid, .process-grid, .price-grid{ grid-template-columns: 1fr; }
+  .engine-grid{ grid-template-columns: 1fr; }
+  .engine-feats{ grid-template-columns: 1fr; }
+  .fit-grid{ grid-template-columns: 1fr; }
+  .stats{ grid-template-columns: repeat(2,1fr); }
+  .stat{ border-left:none; border-top: 1px solid var(--dark-border); }
+  .agent-card{ grid-template-columns: 1fr; text-align:left; }
+  .agent-card .arrow{ display:none; }
+  .nav-links{
+    position:absolute; top:100%; left:0; right:0;
+    flex-direction:column; align-items:flex-start;
+    background: var(--dark); border-bottom:1px solid var(--dark-border);
+    padding: 20px 32px; gap: 16px; display:none;
+  }
+  .nav-links.open{ display:flex; }
+  .nav-toggle{ display:block; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+  .deck-card{ transition:none; }
+}
+
+a:focus-visible, button:focus-visible, summary:focus-visible{
+  outline: 2px solid var(--violet);
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   v3 additions: dropdown nav, breadcrumbs, service cards,
+   journey strip, contact layout
+   ========================================================= */
+.nav-right{ display:flex; align-items:center; gap:12px; }
+.nav-links > a, .dd-trigger{ white-space:nowrap; }
+.has-dd{ position:relative; padding:18px 0; margin:-18px 0; }
+.dd-trigger{
+  background:none; border:none; padding:0; margin:0; cursor:pointer;
+  font: inherit; color: inherit; display:inline-flex; align-items:center; gap:7px;
+}
+.dd-trigger::after{ content:""; width:6px; height:6px; border-right:1.5px solid currentColor; border-bottom:1.5px solid currentColor; transform: rotate(45deg) translateY(-2px); }
+.dd-trigger:hover, .dd-trigger.active, .has-dd:focus-within .dd-trigger{ color:#fff; }
+.dd{
+  display:none; position:absolute; top:100%; left:-18px; min-width:320px;
+  flex-direction:column; gap:2px; padding:10px;
+  background: var(--dark-raised); border:1px solid var(--dark-border); border-radius:16px;
+  box-shadow: 0 24px 60px rgba(0,0,0,.4);
+}
+.dd.cols{ min-width: 460px; }
+.has-dd:hover .dd, .has-dd:focus-within .dd, .has-dd.open .dd{ display:flex; }
+.has-dd:hover .dd.cols, .has-dd:focus-within .dd.cols, .has-dd.open .dd.cols{ display:grid; grid-template-columns: 1fr 1fr; }
+.dd a{ display:block; padding:10px 14px; border-radius:10px; color:#fff; font-size:14.5px; line-height:1.35; }
+.dd a small{ display:block; margin-top:2px; font-size:12.5px; font-weight:400; color: var(--dark-text-soft); }
+.dd a:hover, .dd a.active{ background: rgba(255,255,255,.07); }
+
+.crumbs{ font-size:13.5px; color: var(--ink-soft); margin-bottom:18px; }
+.crumbs a{ color: var(--violet); font-weight:600; }
+.crumbs a:hover{ text-decoration:underline; }
+
+.svc-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap:20px; }
+.svc-card{
+  padding: 26px; border:1px solid var(--border-soft); border-radius: var(--radius);
+  background: var(--surface); backdrop-filter: blur(6px);
+}
+.svc-card h3{ font-family: var(--font-display); font-weight:600; font-size:18px; margin:0 0 8px; color: var(--ink); }
+.svc-card p{ margin:0; color: var(--ink-soft); font-size:14.5px; }
+
+.journey{
+  display:grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  border:1px solid var(--border-soft); border-radius: var(--radius-lg);
+  background: var(--surface); backdrop-filter: blur(6px); overflow:hidden;
+}
+.jstage{ padding: 28px 26px; border-left:1px solid var(--border-soft); min-width:0; }
+.jstage:first-child{ border-left:none; }
+.jstage h4{ font-family: var(--font-display); font-weight:600; font-size:19px; margin:0 0 10px; color: var(--violet-deep); }
+.jstage p{ margin:0 0 12px; color: var(--ink-soft); font-size:14.5px; }
+.jstage ul{ margin:0; padding-left:18px; color: var(--ink); font-size:14.5px; }
+.jstage li{ margin-bottom:6px; }
+
+.process-grid.three{ grid-template-columns: repeat(3, 1fr); }
+.contact-grid{ display:grid; grid-template-columns: 1.1fr .9fr; gap:24px; }
+.info-card{ padding:32px; border:1px solid var(--border-soft); border-radius: var(--radius-lg); background: var(--surface); backdrop-filter: blur(6px); min-width:0; }
+.info-card h4{ font-size:12px; letter-spacing:.14em; text-transform:uppercase; color: var(--violet); margin:0 0 8px; font-weight:700; }
+.info-card p{ margin:0 0 18px; color: var(--ink-soft); }
+.info-card p.big{ font-family: var(--font-display); font-weight:600; font-size: clamp(20px, 2.6vw, 28px); color: var(--ink); overflow-wrap:anywhere; margin-bottom:10px; }
+.textlink{ color: var(--violet); font-weight:600; }
+.textlink:hover{ text-decoration:underline; }
+
+@media (max-width: 900px){
+  .svc-grid, .process-grid.three, .contact-grid{ grid-template-columns: 1fr; }
+  .journey{ grid-template-columns: 1fr; }
+  .jstage{ border-left:none; border-top:1px solid var(--border-soft); }
+  .jstage:first-child{ border-top:none; }
+  .nav-links{ max-height: calc(100vh - 70px); overflow-y:auto; }
+  .has-dd{ padding:0; margin:0; width:100%; }
+  .dd, .has-dd:hover .dd, .has-dd:focus-within .dd{
+    display:flex; position:static; min-width:0; padding:8px 0 4px 12px; margin-top:8px;
+    background:none; border:none; box-shadow:none; border-left:1px solid var(--dark-border); border-radius:0;
+  }
+  .dd.cols, .has-dd:hover .dd.cols, .has-dd:focus-within .dd.cols{ display:flex; min-width:0; }
+  .dd a{ padding:8px 10px; }
+  .dd-trigger::after{ display:none; }
+}
+@media (max-width: 520px){
+  .nav{ padding: 12px 16px; }
+  .nav-right .btn{ padding: 9px 16px; font-size:13.5px; }
+  .wrap{ padding: 0 20px; }
+}
+
+.cta-note{ margin: 22px auto 0; max-width: 46ch; font-size: 14.5px; color: var(--ink-soft); }
+.problem-card h3{ margin-top: 0; }
+
+/* v5: five-stage customer journey */
+.j5{ display:grid; grid-template-columns: repeat(5, 1fr); gap:18px; align-items:stretch; }
+.j5-card{ background:#fff; border:1px solid var(--border-soft); border-radius:18px; padding:14px 14px 18px; min-width:0; }
+.j5-card img{ display:block; width:100%; aspect-ratio: 4/5; object-fit:contain; border-radius:12px; background:#f4f1fb; }
+.j5-card p{ margin:14px 4px 10px; color: var(--ink-soft); font-size:14px; }
+.j5-card ul{ margin:0; padding-left:18px; font-size:14px; }
+.j5-card li{ margin-bottom:5px; }
+.j5-card a{ color: var(--violet-deep); font-weight:600; text-decoration:none; }
+.j5-card a:hover{ text-decoration:underline; }
+@media (max-width: 1100px){ .j5{ grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 760px){ .j5{ grid-template-columns: 1fr 1fr; gap:12px; } }
+@media (max-width: 480px){ .j5{ grid-template-columns: 1fr; } }
+
+/* v6: two-step process */
+.process-grid.two{ grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 760px){ .process-grid.two{ grid-template-columns: 1fr; } }
+
+/* v7: hero image rotator (3 slides, 4s each, crossfade) */
+.hero-visual{ display:flex; justify-content:center; align-items:center; }
+.hero-rotator{ position:relative; width:100%; max-width:500px; aspect-ratio: 725 / 1081; border-radius:26px; overflow:hidden; box-shadow: 0 28px 60px rgba(76,29,149,0.28), 0 0 0 1px rgba(255,255,255,0.35); background:#bea0e6; }
+.hero-rotator img{ position:absolute; inset:0; width:100%; height:100%; object-fit:contain; opacity:0; animation: heroFade 21s infinite; }
+.hero-rotator .hr-1{ animation-delay:0s; }
+.hero-rotator .hr-2{ animation-delay:7s; }
+.hero-rotator .hr-3{ animation-delay:14s; }
+@keyframes heroFade{
+  0%{ opacity:0; }
+  5%{ opacity:1; }
+  33.33%{ opacity:1; }
+  38.33%{ opacity:0; }
+  100%{ opacity:0; }
+}
+@media (prefers-reduced-motion: reduce){
+  .hero-rotator img{ animation:none; }
+  .hero-rotator .hr-1{ opacity:1; }
+}
+@media (max-width: 900px){ .hero-rotator{ max-width:340px; margin-top:12px; } }
+
+/* v8: capability cards with images */
+.svc-card.has-img{ padding:0; overflow:hidden; display:flex; flex-direction:column; }
+.svc-card.has-img img{ display:block; width:100%; aspect-ratio:4/3; object-fit:cover; background:#000; }
+.svc-card .svc-body{ padding: 22px 24px 26px; }
+
+/* ---------- voice agent sections (dark band + support cards) ---------- */
+.voice{ background: var(--dark); border-top: 1px solid var(--dark-border); border-bottom: 1px solid var(--dark-border); color:#fff; }
+.voice-head{ max-width: 720px; margin-bottom: 40px; }
+.voice-head h2{ color:#fff; }
+.voice-head h2 em{ color: var(--lavender); }
+.voice-head p{ color: var(--dark-text-soft); font-size:16.5px; }
+.voice-grid{ list-style:none; margin:0; padding:0; display:grid; grid-template-columns: repeat(3,1fr); gap:22px; }
+.voice-card{ padding:26px; background: var(--dark-raised); border:1px solid var(--dark-border); border-top:3px solid var(--lavender); border-radius: var(--radius); }
+.voice-card h3{ font-family: var(--font-display); font-weight:600; font-size:18px; margin:0 0 8px; color:#fff; }
+.voice-card p{ margin:0; color: var(--dark-text-soft); font-size:14.5px; }
+.voice-cta{ margin-top:36px; }
+.voice .btn:focus-visible{ outline:3px solid var(--lavender); outline-offset:3px; }
+.voice-note{ margin:18px 0 0; font-size:12.5px; color: var(--dark-text-soft); max-width:60ch; }
+@media (max-width: 860px){ .voice-grid{ grid-template-columns:1fr; } .voice-cta .btn{ width:100%; justify-content:center; text-align:center; } }
+
+/* ---------- client dashboard sample visual ---------- */
+.dash-fig{ margin:0 0 30px; }
+.dash{ background: var(--dark); border:1px solid var(--dark-border); border-radius: var(--radius); padding:22px; box-shadow: 0 24px 60px rgba(23,19,33,0.22); color:#fff; }
+.dash-top{ display:flex; justify-content:space-between; align-items:center; margin-bottom:18px; }
+.dash-title{ font-family: var(--font-display); font-weight:600; font-size:15px; }
+.dash-live{ font-size:11.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color: var(--lavender); }
+.dash-live::before{ content:""; display:inline-block; width:7px; height:7px; border-radius:50%; background: var(--amethyst); margin-right:7px; }
+.dash-kpis{ display:grid; grid-template-columns: repeat(3,1fr); gap:14px; margin-bottom:14px; }
+.dash-kpi{ background: var(--dark-raised); border:1px solid var(--dark-border); border-radius:14px; padding:16px 18px; }
+.dash-kpi small{ display:block; font-size:12px; color: var(--dark-text-soft); }
+.dash-kpi b{ display:block; font-family: var(--font-display); font-size:28px; font-weight:700; margin:4px 0 2px; }
+.dash-kpi em{ font-style:normal; font-size:12px; color: var(--lavender); }
+.dash-cols{ display:grid; grid-template-columns: 1fr 1.3fr; gap:14px; }
+.dash-panel{ background: var(--dark-raised); border:1px solid var(--dark-border); border-radius:14px; padding:16px 18px; }
+.dash-panel h4{ margin:0 0 14px; font-size:13px; font-weight:600; color: var(--dark-text-soft); }
+.dash-bars{ display:flex; align-items:flex-end; gap:8px; height:130px; padding-bottom:20px; }
+.dash-bar{ position:relative; flex:1; background: linear-gradient(180deg, var(--amethyst), var(--violet)); border-radius:5px 5px 0 0; }
+.dash-bar i{ position:absolute; left:50%; bottom:-20px; transform:translateX(-50%); font-style:normal; font-size:10px; color: var(--dark-text-soft); white-space:nowrap; }
+.dash-list{ list-style:none; margin:0; padding:0; display:grid; gap:10px; }
+.dash-list li{ display:grid; grid-template-columns:auto 1fr auto; gap:10px; align-items:center; font-size:13px; padding-bottom:10px; border-bottom:1px solid var(--dark-border); }
+.dash-list li:last-child{ border-bottom:0; padding-bottom:0; }
+.dash-chan{ font-size:11px; font-weight:700; padding:3px 9px; border-radius:999px; background: rgba(201,182,245,0.16); color: var(--lavender); }
+.dash-q{ color:#E6E2EE; min-width:0; }
+.dash-st{ font-size:11.5px; font-weight:600; white-space:nowrap; color: var(--dark-text-soft); }
+.dash-st.ok{ color:#B9E7C9; } .dash-st.hot{ color:#F4D58D; }
+.dash-fig figcaption{ margin-top:12px; font-size:12.5px; color: var(--ink-soft); text-align:center; }
+.dash-points{ margin-top:8px; }
+@media (max-width: 860px){
+  .dash-kpis{ grid-template-columns:1fr; }
+  .dash-cols{ grid-template-columns:1fr; }
+  .dash-list li{ grid-template-columns:auto 1fr; }
+  .dash-st{ grid-column:2; }
+}
+
+/* ---------- diagnosis (x-ray) ---------- */
+.voice-scale{ margin:30px 0 0; max-width:70ch; font-size:16px; color:#E6E2EE; padding-left:16px; border-left:3px solid var(--lavender); }
+.xray-panel{ max-width:820px; padding:28px 30px; background: var(--surface); border:1px solid var(--border-soft); border-left:4px solid var(--violet); border-radius: var(--radius); box-shadow: 0 10px 30px rgba(76,29,149,0.06); }
+.xray-panel p{ margin:0; font-size:17px; color: var(--ink); }
+.xray-panel .xray-scale{ margin-top:14px; font-size:14.5px; color: var(--ink-soft); }
+
+/* ---------- equip-your-team callout + placeholders ---------- */
+.equip{ margin:0 0 34px; padding:26px 30px; background: var(--surface); border:1px solid var(--border-soft); border-left:4px solid var(--violet); border-radius: var(--radius); box-shadow: 0 10px 30px rgba(76,29,149,0.06); max-width:900px; }
+.equip .eyebrow{ margin-bottom:10px; }
+.equip-main{ margin:0; font-family: var(--font-display); font-weight:600; font-size:20px; line-height:1.4; color: var(--ink); }
+.equip-sub{ margin:12px 0 0; font-size:14.5px; color: var(--ink-soft); }
+.ph-card{ border-style:dashed; border-color: var(--border-strong); }
+.ph-tag{ display:inline-block; margin-bottom:10px; font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color: var(--violet); background: var(--lavender-pale); padding:3px 10px; border-radius:999px; }
+@media (max-width: 860px){ .equip{ padding:22px 20px; } .equip-main{ font-size:18px; } }
+
+.voice-thesis{ margin:0 0 22px; padding:0 0 0 16px; border-left:3px solid var(--lavender); font-family: var(--font-display); font-weight:600; font-size:clamp(18px,2.2vw,22px); line-height:1.35; color:#fff; }
+.voice-head .voice-thesis{ color:#fff; font-size:clamp(18px,2.2vw,22px); }
+
+/* ---------- service card image icons ---------- */
+.icon-badge.icon-img{ width:88px; height:88px; background:none; border:none; box-shadow:none; border-radius:0; padding:0; margin:-6px 0 10px -6px; }
+.icon-badge.icon-img img{ display:block; width:100%; height:100%; object-fit:contain; }
+.icon-badge.icon-img{ width:108px; height:108px; margin:-14px 0 4px -14px; }
+
+/* ---------- "behind every build" two-column ---------- */
+.team-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:60px; align-items:center; }
+.team-grid h2{ margin-bottom:16px; }
+.team-copy{ color: var(--ink-soft); font-size:16.5px; max-width:52ch; margin:0; }
+.team-visual{ display:flex; justify-content:center; }
+.team-visual img{ display:block; width:100%; max-width:540px; height:auto; }
+@media (max-width: 860px){ .team-grid{ grid-template-columns:1fr; gap:32px; } .team-visual img{ max-width:340px; } }
+
+/* ---------- industry photo cards ---------- */
+.photo-grid{ display:grid; grid-template-columns: repeat(3,1fr); gap:26px; }
+.photo-card{ position:relative; display:block; aspect-ratio:3/2; border-radius: var(--radius); overflow:hidden; isolation:isolate; color:#fff; text-decoration:none; background:#171321; box-shadow: 0 14px 34px rgba(76,29,149,0.18); transition: transform .45s cubic-bezier(.2,.7,.2,1), box-shadow .45s ease; }
+.photo-card .pc-img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transform:scale(1.001); transition: transform 1.1s cubic-bezier(.2,.7,.2,1); }
+/* always-on soft scrim so the white title stays readable on bright photos */
+.photo-card::before{ content:""; position:absolute; inset:0; z-index:1; background: linear-gradient(to top, rgba(14,10,26,.86) 0%, rgba(14,10,26,.55) 38%, rgba(14,10,26,0) 72%); }
+/* hover mask at 10% */
+.photo-card::after{ content:""; position:absolute; inset:0; z-index:1; background: rgba(10,6,20,.10); opacity:0; transition: opacity .45s ease; }
+.photo-card:hover, .photo-card:focus-visible{ transform: translateY(-4px); box-shadow: 0 24px 50px rgba(76,29,149,0.3); }
+.photo-card:hover::after, .photo-card:focus-visible::after{ opacity:1; }
+.photo-card:hover .pc-img, .photo-card:focus-visible .pc-img{ transform: scale(1.08); }
+.photo-card:focus-visible{ outline:3px solid var(--lavender); outline-offset:3px; }
+.pc-body{ position:absolute; left:0; right:0; bottom:0; z-index:2; display:block; padding:20px 24px 22px; }
+.pc-title{ display:block; font-family: var(--font-display); font-weight:600; font-size:21px; line-height:1.25; color:#fff; text-shadow: 0 1px 12px rgba(0,0,0,.35); }
+.pc-blurb{ display:block; max-height:0; opacity:0; overflow:hidden; margin-top:0; font-size:14px; line-height:1.5; color: rgba(255,255,255,.94); transform: translateY(10px); transition: max-height .5s ease, opacity .45s ease, transform .5s cubic-bezier(.2,.7,.2,1), margin-top .45s ease; }
+.pc-go{ display:block; margin-top:10px; font-size:13.5px; font-weight:700; color: var(--lavender); transform: translateX(0); transition: transform .35s ease; }
+.photo-card:hover .pc-blurb, .photo-card:focus-visible .pc-blurb{ max-height:96px; opacity:1; margin-top:8px; transform:none; }
+.photo-card:hover .pc-go, .photo-card:focus-visible .pc-go{ transform: translateX(4px); }
+/* branded tile used until an industry photo is added */
+.photo-card.ph{ background: radial-gradient(circle at 30% 22%, #8B5CF6 0%, #4C1D95 55%, #171321 100%); }
+.pc-ph{ position:absolute; top:16%; left:0; right:0; z-index:0; text-align:center; font-size:74px; line-height:1; color: rgba(255,255,255,.28); transition: transform 1.1s cubic-bezier(.2,.7,.2,1); }
+.photo-card.ph:hover .pc-ph{ transform: scale(1.12); }
+/* touch screens have no hover, so keep the description visible */
+@media (hover:none){ .pc-blurb{ max-height:none; opacity:1; margin-top:8px; transform:none; } .photo-card::before{ background: linear-gradient(to top, rgba(14,10,26,.9) 0%, rgba(14,10,26,.7) 55%, rgba(14,10,26,0) 85%); } }
+@media (max-width: 1000px){ .photo-grid{ grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 640px){ .photo-grid{ grid-template-columns:1fr; } .photo-card{ aspect-ratio:4/3; } }
+@media (prefers-reduced-motion: reduce){ .photo-card, .photo-card *, .photo-card::after{ transition:none !important; } .photo-card:hover .pc-img{ transform:none; } }
+
+/* industry hero illustration */
+.hero-split{ display:grid; grid-template-columns:minmax(0,1fr) 380px; gap:56px; align-items:center; }
+.hero-art{ margin:0; }
+.hero-art img{ display:block; width:100%; height:auto; aspect-ratio:3/2; border-radius:24px; box-shadow:0 24px 54px rgba(76,29,149,.28), 0 0 0 1px rgba(255,255,255,.35); }
+@media (max-width:1000px){ .hero-split{ grid-template-columns:1fr; } .hero-art{ max-width:420px; } }
+@media (max-width:640px){ .logo-lockup img{ height:46px; } .nav-cta, .nav .btn{ white-space:nowrap; } }
+
+/* pricing tiers + planning guide */
+.price-card .tier-sub{ font-size:14px; color:var(--ink-soft); margin:0 0 12px; }
+.price-card li strong{ color:var(--ink); font-weight:600; }
+.guide-block{ margin-top:72px; }
+.guide-head{ max-width:720px; margin:0 0 28px; }
+.guide-head h3{ font-family:var(--font-display); font-weight:700; font-size:clamp(24px,3vw,32px); line-height:1.2; margin:0 0 12px; color:var(--ink); }
+.guide-head h3 em{ font-style:normal; color:var(--violet); }
+.guide-head p{ margin:0; color:var(--ink-soft); }
+.guide-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+.guide-card{ padding:28px; border-radius:var(--radius-lg); border:1px dashed rgba(109,40,217,.35); background:rgba(255,255,255,.55); cursor:default; }
+.guide-stage{ display:inline-block; font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--violet); background:rgba(139,92,246,.14); padding:4px 12px; border-radius:999px; margin-bottom:14px; }
+.guide-card h4{ font-family:var(--font-display); font-size:19px; line-height:1.3; margin:0 0 16px; color:var(--ink); }
+.guide-label{ font-size:12px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--ink-soft); margin:16px 0 4px; }
+.guide-card ul{ list-style:none; margin:0; padding:0; }
+.guide-card li{ position:relative; padding:5px 0 5px 20px; font-size:14px; color:var(--ink-soft); }
+.guide-card li::before{ content:""; position:absolute; left:2px; top:13px; width:7px; height:7px; border-radius:50%; background:var(--amethyst); }
+.guide-note{ margin:22px 0 0; font-size:14px; color:var(--ink-soft); }
+@media (max-width:1000px){ .guide-grid{ grid-template-columns:1fr; } }
+
+/* corestack agent icons */
+.agent-icon-col .icon-badge.icon-img{ width:96px; height:96px; margin:-8px 0 0; }
+.agent-card .agent-icon-col{ width:104px; }
+@media (max-width:640px){ .agent-icon-col .icon-badge.icon-img{ width:80px; height:80px; } .agent-card .agent-icon-col{ flex-direction:row; width:auto; text-align:left; gap:12px; } }
+
+/* legal pages */
+.legal{ max-width:760px; }
+.legal p, .legal li{ color:var(--ink-soft); font-size:16px; line-height:1.7; }
+.legal-updated{ margin:0 0 16px; }
+.legal-toc{ margin:28px 0 8px; padding:22px 26px; border:1px solid var(--border-soft); border-radius:var(--radius); background:var(--surface); }
+.legal-toc-t{ font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--violet); margin-bottom:8px; }
+.legal-toc ol{ margin:0; padding-left:20px; columns:2; column-gap:32px; }
+.legal-toc li{ padding:3px 0; font-size:15px; }
+.legal-toc a{ color:var(--ink); text-decoration:none; } .legal-toc a:hover{ color:var(--violet); text-decoration:underline; }
+.legal-sec{ padding-top:34px; scroll-margin-top:96px; }
+.legal-sec h2{ font-family:var(--font-display); font-size:24px; line-height:1.25; margin:0 0 12px; color:var(--ink); }
+.legal ul{ margin:0; padding-left:22px; } .legal li{ padding:3px 0; }
+.legal li strong{ color:var(--ink); }
+.legal a{ color:var(--violet); }
+.legal-foot{ margin-top:40px; padding-top:20px; border-top:1px solid var(--border-soft); font-size:15px; }
+mark.ph{ background:#fff0a8; color:#4a3b00; padding:0 4px; border-radius:4px; }
+@media (max-width:640px){ .legal-toc ol{ columns:1; } }
+
+/* footer newsletter */
+.foot-news{ border-top:1px solid var(--dark-border); padding:28px 0 8px; }
+.news-form{ max-width:640px; }
+.news-copy{ display:flex; flex-direction:column; gap:2px; margin-bottom:14px; color:#fff; }
+.news-copy strong{ font-family:var(--font-display); font-size:18px; }
+.news-copy span{ color:var(--dark-text-soft); font-size:14px; }
+.news-row{ display:flex; gap:10px; flex-wrap:wrap; }
+.news-row input{ flex:1 1 240px; min-width:0; padding:13px 18px; border-radius:999px; border:1px solid var(--dark-border); background:rgba(255,255,255,.06); color:#fff; font:inherit; font-size:15px; }
+.news-row input::placeholder{ color:#8d87a0; }
+.news-row input:focus-visible{ outline:2px solid var(--amethyst); outline-offset:2px; }
+.news-fine{ margin:10px 0 0; font-size:12.5px; color:#8d87a0; }
+.news-fine a{ color:#c9b6f5; text-decoration:underline; }
+.news-msg{ margin:6px 0 0; min-height:18px; font-size:13.5px; color:#c9b6f5; }
+.sr-only{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+
+/* pricing teaser + roll-in animation */
+.price-teaser{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.9fr); gap:56px; align-items:center; }
+.price-art{ margin:0; }
+.price-art img{ display:block; width:100%; height:auto; }
+.js-roll .roll-in{ opacity:0; transform:translateX(140px) rotate(9deg) scale(.9); transform-origin:50% 100%; transition:transform 1.1s cubic-bezier(.2,.8,.2,1), opacity .9s ease; will-change:transform,opacity; }
+.js-roll .roll-in.in{ opacity:1; transform:none; }
+.price-art.in img{ animation:priceFloat 6s ease-in-out 1.2s infinite; }
+@keyframes priceFloat{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-8px); } }
+@media (max-width:900px){ .price-teaser{ grid-template-columns:1fr; gap:28px; } .price-art{ max-width:460px; } }
+@media (prefers-reduced-motion:reduce){ .js-roll .roll-in{ transition:none; opacity:1; transform:none; } .price-art.in img{ animation:none; } }
+.price-teaser{ overflow-x:clip; }
+@media (max-width:900px){ .js-roll .roll-in{ transform:translateX(60px) rotate(6deg) scale(.92); } }
+
+/* FAQ groups */
+.faq-group{ font-family: var(--font-display, 'Poppins', sans-serif); font-size: 15px; letter-spacing: .06em; text-transform: uppercase; color: var(--accent, #7c3aed); margin: 34px 0 6px; font-weight: 600; }
+.faq-group:first-child{ margin-top: 0; }
+.guide-card > p{ font-size:15px; line-height:1.55; color: var(--ink-soft); margin:0 0 12px; }
+
+/* HubSpot form embed */
+.form-card{ background:#fff; }
+.form-card .hs-form-frame{ min-height:220px; }
+.form-card .hs-form-frame:empty::before{ content:"Loading form…"; color: var(--ink-soft); font-size:14px; }
+@media (max-width:860px){ .contact-grid{ grid-template-columns:1fr; } }
+#book-audit{ scroll-margin-top:110px; }
+.contact-grid .info-card p.big{ font-size: clamp(16px, 1.8vw, 20px); overflow-wrap:anywhere; }
+
+/* Diagnosis cards: small white icons */
+.voice-card .voice-ico{ display:block; width:40px; height:40px; margin:0 0 16px; }
+.voice-card .voice-ico svg{ display:block; width:100%; height:100%; }
+
+/* Customer journey: icon-only, aligned */
+.j5-card{ display:flex; flex-direction:column; padding:22px 18px 22px; }
+.j5-card .j5-art{ height:150px; display:flex; align-items:center; justify-content:center; margin:0 0 14px; }
+.j5-card .j5-art img{ width:150px; height:150px; aspect-ratio:1/1; object-fit:contain; background:none; border-radius:0; }
+.j5-title{ margin:0; font-family: var(--font-display); font-size:19px; letter-spacing:.04em; text-transform:uppercase; text-align:center; color: var(--ink); }
+.j5-role{ align-self:center; display:inline-block; background:#111; color:#fff; font-size:12px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; line-height:1; padding:7px 14px; border-radius:999px; margin:10px 0 6px; }
+.j5-card p{ margin:10px 2px 10px; }
+
+/* How it works: step icons */
+.process-step .step-head{ display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.step-3d{ flex:none; width:112px; height:112px; margin:-24px -8px -14px 0; object-fit:contain; display:block; }
+
+.dash-points .dash-3d{ display:block; width:104px; height:104px; object-fit:contain; margin:-10px 0 6px -8px; }
+
+.pill.dark{ background:#111; color:#fff; border-color:#111; }
+
+/* Stat bands with sources */
+.stats-src .stat{ padding:40px 26px 34px; text-align:left; display:flex; flex-direction:column; }
+.stats-src .stat .num{ font-size: clamp(30px,3.2vw,40px); line-height:1.05; }
+.stats-src .stat .lbl{ font-size:14.5px; line-height:1.5; color:#e9e4f5; margin-top:10px; flex:1; }
+.stats-src .stat .src{ margin-top:16px; font-size:11.5px; line-height:1.4; color: var(--dark-text-soft); text-decoration:underline; text-underline-offset:3px; }
+.stats-src .stat .src:hover{ color:#fff; }
+.stats-note{ font-size:13px; color: var(--ink-soft); margin:16px 0 0; max-width:760px; }
+@media (max-width: 860px){ .stats-src .stat{ padding:28px 20px; } }
+
+/* 3D agent icons */
+.agent-icon-col .icon-badge.icon-img{ width:112px; height:112px; margin:-10px 0 0; }
+.agent-card .agent-icon-col{ width:120px; }
+.agent-card.featured .agent-icon-col .icon-badge.icon-img{ filter:drop-shadow(0 10px 18px rgba(122,70,224,.28)); }
+@media (max-width:640px){ .agent-icon-col .icon-badge.icon-img{ width:84px; height:84px; } .agent-card .agent-icon-col{ width:auto; } }
+
+/* AI Agents hero square art */
+.hero-split:has(.hero-art-sq){ grid-template-columns:minmax(0,1fr) minmax(0,460px); }
+.hero-art-sq img{ aspect-ratio:1/1; border-radius:28px; }
+@media (max-width:1000px){ .hero-art-sq{ max-width:460px; } }
+
+/* 3D laptop vertical heroes */
+.hero-split:has(.hero-art-3d){ grid-template-columns:minmax(0,1fr) minmax(0,540px); }
+.hero-art-3d img{ aspect-ratio:3/2; border-radius:28px; }
+@media (max-width:1000px){ .hero-art-3d{ max-width:560px; } }
+
+/* 3D laptop heroes: transparent PNG, no frame */
+.hero-split:has(.hero-art-3d){ grid-template-columns:minmax(0,1fr) minmax(0,500px); }
+.hero-art-3d img{ aspect-ratio:1/1; border-radius:0; box-shadow:none; background:none; }
+@media (max-width:1000px){ .hero-art-3d{ max-width:460px; margin:0 auto; } }
+
+/* Layered hero with hover tilt + parallax */
+.hero-art-3d{ position:relative; aspect-ratio:1/1; width:100%; transform-style:preserve-3d; transform:perspective(1100px) rotateX(calc(var(--ry-x,0) * 1deg)) rotateY(calc(var(--ry-y,0) * 1deg)); transition:transform .25s ease-out; will-change:transform; touch-action:pan-y; }
+.hero-art-3d .ly{ position:absolute; inset:0; width:100%; height:100%; aspect-ratio:1/1; object-fit:contain; border-radius:0; box-shadow:none; background:none; user-select:none; -webkit-user-drag:none; pointer-events:none; transition:transform .25s ease-out; will-change:transform; }
+.hero-art-3d .ly0{ transform:translate3d(calc(var(--px,0) * 4px), calc(var(--py,0) * 4px), 0); }
+.hero-art-3d .ly1{ transform:translate3d(calc(var(--px,0) * 10px), calc(var(--py,0) * 8px), 0); }
+.hero-art-3d .ly2{ transform:translate3d(calc(var(--px,0) * 24px), calc(var(--py,0) * 18px), 0); }
+.hero-art-3d .ly3{ transform:translate3d(calc(var(--px,0) * 38px), calc(var(--py,0) * 26px), 0); }
+@keyframes dmmFloat{ 0%,100%{ translate:0 0; } 50%{ translate:0 -7px; } }
+.hero-art-3d:not(.is-hover) .ly2{ animation:dmmFloat 6s ease-in-out infinite; }
+.hero-art-3d:not(.is-hover) .ly3{ animation:dmmFloat 7.5s ease-in-out infinite reverse; }
+@media (prefers-reduced-motion:reduce){ .hero-art-3d, .hero-art-3d .ly{ transition:none; animation:none !important; } }
+
+/* hero rotator: transparent cut-outs, no frame */
+.hero-rotator{ aspect-ratio:775/1081; max-width:520px; background:none; box-shadow:none; border-radius:0; overflow:visible; }
+.hero-rotator img{ object-fit:contain; }
+
+/* rotating CTA word */
+.rot-word{display:inline-block;transition:opacity .35s ease,transform .35s ease;color:var(--accent,inherit)}
+.rot-word.out{opacity:0;transform:translateY(8px)}
+.cta-bundle{margin:24px auto 0;max-width:52ch;font-size:15.5px;color:var(--ink-soft)}
+@media (prefers-reduced-motion:reduce){.rot-word{transition:none}}
+.final-cta h2 .rot-word{ color: var(--violet); }
+.final-cta h2:has(.rot-word) em{ color: var(--ink); }
+.price-points{ list-style:none; margin:18px 0 18px; padding:0; display:grid; gap:10px; }
+.price-points li{ position:relative; padding-left:22px; font-size:16px; line-height:1.5; color:var(--ink-soft); }
+.price-points li:before{ content:''; position:absolute; left:0; top:.55em; width:9px; height:9px; border-radius:50%; background:var(--violet); }
+.price-points strong{ color:var(--ink); }
+
+/* animated capability card illustrations */
+.svc-card.has-img .cap-anim{ display:block; width:100%; aspect-ratio:4/3; background:#06050A; overflow:hidden; }
+.svc-card.has-img .cap-anim svg{ display:block; width:100%; height:100%; }
+
+</style>
+
+<meta name="description" content="Digital Masterminds plans digital marketing, creative, lead generation and AI agents as one system for service businesses, starting with a free diagnosis."><link rel="canonical" href="https://www.dmmkt.tech/"><meta property="og:type" content="website"><meta property="og:site_name" content="Digital Masterminds"><meta property="og:title" content="Digital Masterminds | Digital Marketing and AI Agents for Service Businesses"><meta property="og:description" content="Digital Masterminds plans digital marketing, creative, lead generation and AI agents as one system for service businesses, starting with a free diagnosis."><meta property="og:url" content="https://www.dmmkt.tech/"><meta property="og:image" content="https://www.dmmkt.tech/assets/og-image.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><link rel="icon" href="/favicon.ico" sizes="48x48"><link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><meta name="theme-color" content="#0a0812"><script type="application/ld+json">{"@context": "https://schema.org", "@type": "ProfessionalService", "name": "Digital Masterminds", "alternateName": "DMM", "url": "https://www.dmmkt.tech/", "logo": "https://www.dmmkt.tech/icon-512.png", "image": "https://www.dmmkt.tech/assets/og-image.jpg", "email": "info@dmmkt.tech", "telephone": "+1-917-498-2737", "address": {"@type": "PostalAddress", "addressLocality": "Upper Montclair", "addressRegion": "NJ", "postalCode": "07043", "addressCountry": "US"}, "areaServed": "US", "description": "Digital Masterminds plans digital marketing, creative, lead generation and AI agents as one system for service businesses, starting with a free diagnosis."}</script></head><body><a class="skip-link" href="#main">Skip to main content</a>
+<div id="dmm-loader" role="status" aria-live="polite"><div class="dl-scene" aria-hidden="true"><div class="dl-floor"></div><div class="dl-stage"><div class="dl-rays"></div><div class="dl-charge"></div><div class="dl-glow"></div><div class="dl-orb o1"><div class="sp"><i></i><b></b></div></div><div class="dl-orb o2"><div class="sp"><i></i><b></b></div></div><div class="dl-orb o3"><div class="sp"><i></i></div></div><div class="dl-spin"><img class="dl-l" style="--z:-8.07px;--s:0.900" src="/assets/logo-3d-loader.webp" alt="" width="320" height="223"><img class="dl-l" style="--z:-7.22px;--s:0.945" src="/assets/logo-3d-loader-edge.webp" alt="" width="320" height="223"><img class="dl-l" style="--z:-6.38px;--s:0.961" src="/assets/logo-3d-loader-edge.webp" alt="" width="320" height="223"><img class="dl-l" style="--z:-5.52px;--s:0.973" src="/assets/logo-3d-loader-edge.webp" alt="" width="320" height="223"><img class="dl-l" style="--z:-4.67px;--s:0.982" src="/assets/logo-3d-loader-edge.webp" alt="" width="320" height="223"><img class="dl-l" style="--z:-3.82px;--s:0.988" src="/assets/logo-3d-loader-edge.webp" alt="" width="320" height="223"><img class="dl-l" style="--z:-2.98px;--s:0.993" src="/assets/logo-3d-loader-edge.webp" alt="" width="320" height="223"><img class="dl-l" style="--z:-2.12px;--s:0.996" src="/assets/logo-3d-loader-edge.webp" alt="" width="320" height="223"><img class="dl-l" style="--z:-1.27px;--s:0.999" src="/assets/logo-3d-loader-edge.webp" alt="" width="320" height="223"><img class="dl-l" style="--z:-0.42px;--s:1.000" src="/assets/logo-3d-loader-edge.webp" alt="" width="320" height="223"><img class="dl-l" style="--z:0.42px;--s:1.000" src="/assets/logo-3d-loader-edge.webp" alt="" width="320" height="223"><img class="dl-l" style="--z:1.27px;--s:0.999" src="/assets/logo-3d-loader-edge.webp" alt="" width="320" height="223"><img class="dl-l" style="--z:2.12px;--s:0.996" src="/assets/logo-3d-loader-edge.webp" alt="" width="320" height="223"><img class="dl-l" style="--z:2.98px;--s:0.993" src="/assets/logo-3d-loader-edge.webp" alt="" width="320" height="223"><img class="dl-l" style="--z:3.82px;--s:0.988" src="/assets/logo-3d-loader-edge.webp" alt="" width="320" height="223"><img class="dl-l" style="--z:4.67px;--s:0.982" src="/assets/logo-3d-loader-edge.webp" alt="" width="320" height="223"><img class="dl-l" style="--z:5.52px;--s:0.973" src="/assets/logo-3d-loader-edge.webp" alt="" width="320" height="223"><img class="dl-l" style="--z:6.38px;--s:0.961" src="/assets/logo-3d-loader-edge.webp" alt="" width="320" height="223"><img class="dl-l" style="--z:7.22px;--s:0.945" src="/assets/logo-3d-loader-edge.webp" alt="" width="320" height="223"><img class="dl-l" style="--z:8.07px;--s:0.900" src="/assets/logo-3d-loader.webp" alt="" width="320" height="223"></div></div></div><div class="dl-flash"></div><span class="dl-sr">Loading</span></div>
+<script>(function(){var l=document.getElementById('dmm-loader');if(!l)return;if(document.documentElement.classList.contains('dmm-seen')){l.style.display='none';return}var t0=Date.now(),d=false,MIN=1000;function fin(){l.style.display='none';try{localStorage.setItem('dmm_seen','1')}catch(e){}}function go(){if(d)return;d=true;var rm=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;if(rm||!(window.CSS&&('registerProperty' in CSS))){l.classList.add('done');setTimeout(fin,500);return}l.classList.add('reveal');setTimeout(fin,1050)}function done(){setTimeout(go,Math.max(0,MIN-(Date.now()-t0)))}if(document.readyState==='complete')done();else window.addEventListener('load',done);setTimeout(go,6000);window.addEventListener('pageshow',function(e){if(e.persisted){d=true;fin()}})})();</script>
+<header>
+  <nav class="nav">
+    <a href="/" class="logo-lockup"><img src="/assets/logo-white.webp" alt="Digital Masterminds — Martech Solutions" width="520" height="150"></a>
+    <div class="nav-links" id="navLinks">
+      <div class="has-dd">
+        <button type="button" class="dd-trigger" aria-haspopup="true">Services</button>
+        <div class="dd"><a href="/digital-marketing-solutions">Digital Marketing Solutions<small>Channels planned around the customer journey</small></a><a href="/creative">Creative<small>Websites, landing pages, and video</small></a><a href="/lead-generation">Lead Generation<small>Generate, capture, and answer every lead</small></a><a href="/conversion-management-hub">Conversion Management Hub<small>AI, CRM, and our agents in one place</small></a><a href="/reports-analytics">Reports &amp; Analytics<small>Reporting tied to booked business</small></a><a href="/communications">Communications<small>Two-way texting and calendar scheduling</small></a></div>
+      </div>
+      <div class="has-dd">
+        <a href="/who-we-help" class="dd-trigger">Who We Help</a>
+        <div class="dd cols"><a href="/med-spas">MedSpas</a><a href="/health-wellness">Health &amp; Wellness Brands</a><a href="/construction-home-services">Construction &amp; Home Services</a><a href="/law-firms">Law Firms</a><a href="/franchises-multi-locations">Franchises &amp; Multi-Locations</a><a href="/other-businesses">Other Businesses</a><a href="/real-estate">Real Estate</a><a href="/architects">Architects</a><a href="/cpas">CPAs</a></div>
+      </div>
+      <a href="/ai-agents">Our AI Agents</a>
+      <a href="/ai-agents#pricing">Pricing</a>
+      <div class="has-dd">
+        <button type="button" class="dd-trigger" aria-haspopup="true">Community</button>
+        <div class="dd"><a href="/blog">Blog<small>Articles on marketing, AI, and growth</small></a><a href="/case-studies">Case Studies<small>How we work with businesses</small></a><a href="/events">Events<small>Workshops and meetups</small></a></div>
+      </div>
+    </div>
+    <div class="nav-right">
+      <a href="/contact-us" class="btn btn-primary">Contact Us</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
+    </div>
+  </nav>
+</header>
+
+<main id="main" tabindex="-1">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">Digital Marketing · Generative AI · Agentic AI</div>
+        <h1>Diagnose your business. <em>Equip your team. Grow what's next.</em></h1>
+        <p class="lede">Every business starts from a unique baseline. We begin by illuminating yours: tracing how prospects find you, where engagement drops off, and what drives customer loyalty. From there, DMM brings together elite specialists, rich data, and state-of-the-art generative and agentic AI models. We design a full-funnel strategy built to command attention in a saturated digital landscape. By deploying smart technology and automated processes, we empower your team to focus exclusively on the high-value conversations that win business—scaling your results and transforming operational efficiency, all with the team you already have.</p>
+        <div class="cta-row">
+          <a href="/contact-us#book-audit" class="btn btn-primary">Book a Free Agent Audit →</a>
+          <a href="#journey" class="btn btn-ghost on-light">Let’s explore your customer journey</a>
+        </div>
+      </div>
+      <div class="hero-visual"><div class="hero-rotator" role="img" aria-label="Digital Masterminds helps CPA firms, MedSpas, and architects with digital marketing, generative AI, and agentic AI">
+        <img class="hr-1" src="/assets/hero-cpa-cut.webp" alt="" width="775" height="1081" fetchpriority="high">
+        <img class="hr-2" src="/assets/hero-medspa-cut.webp" alt="" width="775" height="1081">
+        <img class="hr-3" src="/assets/hero-architects-cut.webp" alt="" width="775" height="1081">
+      </div></div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <section id="capabilities"><div class="wrap">
+<div class="section-head"><div class="eyebrow">Specialists, Not Generalists</div><h2>Deep expertise in the channels your customers use, <em>and the tools changing them.</em></h2><p>Search, AI answer visibility, social, paid media, and AI tooling each reward people who work in them daily. We build around that depth, then connect it so the work adds up to growth instead of a list of separate deliverables.</p></div><div class="svc-grid"><div class="svc-card has-img"><div class="cap-anim" role="img" aria-label="A funnel drawing the pieces of digital marketing, such as search, ads, social, email, analytics, and AI, into one stream of customers"><svg aria-hidden="true" focusable="false" viewBox="0 0 1080 810" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+<defs>
+<filter id="c1g" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<filter id="c1g2" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="10"/></filter>
+<radialGradient id="c1bg" cx="50%" cy="50%" r="65%"><stop offset="0" stop-color="#1a1230"/><stop offset="1" stop-color="#06050A"/></radialGradient>
+</defs>
+<rect width="1080" height="810" fill="url(#c1bg)"/>
+<circle cx="278" cy="438" r="1.4" fill="#C9B6F5" opacity="0.33"><animate attributeName="opacity" values=".1;.5;.1" dur="4.9s" begin="-0.3s" repeatCount="indefinite"/></circle>
+<circle cx="53" cy="658" r="1.3" fill="#C9B6F5" opacity="0.22"><animate attributeName="opacity" values=".1;.5;.1" dur="6.0s" begin="-2.4s" repeatCount="indefinite"/></circle>
+<circle cx="876" cy="387" r="1.8" fill="#C9B6F5" opacity="0.20"><animate attributeName="opacity" values=".1;.5;.1" dur="4.9s" begin="-4.3s" repeatCount="indefinite"/></circle>
+<circle cx="563" cy="586" r="1.8" fill="#C9B6F5" opacity="0.17"><animate attributeName="opacity" values=".1;.5;.1" dur="5.3s" begin="-3.0s" repeatCount="indefinite"/></circle>
+<circle cx="341" cy="53" r="2.0" fill="#C9B6F5" opacity="0.29"><animate attributeName="opacity" values=".1;.5;.1" dur="5.2s" begin="-4.4s" repeatCount="indefinite"/></circle>
+<circle cx="754" cy="721" r="1.5" fill="#C9B6F5" opacity="0.39"><animate attributeName="opacity" values=".1;.5;.1" dur="4.3s" begin="-4.7s" repeatCount="indefinite"/></circle>
+<circle cx="919" cy="103" r="1.2" fill="#C9B6F5" opacity="0.22"><animate attributeName="opacity" values=".1;.5;.1" dur="5.9s" begin="-2.2s" repeatCount="indefinite"/></circle>
+<circle cx="667" cy="256" r="1.6" fill="#C9B6F5" opacity="0.27"><animate attributeName="opacity" values=".1;.5;.1" dur="4.1s" begin="-2.9s" repeatCount="indefinite"/></circle>
+<circle cx="624" cy="708" r="1.8" fill="#C9B6F5" opacity="0.43"><animate attributeName="opacity" values=".1;.5;.1" dur="5.6s" begin="-5.0s" repeatCount="indefinite"/></circle>
+<circle cx="711" cy="152" r="2.0" fill="#C9B6F5" opacity="0.44"><animate attributeName="opacity" values=".1;.5;.1" dur="5.7s" begin="-2.8s" repeatCount="indefinite"/></circle>
+<circle cx="754" cy="188" r="2.0" fill="#C9B6F5" opacity="0.32"><animate attributeName="opacity" values=".1;.5;.1" dur="3.9s" begin="-0.3s" repeatCount="indefinite"/></circle>
+<circle cx="894" cy="772" r="1.1" fill="#C9B6F5" opacity="0.39"><animate attributeName="opacity" values=".1;.5;.1" dur="4.2s" begin="-0.8s" repeatCount="indefinite"/></circle>
+<circle cx="334" cy="607" r="2.0" fill="#C9B6F5" opacity="0.16"><animate attributeName="opacity" values=".1;.5;.1" dur="4.8s" begin="-0.2s" repeatCount="indefinite"/></circle>
+<circle cx="758" cy="278" r="2.1" fill="#C9B6F5" opacity="0.44"><animate attributeName="opacity" values=".1;.5;.1" dur="4.5s" begin="-5.0s" repeatCount="indefinite"/></circle>
+<circle cx="350" cy="88" r="1.7" fill="#C9B6F5" opacity="0.16"><animate attributeName="opacity" values=".1;.5;.1" dur="3.6s" begin="-2.0s" repeatCount="indefinite"/></circle>
+<circle cx="650" cy="147" r="1.1" fill="#C9B6F5" opacity="0.41"><animate attributeName="opacity" values=".1;.5;.1" dur="3.9s" begin="-4.8s" repeatCount="indefinite"/></circle>
+<circle cx="937" cy="313" r="1.6" fill="#C9B6F5" opacity="0.31"><animate attributeName="opacity" values=".1;.5;.1" dur="4.9s" begin="-3.0s" repeatCount="indefinite"/></circle>
+<circle cx="599" cy="495" r="2.1" fill="#C9B6F5" opacity="0.30"><animate attributeName="opacity" values=".1;.5;.1" dur="4.3s" begin="-3.6s" repeatCount="indefinite"/></circle>
+<circle cx="278" cy="256" r="2.2" fill="#C9B6F5" opacity="0.31"><animate attributeName="opacity" values=".1;.5;.1" dur="4.6s" begin="-0.1s" repeatCount="indefinite"/></circle>
+<circle cx="455" cy="465" r="1.0" fill="#C9B6F5" opacity="0.33"><animate attributeName="opacity" values=".1;.5;.1" dur="4.9s" begin="-0.3s" repeatCount="indefinite"/></circle>
+<circle cx="667" cy="380" r="1.8" fill="#C9B6F5" opacity="0.26"><animate attributeName="opacity" values=".1;.5;.1" dur="5.1s" begin="-3.7s" repeatCount="indefinite"/></circle>
+<circle cx="62" cy="75" r="1.8" fill="#C9B6F5" opacity="0.44"><animate attributeName="opacity" values=".1;.5;.1" dur="3.8s" begin="-2.3s" repeatCount="indefinite"/></circle>
+<circle cx="633" cy="270" r="1.4" fill="#C9B6F5" opacity="0.24"><animate attributeName="opacity" values=".1;.5;.1" dur="4.1s" begin="-3.0s" repeatCount="indefinite"/></circle>
+<circle cx="340" cy="313" r="1.9" fill="#C9B6F5" opacity="0.16"><animate attributeName="opacity" values=".1;.5;.1" dur="4.7s" begin="-3.7s" repeatCount="indefinite"/></circle>
+<circle cx="350" cy="197" r="2.0" fill="#C9B6F5" opacity="0.22"><animate attributeName="opacity" values=".1;.5;.1" dur="3.6s" begin="-2.2s" repeatCount="indefinite"/></circle>
+<circle cx="738" cy="106" r="1.4" fill="#C9B6F5" opacity="0.25"><animate attributeName="opacity" values=".1;.5;.1" dur="5.5s" begin="-2.2s" repeatCount="indefinite"/></circle>
+<circle cx="896" cy="157" r="1.4" fill="#C9B6F5" opacity="0.35"><animate attributeName="opacity" values=".1;.5;.1" dur="5.7s" begin="-2.3s" repeatCount="indefinite"/></circle>
+<circle cx="265" cy="121" r="1.6" fill="#C9B6F5" opacity="0.21"><animate attributeName="opacity" values=".1;.5;.1" dur="5.4s" begin="-4.2s" repeatCount="indefinite"/></circle>
+<circle cx="224" cy="239" r="2.0" fill="#C9B6F5" opacity="0.34"><animate attributeName="opacity" values=".1;.5;.1" dur="5.4s" begin="-1.7s" repeatCount="indefinite"/></circle>
+<circle cx="170" cy="249" r="2.0" fill="#C9B6F5" opacity="0.23"><animate attributeName="opacity" values=".1;.5;.1" dur="4.0s" begin="-2.1s" repeatCount="indefinite"/></circle>
+<circle cx="460" cy="337" r="2.1" fill="#C9B6F5" opacity="0.20"><animate attributeName="opacity" values=".1;.5;.1" dur="3.0s" begin="-4.7s" repeatCount="indefinite"/></circle>
+<circle cx="920" cy="770" r="1.5" fill="#C9B6F5" opacity="0.44"><animate attributeName="opacity" values=".1;.5;.1" dur="5.8s" begin="-1.1s" repeatCount="indefinite"/></circle>
+<circle cx="786" cy="658" r="1.8" fill="#C9B6F5" opacity="0.31"><animate attributeName="opacity" values=".1;.5;.1" dur="3.9s" begin="-1.7s" repeatCount="indefinite"/></circle>
+<circle cx="267" cy="81" r="1.7" fill="#C9B6F5" opacity="0.24"><animate attributeName="opacity" values=".1;.5;.1" dur="5.4s" begin="-0.2s" repeatCount="indefinite"/></circle>
+<circle cx="944" cy="550" r="2.1" fill="#C9B6F5" opacity="0.42"><animate attributeName="opacity" values=".1;.5;.1" dur="5.7s" begin="-2.9s" repeatCount="indefinite"/></circle>
+<circle cx="53" cy="589" r="1.2" fill="#C9B6F5" opacity="0.24"><animate attributeName="opacity" values=".1;.5;.1" dur="5.0s" begin="-2.6s" repeatCount="indefinite"/></circle>
+<circle cx="454" cy="734" r="1.7" fill="#C9B6F5" opacity="0.25"><animate attributeName="opacity" values=".1;.5;.1" dur="3.8s" begin="-4.3s" repeatCount="indefinite"/></circle>
+<circle cx="517" cy="617" r="1.4" fill="#C9B6F5" opacity="0.21"><animate attributeName="opacity" values=".1;.5;.1" dur="4.6s" begin="-4.1s" repeatCount="indefinite"/></circle>
+<circle cx="211" cy="624" r="2.1" fill="#C9B6F5" opacity="0.39"><animate attributeName="opacity" values=".1;.5;.1" dur="5.5s" begin="-0.0s" repeatCount="indefinite"/></circle>
+<circle cx="669" cy="677" r="1.1" fill="#C9B6F5" opacity="0.23"><animate attributeName="opacity" values=".1;.5;.1" dur="3.8s" begin="-2.6s" repeatCount="indefinite"/></circle>
+<g transform="translate(230 175)" opacity=".85"><g><circle cx="0" cy="0" r="30" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 22 L50 50" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/><animateTransform attributeName="transform" type="scale" values="1;1.08;1" dur="2.6s" begin="-0.00s" repeatCount="indefinite"/></g></g>
+<g transform="translate(405 110)" opacity=".85"><g><rect x="-40" y="-28" width="80" height="56" rx="8" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><text x="0" y="11" text-anchor="middle" font-family="Inter,Arial" font-size="30" fill="#C9B6F5">Ad</text><animateTransform attributeName="transform" type="scale" values="1;1.08;1" dur="2.6s" begin="-0.37s" repeatCount="indefinite"/></g></g>
+<g transform="translate(585 80)" opacity=".85"><g><path d="M-38 -24 h76 a8 8 0 0 1 8 8 v34 a8 8 0 0 1 -8 8 h-50 l-18 16 v-16 h-8 a8 8 0 0 1 -8 -8 v-34 a8 8 0 0 1 8 -8z" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M-22 -6 h44 M-22 8 h28" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"/><animateTransform attributeName="transform" type="scale" values="1;1.08;1" dur="2.6s" begin="-0.74s" repeatCount="indefinite"/></g></g>
+<g transform="translate(760 120)" opacity=".85"><g><path d="M-36 4 L40 -30 L14 36 L2 12 Z M2 12 L40 -30" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><animateTransform attributeName="transform" type="scale" values="1;1.08;1" dur="2.6s" begin="-1.11s" repeatCount="indefinite"/></g></g>
+<g transform="translate(880 245)" opacity=".85"><g><path d="M-40 34 V10 M-20 34 V-2 M0 34 V6 M20 34 V-14" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M-44 0 L-14 -24 L6 -12 L40 -42" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 -42 H40 V-26" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><animateTransform attributeName="transform" type="scale" values="1;1.08;1" dur="2.6s" begin="-1.48s" repeatCount="indefinite"/></g></g>
+<g transform="translate(890 445)" opacity=".85"><g><rect x="-30" y="-30" width="60" height="60" rx="8" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><text x="0" y="10" text-anchor="middle" font-family="Inter,Arial" font-size="24" font-weight="600" fill="#C9B6F5">AI</text><path d="M-14 -30 v-12 M-14 30 v12 M-30 -14 h-12 M30 -14 h12" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"/><path d="M0 -30 v-12 M0 30 v12 M-30 0 h-12 M30 0 h12" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"/><path d="M14 -30 v-12 M14 30 v12 M-30 14 h-12 M30 14 h12" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"/><animateTransform attributeName="transform" type="scale" values="1;1.08;1" dur="2.6s" begin="-1.85s" repeatCount="indefinite"/></g></g>
+<g transform="translate(185 410)" opacity=".85"><g><circle cx="0" cy="0" r="10" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="-42" cy="-30" r="7" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="40" cy="-36" r="7" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="-30" cy="40" r="7" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="44" cy="34" r="7" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M-8 -6 L-36 -26 M8 -6 L34 -32 M-6 8 L-26 34 M8 6 L38 30" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><animateTransform attributeName="transform" type="scale" values="1;1.08;1" dur="2.6s" begin="-2.22s" repeatCount="indefinite"/></g></g>
+<path id="c1f0" d="M230 175 Q330 240 420 330" fill="none" stroke="#C9B6F5" stroke-width="1.6" opacity="0.5" stroke-dasharray="6 10" stroke-linecap="round"><animate attributeName="stroke-dashoffset" from="32" to="0" dur="1.6s" repeatCount="indefinite"/></path>
+<circle r="4.5" fill="#E9DDFF" filter="url(#c1g)" opacity="0"><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" dur="2.6s" begin="-0.0s" repeatCount="indefinite"/><animateMotion dur="2.6s" begin="-0.0s" repeatCount="indefinite" ><mpath href="#c1f0"/></animateMotion></circle>
+<circle r="4.5" fill="#E9DDFF" filter="url(#c1g)" opacity="0"><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" dur="2.6s" begin="-1.3s" repeatCount="indefinite"/><animateMotion dur="2.6s" begin="-1.3s" repeatCount="indefinite" ><mpath href="#c1f0"/></animateMotion></circle>
+<path id="c1f1" d="M405 150 Q440 230 480 318" fill="none" stroke="#E6A8F0" stroke-width="1.6" opacity="0.5" stroke-dasharray="6 10" stroke-linecap="round"><animate attributeName="stroke-dashoffset" from="32" to="0" dur="1.6s" repeatCount="indefinite"/></path>
+<circle r="4.5" fill="#E9DDFF" filter="url(#c1g)" opacity="0"><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" dur="2.6s" begin="-0.37s" repeatCount="indefinite"/><animateMotion dur="2.6s" begin="-0.37s" repeatCount="indefinite" ><mpath href="#c1f1"/></animateMotion></circle>
+<circle r="4.5" fill="#E9DDFF" filter="url(#c1g)" opacity="0"><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" dur="2.6s" begin="-1.67s" repeatCount="indefinite"/><animateMotion dur="2.6s" begin="-1.67s" repeatCount="indefinite" ><mpath href="#c1f1"/></animateMotion></circle>
+<path id="c1f2" d="M585 120 Q560 200 540 314" fill="none" stroke="#C9B6F5" stroke-width="1.6" opacity="0.5" stroke-dasharray="6 10" stroke-linecap="round"><animate attributeName="stroke-dashoffset" from="32" to="0" dur="1.6s" repeatCount="indefinite"/></path>
+<circle r="4.5" fill="#E9DDFF" filter="url(#c1g)" opacity="0"><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" dur="2.6s" begin="-0.74s" repeatCount="indefinite"/><animateMotion dur="2.6s" begin="-0.74s" repeatCount="indefinite" ><mpath href="#c1f2"/></animateMotion></circle>
+<circle r="4.5" fill="#E9DDFF" filter="url(#c1g)" opacity="0"><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" dur="2.6s" begin="-2.04s" repeatCount="indefinite"/><animateMotion dur="2.6s" begin="-2.04s" repeatCount="indefinite" ><mpath href="#c1f2"/></animateMotion></circle>
+<path id="c1f3" d="M760 160 Q690 230 600 318" fill="none" stroke="#E6A8F0" stroke-width="1.6" opacity="0.5" stroke-dasharray="6 10" stroke-linecap="round"><animate attributeName="stroke-dashoffset" from="32" to="0" dur="1.6s" repeatCount="indefinite"/></path>
+<circle r="4.5" fill="#E9DDFF" filter="url(#c1g)" opacity="0"><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" dur="2.6s" begin="-1.1099999999999999s" repeatCount="indefinite"/><animateMotion dur="2.6s" begin="-1.1099999999999999s" repeatCount="indefinite" ><mpath href="#c1f3"/></animateMotion></circle>
+<circle r="4.5" fill="#E9DDFF" filter="url(#c1g)" opacity="0"><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" dur="2.6s" begin="-2.41s" repeatCount="indefinite"/><animateMotion dur="2.6s" begin="-2.41s" repeatCount="indefinite" ><mpath href="#c1f3"/></animateMotion></circle>
+<path id="c1f4" d="M880 245 Q800 300 660 324" fill="none" stroke="#C9B6F5" stroke-width="1.6" opacity="0.5" stroke-dasharray="6 10" stroke-linecap="round"><animate attributeName="stroke-dashoffset" from="32" to="0" dur="1.6s" repeatCount="indefinite"/></path>
+<circle r="4.5" fill="#E9DDFF" filter="url(#c1g)" opacity="0"><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" dur="2.6s" begin="-1.48s" repeatCount="indefinite"/><animateMotion dur="2.6s" begin="-1.48s" repeatCount="indefinite" ><mpath href="#c1f4"/></animateMotion></circle>
+<circle r="4.5" fill="#E9DDFF" filter="url(#c1g)" opacity="0"><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" dur="2.6s" begin="-2.7800000000000002s" repeatCount="indefinite"/><animateMotion dur="2.6s" begin="-2.7800000000000002s" repeatCount="indefinite" ><mpath href="#c1f4"/></animateMotion></circle>
+<path id="c1f5" d="M890 445 Q800 380 700 345" fill="none" stroke="#E6A8F0" stroke-width="1.6" opacity="0.5" stroke-dasharray="6 10" stroke-linecap="round"><animate attributeName="stroke-dashoffset" from="32" to="0" dur="1.6s" repeatCount="indefinite"/></path>
+<circle r="4.5" fill="#E9DDFF" filter="url(#c1g)" opacity="0"><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" dur="2.6s" begin="-1.85s" repeatCount="indefinite"/><animateMotion dur="2.6s" begin="-1.85s" repeatCount="indefinite" ><mpath href="#c1f5"/></animateMotion></circle>
+<circle r="4.5" fill="#E9DDFF" filter="url(#c1g)" opacity="0"><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" dur="2.6s" begin="-3.1500000000000004s" repeatCount="indefinite"/><animateMotion dur="2.6s" begin="-3.1500000000000004s" repeatCount="indefinite" ><mpath href="#c1f5"/></animateMotion></circle>
+<path id="c1f6" d="M185 410 Q280 330 380 345" fill="none" stroke="#C9B6F5" stroke-width="1.6" opacity="0.5" stroke-dasharray="6 10" stroke-linecap="round"><animate attributeName="stroke-dashoffset" from="32" to="0" dur="1.6s" repeatCount="indefinite"/></path>
+<circle r="4.5" fill="#E9DDFF" filter="url(#c1g)" opacity="0"><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" dur="2.6s" begin="-2.2199999999999998s" repeatCount="indefinite"/><animateMotion dur="2.6s" begin="-2.2199999999999998s" repeatCount="indefinite" ><mpath href="#c1f6"/></animateMotion></circle>
+<circle r="4.5" fill="#E9DDFF" filter="url(#c1g)" opacity="0"><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" dur="2.6s" begin="-3.5199999999999996s" repeatCount="indefinite"/><animateMotion dur="2.6s" begin="-3.5199999999999996s" repeatCount="indefinite" ><mpath href="#c1f6"/></animateMotion></circle>
+<path d="M350 330 L488 585 M730 330 L592 585" fill="none" stroke="#C9B6F5" stroke-width="2" opacity=".55"/>
+<ellipse cx="540" cy="330" rx="190" ry="46" fill="none" stroke="#C9B6F5" stroke-width="3" opacity=".5"><animate attributeName="opacity" values=".35;1;.35" keyTimes="0;.15;1" dur="2.2s" begin="0.00s" repeatCount="indefinite"/><animate attributeName="stroke" values="#C9B6F5;#E9DDFF;#C9B6F5" keyTimes="0;.15;1" dur="2.2s" begin="0.00s" repeatCount="indefinite"/></ellipse>
+<ellipse cx="540" cy="385" rx="165" ry="40" fill="none" stroke="#C9B6F5" stroke-width="2.4" opacity=".5"><animate attributeName="opacity" values=".35;1;.35" keyTimes="0;.15;1" dur="2.2s" begin="0.22s" repeatCount="indefinite"/><animate attributeName="stroke" values="#C9B6F5;#E9DDFF;#C9B6F5" keyTimes="0;.15;1" dur="2.2s" begin="0.22s" repeatCount="indefinite"/></ellipse>
+<ellipse cx="540" cy="435" rx="140" ry="34" fill="none" stroke="#C9B6F5" stroke-width="2.4" opacity=".5"><animate attributeName="opacity" values=".35;1;.35" keyTimes="0;.15;1" dur="2.2s" begin="0.44s" repeatCount="indefinite"/><animate attributeName="stroke" values="#C9B6F5;#E9DDFF;#C9B6F5" keyTimes="0;.15;1" dur="2.2s" begin="0.44s" repeatCount="indefinite"/></ellipse>
+<ellipse cx="540" cy="480" rx="116" ry="28" fill="none" stroke="#C9B6F5" stroke-width="2.4" opacity=".5"><animate attributeName="opacity" values=".35;1;.35" keyTimes="0;.15;1" dur="2.2s" begin="0.66s" repeatCount="indefinite"/><animate attributeName="stroke" values="#C9B6F5;#E9DDFF;#C9B6F5" keyTimes="0;.15;1" dur="2.2s" begin="0.66s" repeatCount="indefinite"/></ellipse>
+<ellipse cx="540" cy="520" rx="94" ry="23" fill="none" stroke="#C9B6F5" stroke-width="2.4" opacity=".5"><animate attributeName="opacity" values=".35;1;.35" keyTimes="0;.15;1" dur="2.2s" begin="0.88s" repeatCount="indefinite"/><animate attributeName="stroke" values="#C9B6F5;#E9DDFF;#C9B6F5" keyTimes="0;.15;1" dur="2.2s" begin="0.88s" repeatCount="indefinite"/></ellipse>
+<ellipse cx="540" cy="555" rx="72" ry="18" fill="none" stroke="#C9B6F5" stroke-width="2.4" opacity=".5"><animate attributeName="opacity" values=".35;1;.35" keyTimes="0;.15;1" dur="2.2s" begin="1.10s" repeatCount="indefinite"/><animate attributeName="stroke" values="#C9B6F5;#E9DDFF;#C9B6F5" keyTimes="0;.15;1" dur="2.2s" begin="1.10s" repeatCount="indefinite"/></ellipse>
+<ellipse cx="540" cy="585" rx="52" ry="13" fill="none" stroke="#C9B6F5" stroke-width="2.4" opacity=".5"><animate attributeName="opacity" values=".35;1;.35" keyTimes="0;.15;1" dur="2.2s" begin="1.32s" repeatCount="indefinite"/><animate attributeName="stroke" values="#C9B6F5;#E9DDFF;#C9B6F5" keyTimes="0;.15;1" dur="2.2s" begin="1.32s" repeatCount="indefinite"/></ellipse>
+<ellipse cx="540" cy="335" rx="150" ry="30" fill="#8B5CF6" opacity=".18" filter="url(#c1g2)"><animate attributeName="opacity" values=".1;.3;.1" dur="2.2s" repeatCount="indefinite"/></ellipse>
+<path id="c1stem" d="M540 590 L540 700" stroke="#C9B6F5" stroke-width="2" opacity=".6" stroke-dasharray="4 8"><animate attributeName="stroke-dashoffset" from="24" to="0" dur="1s" repeatCount="indefinite"/></path>
+<circle r="5" fill="#E6A8F0" filter="url(#c1g)" opacity="0"><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" dur="1.2s" begin="0.0s" repeatCount="indefinite"/><animateMotion dur="1.2s" begin="0.0s" repeatCount="indefinite" ><mpath href="#c1stem"/></animateMotion></circle>
+<circle r="5" fill="#E6A8F0" filter="url(#c1g)" opacity="0"><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" dur="1.2s" begin="-0.4s" repeatCount="indefinite"/><animateMotion dur="1.2s" begin="-0.4s" repeatCount="indefinite" ><mpath href="#c1stem"/></animateMotion></circle>
+<circle r="5" fill="#E6A8F0" filter="url(#c1g)" opacity="0"><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" dur="1.2s" begin="-0.8s" repeatCount="indefinite"/><animateMotion dur="1.2s" begin="-0.8s" repeatCount="indefinite" ><mpath href="#c1stem"/></animateMotion></circle>
+<g transform="translate(420 745)" opacity=".25"><circle cx="0" cy="-16" r="9" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"/><path d="M-16 14 a16 14 0 0 1 32 0" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"/><animate attributeName="opacity" values=".2;.2;1;1;.2" keyTimes="0;0.10;0.16;.92;1" dur="5s" repeatCount="indefinite"/></g>
+<g transform="translate(480 745)" opacity=".25"><circle cx="0" cy="-16" r="9" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"/><path d="M-16 14 a16 14 0 0 1 32 0" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"/><animate attributeName="opacity" values=".2;.2;1;1;.2" keyTimes="0;0.20;0.26;.92;1" dur="5s" repeatCount="indefinite"/></g>
+<g transform="translate(540 745)" opacity=".25"><circle cx="0" cy="-16" r="9" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"/><path d="M-16 14 a16 14 0 0 1 32 0" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"/><animate attributeName="opacity" values=".2;.2;1;1;.2" keyTimes="0;0.30;0.36;.92;1" dur="5s" repeatCount="indefinite"/></g>
+<g transform="translate(600 745)" opacity=".25"><circle cx="0" cy="-16" r="9" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"/><path d="M-16 14 a16 14 0 0 1 32 0" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"/><animate attributeName="opacity" values=".2;.2;1;1;.2" keyTimes="0;0.40;0.46;.92;1" dur="5s" repeatCount="indefinite"/></g>
+<g transform="translate(660 745)" opacity=".25"><circle cx="0" cy="-16" r="9" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"/><path d="M-16 14 a16 14 0 0 1 32 0" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"/><animate attributeName="opacity" values=".2;.2;1;1;.2" keyTimes="0;0.50;0.56;.92;1" dur="5s" repeatCount="indefinite"/></g>
+</svg></div><div class="svc-body"><h3>Digital marketing, run by specialists</h3><p>Advertising, SEO, AEO and GEO, social, email, and web, each handled by people who work in that channel every day and planned together as one full-funnel program.</p></div></div><div class="svc-card has-img"><div class="cap-anim" role="img" aria-label="Website, email, ad, video, and AI analytics assets flowing into one approved result marked with a check and a thumbs-up"><svg aria-hidden="true" focusable="false" viewBox="0 0 1080 810" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+<defs>
+<filter id="c2g" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<filter id="c2g2" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="10"/></filter>
+<radialGradient id="c2bg" cx="50%" cy="50%" r="65%"><stop offset="0" stop-color="#1a1230"/><stop offset="1" stop-color="#06050A"/></radialGradient>
+</defs>
+<rect width="1080" height="810" fill="url(#c2bg)"/>
+<path d="M230 130 Q110 190.0 160 250" fill="none" stroke="#C9B6F5" stroke-width="1.2" opacity=".3" stroke-dasharray="2 7"/>
+<path d="M160 270 Q80 332.5 130 395" fill="none" stroke="#C9B6F5" stroke-width="1.2" opacity=".3" stroke-dasharray="2 7"/>
+<path d="M130 415 Q80 477.5 170 540" fill="none" stroke="#C9B6F5" stroke-width="1.2" opacity=".3" stroke-dasharray="2 7"/>
+<path d="M170 560 Q120 620.0 230 680" fill="none" stroke="#C9B6F5" stroke-width="1.2" opacity=".3" stroke-dasharray="2 7"/>
+<path id="c2in0" d="M355 120 C480 120 430 333.75 542 390.75" fill="none" stroke="#C9B6F5" stroke-width="1.6" opacity="0.5" stroke-dasharray="6 10" stroke-linecap="round"><animate attributeName="stroke-dashoffset" from="32" to="0" dur="1.4s" repeatCount="indefinite"/></path>
+<circle r="5" fill="#E9DDFF" filter="url(#c2g)" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.00;0.02;0.30;0.32;1" dur="6s" repeatCount="indefinite"/><animateMotion dur="6s" repeatCount="indefinite" keyPoints="0;0;1;1" keyTimes="0;0.00;0.32;1" calcMode="linear"><mpath href="#c2in0"/></animateMotion></circle>
+<g transform="translate(300 120)" opacity=".9"><rect x="-44" y="-50" width="88" height="100" rx="6" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M-44 -34 h88" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><rect x="-32" y="-24" width="64" height="30" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><path d="M-32 -24 L32 6 M32 -24 L-32 6" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"/><path d="M-32 18 h64 M-32 30 h44" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></g>
+<path id="c2in1" d="M285 260 C410 260 430 368.75 542 397.75" fill="none" stroke="#E6A8F0" stroke-width="1.6" opacity="0.5" stroke-dasharray="6 10" stroke-linecap="round"><animate attributeName="stroke-dashoffset" from="32" to="0" dur="1.4s" repeatCount="indefinite"/></path>
+<circle r="5" fill="#E9DDFF" filter="url(#c2g)" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.04;0.06;0.34;0.36;1" dur="6s" repeatCount="indefinite"/><animateMotion dur="6s" repeatCount="indefinite" keyPoints="0;0;1;1" keyTimes="0;0.04;0.36;1" calcMode="linear"><mpath href="#c2in1"/></animateMotion></circle>
+<g transform="translate(230 260)" opacity=".9"><rect x="-46" y="-32" width="92" height="64" rx="6" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M-46 -30 L0 6 L46 -30" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
+<path id="c2in2" d="M255 405 C380 405 430 405.0 542 405.0" fill="none" stroke="#C9B6F5" stroke-width="1.6" opacity="0.5" stroke-dasharray="6 10" stroke-linecap="round"><animate attributeName="stroke-dashoffset" from="32" to="0" dur="1.4s" repeatCount="indefinite"/></path>
+<circle r="5" fill="#E9DDFF" filter="url(#c2g)" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.08;0.10;0.38;0.40;1" dur="6s" repeatCount="indefinite"/><animateMotion dur="6s" repeatCount="indefinite" keyPoints="0;0;1;1" keyTimes="0;0.08;0.40;1" calcMode="linear"><mpath href="#c2in2"/></animateMotion></circle>
+<g transform="translate(200 405)" opacity=".9"><rect x="-52" y="-42" width="104" height="84" rx="6" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><rect x="-42" y="-22" width="52" height="34" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><text x="-16" y="4" text-anchor="middle" font-family="Inter,Arial" font-size="22" fill="#C9B6F5">Ad</text><path d="M22 10 v18 M32 0 v28 M42 14 v14" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"/></g>
+<path id="c2in3" d="M295 550 C420 550 430 441.25 542 412.25" fill="none" stroke="#E6A8F0" stroke-width="1.6" opacity="0.5" stroke-dasharray="6 10" stroke-linecap="round"><animate attributeName="stroke-dashoffset" from="32" to="0" dur="1.4s" repeatCount="indefinite"/></path>
+<circle r="5" fill="#E9DDFF" filter="url(#c2g)" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.12;0.14;0.42;0.44;1" dur="6s" repeatCount="indefinite"/><animateMotion dur="6s" repeatCount="indefinite" keyPoints="0;0;1;1" keyTimes="0;0.12;0.44;1" calcMode="linear"><mpath href="#c2in3"/></animateMotion></circle>
+<g transform="translate(240 550)" opacity=".9"><rect x="-50" y="-34" width="100" height="68" rx="6" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M-8 -14 L14 0 L-8 14 Z" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M-40 24 h80" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></g>
+<path id="c2in4" d="M355 690 C480 690 430 476.25 542 419.25" fill="none" stroke="#C9B6F5" stroke-width="1.6" opacity="0.5" stroke-dasharray="6 10" stroke-linecap="round"><animate attributeName="stroke-dashoffset" from="32" to="0" dur="1.4s" repeatCount="indefinite"/></path>
+<circle r="5" fill="#E9DDFF" filter="url(#c2g)" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.16;0.18;0.46;0.48;1" dur="6s" repeatCount="indefinite"/><animateMotion dur="6s" repeatCount="indefinite" keyPoints="0;0;1;1" keyTimes="0;0.16;0.48;1" calcMode="linear"><mpath href="#c2in4"/></animateMotion></circle>
+<g transform="translate(300 690)" opacity=".9"><rect x="-36" y="-44" width="72" height="88" rx="6" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M-20 22 V10 M-6 22 V0 M8 22 V4 M22 22 V-10" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"/><path d="M-22 -14 L-4 -28 L8 -20 L24 -34" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"/></g>
+<g transform="translate(600 405)"><circle r="56" fill="none" stroke="#C9B6F5" stroke-width="2.4" stroke-dasharray="3 9" opacity=".7"><animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="8s" repeatCount="indefinite"/><animate attributeName="opacity" values=".5;.5;1;1;.5" keyTimes="0;.3;.4;.75;1" dur="6s" repeatCount="indefinite"/></circle><circle r="70" fill="#8B5CF6" opacity="0" filter="url(#c2g2)"><animate attributeName="opacity" values="0;0;.45;.2;0" keyTimes="0;.42;.5;.8;1" dur="6s" repeatCount="indefinite"/></circle><path d="M-26 2 L-6 22 L30 -22" fill="none" stroke="#E9DDFF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="90" stroke-dashoffset="90" filter="url(#c2g)"><animate attributeName="stroke-dashoffset" values="90;90;0;0;90" keyTimes="0;.42;.52;.9;1" dur="6s" repeatCount="indefinite"/></path></g>
+<text x="600" y="510" text-anchor="middle" font-family="Inter,Arial" font-size="24" font-weight="600" fill="#E9DDFF" opacity="0">Reviewed by your team<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;.34;.4;.9;1" dur="6s" repeatCount="indefinite"/></text>
+<g transform="translate(715 395)"><g opacity="0"><path d="M-18 -6 h-14 v40 h14 z M-18 -6 L-2 -40 c10 -2 16 6 12 16 l-6 18 h28 c10 0 14 8 12 16 l-8 26 c-2 6 -6 8 -12 8 h-44" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke="#E6A8F0"/><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;.5;.56;.9;1" dur="6s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="scale" values=".6;.6;1.15;1;1" keyTimes="0;.5;.56;.62;1" dur="6s" repeatCount="indefinite"/></g></g>
+<path id="c2out0" d="M780 405 C860 405 880 250 1000 250" fill="none" stroke="#C9B6F5" stroke-width="1.6" opacity="0" stroke-linecap="round"><animate attributeName="opacity" values="0;0;.7;.7;0" keyTimes="0;.56;.62;.92;1" dur="6s" repeatCount="indefinite"/></path>
+<path d="M992 243 L1004 250 L992 257" fill="none" stroke="#E9DDFF" stroke-width="2" opacity="0"><animate attributeName="opacity" values="0;0;.9;.9;0" keyTimes="0;.6;.66;.92;1" dur="6s" repeatCount="indefinite"/></path>
+<circle r="4" fill="#E9DDFF" filter="url(#c2g)" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.580;0.600;0.820;1" dur="6s" repeatCount="indefinite"/><animateMotion dur="6s" repeatCount="indefinite" keyPoints="0;0;1;1" keyTimes="0;0.580;0.840;1" calcMode="linear"><mpath href="#c2out0"/></animateMotion></circle>
+<path id="c2out1" d="M780 405 C860 405 880 310 1000 310" fill="none" stroke="#E9DDFF" stroke-width="1.6" opacity="0" stroke-linecap="round"><animate attributeName="opacity" values="0;0;.7;.7;0" keyTimes="0;.56;.62;.92;1" dur="6s" repeatCount="indefinite"/></path>
+<path d="M992 303 L1004 310 L992 317" fill="none" stroke="#E9DDFF" stroke-width="2" opacity="0"><animate attributeName="opacity" values="0;0;.9;.9;0" keyTimes="0;.6;.66;.92;1" dur="6s" repeatCount="indefinite"/></path>
+<circle r="4" fill="#E9DDFF" filter="url(#c2g)" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.595;0.615;0.835;1" dur="6s" repeatCount="indefinite"/><animateMotion dur="6s" repeatCount="indefinite" keyPoints="0;0;1;1" keyTimes="0;0.595;0.855;1" calcMode="linear"><mpath href="#c2out1"/></animateMotion></circle>
+<path id="c2out2" d="M780 405 C860 405 880 370 1000 370" fill="none" stroke="#C9B6F5" stroke-width="1.6" opacity="0" stroke-linecap="round"><animate attributeName="opacity" values="0;0;.7;.7;0" keyTimes="0;.56;.62;.92;1" dur="6s" repeatCount="indefinite"/></path>
+<path d="M992 363 L1004 370 L992 377" fill="none" stroke="#E9DDFF" stroke-width="2" opacity="0"><animate attributeName="opacity" values="0;0;.9;.9;0" keyTimes="0;.6;.66;.92;1" dur="6s" repeatCount="indefinite"/></path>
+<circle r="4" fill="#E9DDFF" filter="url(#c2g)" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.610;0.630;0.850;1" dur="6s" repeatCount="indefinite"/><animateMotion dur="6s" repeatCount="indefinite" keyPoints="0;0;1;1" keyTimes="0;0.610;0.870;1" calcMode="linear"><mpath href="#c2out2"/></animateMotion></circle>
+<path id="c2out3" d="M780 405 C860 405 880 430 1000 430" fill="none" stroke="#C9B6F5" stroke-width="1.6" opacity="0" stroke-linecap="round"><animate attributeName="opacity" values="0;0;.7;.7;0" keyTimes="0;.56;.62;.92;1" dur="6s" repeatCount="indefinite"/></path>
+<path d="M992 423 L1004 430 L992 437" fill="none" stroke="#E9DDFF" stroke-width="2" opacity="0"><animate attributeName="opacity" values="0;0;.9;.9;0" keyTimes="0;.6;.66;.92;1" dur="6s" repeatCount="indefinite"/></path>
+<circle r="4" fill="#E9DDFF" filter="url(#c2g)" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.625;0.645;0.865;1" dur="6s" repeatCount="indefinite"/><animateMotion dur="6s" repeatCount="indefinite" keyPoints="0;0;1;1" keyTimes="0;0.625;0.885;1" calcMode="linear"><mpath href="#c2out3"/></animateMotion></circle>
+<path id="c2out4" d="M780 405 C860 405 880 490 1000 490" fill="none" stroke="#E9DDFF" stroke-width="1.6" opacity="0" stroke-linecap="round"><animate attributeName="opacity" values="0;0;.7;.7;0" keyTimes="0;.56;.62;.92;1" dur="6s" repeatCount="indefinite"/></path>
+<path d="M992 483 L1004 490 L992 497" fill="none" stroke="#E9DDFF" stroke-width="2" opacity="0"><animate attributeName="opacity" values="0;0;.9;.9;0" keyTimes="0;.6;.66;.92;1" dur="6s" repeatCount="indefinite"/></path>
+<circle r="4" fill="#E9DDFF" filter="url(#c2g)" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.640;0.660;0.880;1" dur="6s" repeatCount="indefinite"/><animateMotion dur="6s" repeatCount="indefinite" keyPoints="0;0;1;1" keyTimes="0;0.640;0.900;1" calcMode="linear"><mpath href="#c2out4"/></animateMotion></circle>
+<path id="c2out5" d="M780 405 C860 405 880 550 1000 550" fill="none" stroke="#C9B6F5" stroke-width="1.6" opacity="0" stroke-linecap="round"><animate attributeName="opacity" values="0;0;.7;.7;0" keyTimes="0;.56;.62;.92;1" dur="6s" repeatCount="indefinite"/></path>
+<path d="M992 543 L1004 550 L992 557" fill="none" stroke="#E9DDFF" stroke-width="2" opacity="0"><animate attributeName="opacity" values="0;0;.9;.9;0" keyTimes="0;.6;.66;.92;1" dur="6s" repeatCount="indefinite"/></path>
+<circle r="4" fill="#E9DDFF" filter="url(#c2g)" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.655;0.675;0.895;1" dur="6s" repeatCount="indefinite"/><animateMotion dur="6s" repeatCount="indefinite" keyPoints="0;0;1;1" keyTimes="0;0.655;0.915;1" calcMode="linear"><mpath href="#c2out5"/></animateMotion></circle>
+</svg></div><div class="svc-body"><h3>Generative AI, human-approved</h3><p>Faster drafts of ads, pages, emails, and video scripts, plus sharper audience and performance insight. A person reviews and approves everything before it goes live.</p></div></div><div class="svc-card has-img"><div class="cap-anim" role="img" aria-label="A flow from customer inquiry to reply, booked appointment, quote follow-up, and review request, powered by an AI agent that reports results"><svg aria-hidden="true" focusable="false" viewBox="0 0 1080 810" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+<defs>
+<filter id="c3g" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<filter id="c3g2" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="10"/></filter>
+<radialGradient id="c3bg" cx="50%" cy="50%" r="65%"><stop offset="0" stop-color="#1a1230"/><stop offset="1" stop-color="#06050A"/></radialGradient>
+</defs>
+<rect width="1080" height="810" fill="url(#c3bg)"/>
+<g transform="translate(735 405)"><circle r="86" fill="#8B5CF6" opacity=".18" filter="url(#c3g2)"><animate attributeName="opacity" values=".12;.32;.12" dur="2.0s" repeatCount="indefinite"/></circle><circle r="58" fill="#120c22" stroke="#C9B6F5" stroke-width="3"/><circle r="68" fill="none" stroke="#C9B6F5" stroke-width="1.4" opacity=".4"><animate attributeName="r" values="60;80" dur="2.0s" repeatCount="indefinite"/><animate attributeName="opacity" values=".6;0" dur="2.0s" repeatCount="indefinite"/></circle><rect x="-20" y="-16" width="40" height="32" rx="6" fill="none" stroke="#E9DDFF" stroke-width="3"/><text x="0" y="8" text-anchor="middle" font-family="Inter,Arial" font-size="18" font-weight="700" fill="#E9DDFF">AI</text></g><text x="735" y="505" text-anchor="middle" font-family="Inter,Arial" font-size="24" font-weight="600" fill="#E9DDFF">Agent takes</text><text x="735" y="535" text-anchor="middle" font-family="Inter,Arial" font-size="24" font-weight="600" fill="#E9DDFF">the next step</text>
+<path id="c3o0" d="M797 405 C855 405 845 290 872 290" fill="none" stroke="#C9B6F5" stroke-width="1.8" opacity=".45"/>
+<g opacity=".4"><g transform="translate(930 290)"><rect x="-28" y="-22" width="56" height="50" rx="6" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M-28 -6 h56 M-12 -30 v14 M12 -30 v14" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6"/><path d="M-10 12 L-2 20 L14 2" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g><text x="930" y="352" text-anchor="middle" font-family="Inter,Arial" font-size="24" fill="#C9B6F5">Booked</text><animate attributeName="opacity" values=".4;.4;1;1;.4;.4" keyTimes="0;0.510;0.520;0.590;0.600;1" dur="10s" repeatCount="indefinite"/></g>
+<path id="c3o1" d="M797 405 C855 405 845 420 872 420" fill="none" stroke="#C9B6F5" stroke-width="1.8" opacity=".45"/>
+<g opacity=".4"><g transform="translate(930 420)"><path d="M-30 4 L32 -26 L12 30 L2 10 Z M2 10 L32 -26" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g><text x="930" y="482" text-anchor="middle" font-family="Inter,Arial" font-size="24" fill="#C9B6F5">Followed up</text><animate attributeName="opacity" values=".4;.4;1;1;.4;.4;1;1;.4;.4;1;1;.4;.4" keyTimes="0;0.110;0.120;0.190;0.200;0.310;0.320;0.390;0.400;0.710;0.720;0.790;0.800;1" dur="10s" repeatCount="indefinite"/></g>
+<path id="c3o2" d="M797 405 C855 405 845 550 872 550" fill="none" stroke="#C9B6F5" stroke-width="1.8" opacity=".45"/>
+<g opacity=".4"><g transform="translate(930 550)"><path d="M-30 -30 V28 H32" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M-22 16 L-6 -2 L6 8 L28 -18" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 -18 H28 V-4" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g><text x="930" y="612" text-anchor="middle" font-family="Inter,Arial" font-size="24" fill="#C9B6F5">Reported</text><animate attributeName="opacity" values=".4;.4;1;1;.4;.4" keyTimes="0;0.910;0.920;0.990;1.000;1" dur="10s" repeatCount="indefinite"/></g>
+<g opacity=".4"><g transform="translate(120 110)"><path d="M-30 -22 h60 a8 8 0 0 1 8 8 v26 a8 8 0 0 1 -8 8 h-38 l-14 12 v-12 h-8 a8 8 0 0 1 -8 -8 v-26 a8 8 0 0 1 8 -8z" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M-16 -6 h32 M-16 6 h22" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"/></g><text x="185" y="119" font-family="Inter,Arial" font-size="28" fill="#E9DDFF">Inquiry</text><animate attributeName="opacity" values=".4;.4;1;1;.4;.4" keyTimes="0;.001;.01;0.190;0.200;1" dur="10s" repeatCount="indefinite"/></g>
+<path id="c3in0" d="M330 110 C560 110 600 346.0 673 381.4" fill="none" stroke="#C9B6F5" stroke-width="1.8" opacity=".35"><animate attributeName="opacity" values=".3;.3;.9;.9;.3;.3" keyTimes="0;.001;.01;0.190;0.200;1" dur="10s" repeatCount="indefinite"/></path>
+<circle r="6" fill="#E9DDFF" filter="url(#c3g)" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.020;0.025;0.095;0.100;1" dur="10s" repeatCount="indefinite"/><animateMotion dur="10s" repeatCount="indefinite" keyPoints="0;0;1;1" keyTimes="0;0.020;0.100;1" calcMode="linear"><mpath href="#c3in0"/></animateMotion></circle>
+<circle r="6" fill="#E6A8F0" filter="url(#c3g)" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.100;0.105;0.145;0.150;1" dur="10s" repeatCount="indefinite"/><animateMotion dur="10s" repeatCount="indefinite" keyPoints="0;0;1;1" keyTimes="0;0.100;0.150;1" calcMode="linear"><mpath href="#c3o1"/></animateMotion></circle>
+<g opacity=".4"><g transform="translate(120 245)"><rect x="-34" y="-26" width="68" height="52" rx="8" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M18 -10 v10 a6 6 0 0 1 -6 6 h-30 M-10 -6 L-20 6 L-10 18" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6"/></g><text x="185" y="254" font-family="Inter,Arial" font-size="28" fill="#E9DDFF">Reply</text><animate attributeName="opacity" values=".4;.4;1;1;.4;.4" keyTimes="0;0.200;0.210;0.390;0.400;1" dur="10s" repeatCount="indefinite"/></g>
+<path id="c3in1" d="M330 245 C560 245 600 373.0 673 392.2" fill="none" stroke="#C9B6F5" stroke-width="1.8" opacity=".35"><animate attributeName="opacity" values=".3;.3;.9;.9;.3;.3" keyTimes="0;0.200;0.210;0.390;0.400;1" dur="10s" repeatCount="indefinite"/></path>
+<circle r="6" fill="#E9DDFF" filter="url(#c3g)" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.220;0.225;0.295;0.300;1" dur="10s" repeatCount="indefinite"/><animateMotion dur="10s" repeatCount="indefinite" keyPoints="0;0;1;1" keyTimes="0;0.220;0.300;1" calcMode="linear"><mpath href="#c3in1"/></animateMotion></circle>
+<circle r="6" fill="#E6A8F0" filter="url(#c3g)" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.300;0.305;0.345;0.350;1" dur="10s" repeatCount="indefinite"/><animateMotion dur="10s" repeatCount="indefinite" keyPoints="0;0;1;1" keyTimes="0;0.300;0.350;1" calcMode="linear"><mpath href="#c3o1"/></animateMotion></circle>
+<g opacity=".4"><g transform="translate(120 380)"><rect x="-30" y="-24" width="60" height="54" rx="6" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M-30 -8 h60 M-14 -32 v14 M14 -32 v14" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6"/><path d="M-12 12 L-2 22 L16 2" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g><text x="185" y="389" font-family="Inter,Arial" font-size="28" fill="#E9DDFF">Booking</text><animate attributeName="opacity" values=".4;.4;1;1;.4;.4" keyTimes="0;0.400;0.410;0.590;0.600;1" dur="10s" repeatCount="indefinite"/></g>
+<path id="c3in2" d="M330 380 C560 380 600 400.0 673 403.0" fill="none" stroke="#C9B6F5" stroke-width="1.8" opacity=".35"><animate attributeName="opacity" values=".3;.3;.9;.9;.3;.3" keyTimes="0;0.400;0.410;0.590;0.600;1" dur="10s" repeatCount="indefinite"/></path>
+<circle r="6" fill="#E9DDFF" filter="url(#c3g)" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.420;0.425;0.495;0.500;1" dur="10s" repeatCount="indefinite"/><animateMotion dur="10s" repeatCount="indefinite" keyPoints="0;0;1;1" keyTimes="0;0.420;0.500;1" calcMode="linear"><mpath href="#c3in2"/></animateMotion></circle>
+<circle r="6" fill="#E6A8F0" filter="url(#c3g)" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.500;0.505;0.545;0.550;1" dur="10s" repeatCount="indefinite"/><animateMotion dur="10s" repeatCount="indefinite" keyPoints="0;0;1;1" keyTimes="0;0.500;0.550;1" calcMode="linear"><mpath href="#c3o0"/></animateMotion></circle>
+<g opacity=".4"><g transform="translate(120 515)"><path d="M-24 -32 h30 l18 18 v46 h-48 z M6 -32 v18 h18" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M-12 4 h24 M-12 16 h18" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"/></g><text x="185" y="524" font-family="Inter,Arial" font-size="28" fill="#E9DDFF">Quote follow-up</text><animate attributeName="opacity" values=".4;.4;1;1;.4;.4" keyTimes="0;0.600;0.610;0.790;0.800;1" dur="10s" repeatCount="indefinite"/></g>
+<path id="c3in3" d="M430 515 C560 515 600 427.0 673 413.8" fill="none" stroke="#C9B6F5" stroke-width="1.8" opacity=".35"><animate attributeName="opacity" values=".3;.3;.9;.9;.3;.3" keyTimes="0;0.600;0.610;0.790;0.800;1" dur="10s" repeatCount="indefinite"/></path>
+<circle r="6" fill="#E9DDFF" filter="url(#c3g)" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.620;0.625;0.695;0.700;1" dur="10s" repeatCount="indefinite"/><animateMotion dur="10s" repeatCount="indefinite" keyPoints="0;0;1;1" keyTimes="0;0.620;0.700;1" calcMode="linear"><mpath href="#c3in3"/></animateMotion></circle>
+<circle r="6" fill="#E6A8F0" filter="url(#c3g)" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.700;0.705;0.745;0.750;1" dur="10s" repeatCount="indefinite"/><animateMotion dur="10s" repeatCount="indefinite" keyPoints="0;0;1;1" keyTimes="0;0.700;0.750;1" calcMode="linear"><mpath href="#c3o1"/></animateMotion></circle>
+<g opacity=".4"><g transform="translate(120 650)"><path d="M-34 -24 h68 a8 8 0 0 1 8 8 v28 a8 8 0 0 1 -8 8 h-40 l-16 14 v-14 h-12 a8 8 0 0 1 -8 -8 v-28 a8 8 0 0 1 8 -8z" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M-18 -10 l4 8 l9 1 l-7 6 l2 9 l-8 -5 l-8 5 l2 -9 l-7 -6 l9 -1z" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><path d="M6 -4 h16 M6 8 h12" fill="none" stroke="#C9B6F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"/></g><text x="185" y="659" font-family="Inter,Arial" font-size="28" fill="#E9DDFF">Review request</text><animate attributeName="opacity" values=".4;.4;1;1;.4;.4" keyTimes="0;0.800;0.810;0.990;1.000;1" dur="10s" repeatCount="indefinite"/></g>
+<path id="c3in4" d="M400 650 C560 650 600 454.0 673 424.6" fill="none" stroke="#C9B6F5" stroke-width="1.8" opacity=".35"><animate attributeName="opacity" values=".3;.3;.9;.9;.3;.3" keyTimes="0;0.800;0.810;0.990;1.000;1" dur="10s" repeatCount="indefinite"/></path>
+<circle r="6" fill="#E9DDFF" filter="url(#c3g)" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.820;0.825;0.895;0.900;1" dur="10s" repeatCount="indefinite"/><animateMotion dur="10s" repeatCount="indefinite" keyPoints="0;0;1;1" keyTimes="0;0.820;0.900;1" calcMode="linear"><mpath href="#c3in4"/></animateMotion></circle>
+<circle r="6" fill="#E6A8F0" filter="url(#c3g)" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.900;0.905;0.945;0.950;1" dur="10s" repeatCount="indefinite"/><animateMotion dur="10s" repeatCount="indefinite" keyPoints="0;0;1;1" keyTimes="0;0.900;0.950;1" calcMode="linear"><mpath href="#c3o2"/></animateMotion></circle>
+</svg></div><div class="svc-body"><h3>Agentic AI that takes the next step</h3><p>Agents that reply to an inquiry, book the appointment, follow up on a quote, and ask for the review, then report what they did and what changed.</p></div></div></div>
+  </div></section>
+  <section class="voice" id="diagnosis" aria-labelledby="diagnosis-h">
+    <div class="wrap">
+      <div class="voice-head">
+        <p class="voice-thesis">The AI agency that diagnoses before it builds.</p>
+        <div class="eyebrow on-dark">The DMM Diagnosis</div>
+        <h2 id="diagnosis-h">Start with a clear picture <em>of your business.</em></h2>
+        <p>Before we recommend a single channel or agent, we look at how potential clients find you, where they drop off, how often your current clients come back, and what your competitors are doing that works.</p>
+      </div>
+      <ul class="voice-grid"><li class="voice-card"><span class="voice-ico" aria-hidden="true"><svg viewBox="0 0 48 48" width="40" height="40" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" focusable="false"><circle cx="21" cy="21" r="11"/><path d="M29.500 29.500L40 40"/><path d="M16 24v-4M21 24v-8M26 24v-5"/></svg></span><h3>How customers find you</h3><p>Which channels bring people in today, and which ones are quietly underperforming.</p></li><li class="voice-card"><span class="voice-ico" aria-hidden="true"><svg viewBox="0 0 48 48" width="40" height="40" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M7 9h34L28 25v11l-8 4V25z"/></svg></span><h3>Where they drop off</h3><p>The points where potential clients go quiet, bookings stall, or current clients stop coming back.</p></li><li class="voice-card"><span class="voice-ico" aria-hidden="true"><svg viewBox="0 0 48 48" width="40" height="40" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M10 38V24M20 38V14M30 38V20M40 38V8"/><path d="M6 38h36"/></svg></span><h3>What competitors do well</h3><p>How others in your market attract and keep the customers you want, so you know what is worth matching.</p></li></ul>
+      <p class="voice-scale">The depth of the picture scales with your engagement, from a focused snapshot to a full competitive teardown, so what we build next is grounded in your real numbers and sized to what you are ready to invest.</p>
+      <div class="cta-row voice-cta"><a href="/contact-us#book-audit" class="btn btn-primary">Book a Free Agent Audit →</a></div>
+    </div>
+  </section>
+  <section id="journey"><div class="wrap">
+<div class="section-head"><div class="eyebrow">The Customer Journey</div><h2>Every business starts this journey <em>from a different place.</em></h2><p>Some of our clients aren't reaching enough potential clients at the top of the funnel. Others have plenty of interest but lose customers to churn before they ever become loyal. Some haven't built a real journey yet at all. Before we touch a single channel, we diagnose where you and your competitors stand today, then build the five stages below around what you actually need, not a one-size-fits-all template.</p></div><div class="j5"><div class="j5-card"><div class="j5-art"><img src="/assets/stage-awareness-icon.webp" alt="" width="400" height="400" loading="lazy"></div><h3 class="j5-title">Awareness</h3><div class="j5-role">Attract</div><p>People find you and see a reason to trust you.</p><ul><li><a href="/digital-marketing-solutions">Digital Advertising</a></li><li><a href="/digital-marketing-solutions#search-ai">SEO, AEO &amp; GEO</a></li><li><a href="/digital-marketing-solutions">Reputation Management</a></li></ul></div><div class="j5-card"><div class="j5-art"><img src="/assets/stage-consideration-icon.webp" alt="" width="400" height="400" loading="lazy"></div><h3 class="j5-title">Consideration</h3><div class="j5-role">Convert</div><p>Visitors get answers fast and an easy way to talk to you.</p><ul><li><a href="/creative">Website</a></li><li><a href="/conversion-management-hub">AI Business Development Rep</a></li><li><a href="/conversion-management-hub">Meetings Scheduler</a></li></ul></div><div class="j5-card"><div class="j5-art"><img src="/assets/stage-purchase-icon.webp" alt="" width="400" height="400" loading="lazy"></div><h3 class="j5-title">Purchase</h3><div class="j5-role">Convert</div><p>Deciding is simple: book, pay, or sign without friction.</p><ul><li><a href="/conversion-management-hub">Payments</a></li><li><a href="/conversion-management-hub">Scheduling Demos</a></li><li><a href="/conversion-management-hub">Sending Proposals</a></li></ul></div><div class="j5-card"><div class="j5-art"><img src="/assets/stage-retention-icon.webp" alt="" width="400" height="400" loading="lazy"></div><h3 class="j5-title">Retention</h3><div class="j5-role">Engage</div><p>Customers hear from you at the right moment, not never.</p><ul><li><a href="/communications">SMS/Texting</a></li><li><a href="/digital-marketing-solutions">Email Campaigns</a></li><li><a href="/conversion-management-hub">Automations</a></li></ul></div><div class="j5-card"><div class="j5-art"><img src="/assets/stage-loyalty-icon.webp" alt="" width="400" height="400" loading="lazy"></div><h3 class="j5-title">Loyalty</h3><div class="j5-role">Engage</div><p>Happy customers return, review, and refer.</p><ul><li><a href="/digital-marketing-solutions">Social Media</a></li><li><a href="/conversion-management-hub">Review Management</a></li><li><a href="/creative">Testimonials</a></li></ul></div></div>
+  </div></section>
+  <section id="services"><div class="wrap">
+<div class="section-head"><div class="eyebrow">What We Do</div><h2>Digital solutions that optimize <em>every stage of the customer journey.</em></h2><p>Whether you are launching a new business or growing an established one, we strengthen the stages of the journey that matter most right now and measure the result in booked business. Our team stays at the leading edge of business technology, market tactics, and the practices that hold up, so you get proven methods applied to your business, not experiments run on your budget.</p></div><div class="process-grid two">
+        <div class="process-step"><div class="step-num">01</div><h4 aria-level="3">We analyze</h4><p>We look at your customer journey stage by stage, find where customers stall or drift away, and show you what is happening in plain numbers.</p></div>
+        <div class="process-step"><div class="step-num">02</div><h4 aria-level="3">We implement</h4><p>We put the right digital solution in place, or deliver the service ourselves when that is faster, so every stage of the journey gets stronger.</p></div>
+      </div>
+<div style="height:40px"></div><div class="ind-grid"><a class="ind-card" href="/digital-marketing-solutions"><div class="icon-badge icon-img"><img src="/assets/svc-digital-marketing.webp" alt="" width="108" height="108" loading="lazy"></div><h3>Digital Marketing Solutions</h3><p>Advertising, SEO, AEO and GEO, content, social, email, and text, planned around how customers actually decide.</p><span class="go">Learn more →</span></a><a class="ind-card" href="/creative"><div class="icon-badge icon-img"><img src="/assets/svc-creative.webp" alt="" width="108" height="108" loading="lazy"></div><h3>Creative</h3><p>Websites, landing pages, and video built to turn attention into inquiries.</p><span class="go">Learn more →</span></a><a class="ind-card" href="/lead-generation"><div class="icon-badge icon-img"><img src="/assets/svc-lead-generation.webp" alt="" width="108" height="108" loading="lazy"></div><h3>Lead Generation</h3><p>Consistent inbound demand, with every inquiry captured and answered in minutes.</p><span class="go">Learn more →</span></a><a class="ind-card" href="/conversion-management-hub"><div class="icon-badge icon-img"><img src="/assets/svc-conversion-hub.webp" alt="" width="108" height="108" loading="lazy"></div><h3>Conversion Management Hub</h3><p>The AI layer that turns inquiries into booked business: CRM, conversations, reviews, and agents.</p><span class="go">Learn more →</span></a><a class="ind-card" href="/reports-analytics"><div class="icon-badge icon-img"><img src="/assets/svc-reports.webp" alt="" width="108" height="108" loading="lazy"></div><h3>Reports &amp; Analytics</h3><p>Reporting that follows leads to booked appointments and revenue, not just clicks.</p><span class="go">Learn more →</span></a><a class="ind-card" href="/communications"><div class="icon-badge icon-img"><img src="/assets/svc-communications.webp" alt="" width="108" height="108" loading="lazy"></div><h3>Communications</h3><p>Two-way business texting and online scheduling in one shared conversation.</p><span class="go">Learn more →</span></a></div>
+  </div></section>
+
+  <section class="engine">
+    <div class="wrap engine-grid">
+      <div>
+        <div class="eyebrow">Agentic AI</div>
+        <h2>Works with your tools. <em>Takes the repetitive work.</em></h2>
+        <p style="color:var(--dark-text-soft); max-width:48ch;">Our agents connect to the tech stack your company already runs, such as your CRM, calendar, and messaging tools, and take over the repetitive tasks that eat your team's day: replying, booking, chasing, and reporting. Your people stay focused on the actual business.</p>
+        <div class="engine-feats">
+          <div class="engine-feat"><span class="dot"></span><div><h5 aria-level="3">Fits your stack</h5><p>Connects to the tools you already use. No rip-and-replace, and we confirm compatibility in the audit.</p></div></div>
+          <div class="engine-feat"><span class="dot"></span><div><h5 aria-level="3">Repetitive work, handled</h5><p>Replies, reminders, follow-ups, and review requests run in the background, around the clock.</p></div></div>
+          <div class="engine-feat"><span class="dot"></span><div><h5 aria-level="3">People stay in charge</h5><p>Every agent has a review point. Nothing client-facing ships without a person able to see and correct it.</p></div></div>
+          <div class="engine-feat"><span class="dot"></span><div><h5 aria-level="3">Reported weekly</h5><p>You see what the agents handled, what they escalated, and what changed as a result.</p></div></div>
+        </div>
+        <div class="pills" style="margin-top:28px;"><span class="pill">Lead Response</span><span class="pill">Scheduling &amp; Reminders</span><span class="pill">Review &amp; Reputation</span><span class="pill">Nurture &amp; Follow-Up</span><span class="pill">Reporting</span></div>
+        <div class="cta-row" style="margin-top:28px;"><a href="/ai-agents" class="btn btn-ghost">Meet the agents →</a></div>
+      </div>
+      <div class="engine-panel">
+        <div class="cap-anim wheel-anim" role="img" aria-label="Wheel showing the tools our agents connect to, including CRM, calendar, email, texting, webchat, phone, website, forms, reviews, payments, social messages, and proposals, around the repetitive work they take over: reply, book, chase, and report, with your team in charge at the center"><svg aria-hidden="true" focusable="false" viewBox="0 0 900 900" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="wgA" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EDE4FF"/><stop offset="1" stop-color="#B7A0EE"/></linearGradient><linearGradient id="wgB" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E2D5FC"/><stop offset="1" stop-color="#A88DE6"/></linearGradient><radialGradient id="wgC" cx="50%" cy="42%" r="60%"><stop offset="0" stop-color="#fff"/><stop offset=".7" stop-color="#EEE6FF"/><stop offset="1" stop-color="#D8C8FA"/></radialGradient><linearGradient id="wgR" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E4D8FD"/><stop offset="1" stop-color="#BFA9F0"/></linearGradient><radialGradient id="wgG"><stop offset="0" stop-color="#C4B5FD" stop-opacity=".9"/><stop offset="1" stop-color="#8B5CF6" stop-opacity="0"/></radialGradient><filter id="wgf" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+<circle cx="450" cy="450" r="441" fill="#1b0f45"/><circle cx="450" cy="450" r="431" fill="#5B3FB0"/>
+<g>
+<path d="M340.0 39.5 A425 425 0 0 1 560.0 39.5 L516.0 203.7 A255 255 0 0 0 384.0 203.7Z" fill="url(#wgB)" stroke="#6D4FC2" stroke-width="5"/>
+<path d="M340.0 39.5 A425 425 0 0 1 560.0 39.5 L516.0 203.7 A255 255 0 0 0 384.0 203.7Z" fill="#fff" opacity="0"><animate attributeName="opacity" values="0;0;.55;0;0" keyTimes="0;0.0000;0.0400;0.1400;1" dur="12.0s" repeatCount="indefinite"/></path>
+<g transform="translate(450.0 76.0)"><circle r="22" fill="#7C5BD6" opacity=".9"/><circle cx="0" cy="-7" r="7" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M-13 12 a13 11 0 0 1 26 0" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="450.0" y="124.0" text-anchor="middle" font-family="Poppins,Inter,Arial" font-size="17" font-weight="700" fill="#2a1458" letter-spacing=".5">CRM</text>
+<circle r="7" fill="#fff" filter="url(#wgf)" opacity="0"><animate attributeName="cx" values="450.0;450.0;450.0;450.0" keyTimes="0;0.0300;0.0900;1" dur="12.0s" repeatCount="indefinite"/><animate attributeName="cy" values="145.0;145.0;198.0;198.0" keyTimes="0;0.0300;0.0900;1" dur="12.0s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.0300;0.0400;0.0850;0.0950;1" dur="12.0s" repeatCount="indefinite"/></circle>
+<path d="M560.0 39.5 A425 425 0 0 1 750.5 149.5 L630.3 269.7 A255 255 0 0 0 516.0 203.7Z" fill="url(#wgA)" stroke="#6D4FC2" stroke-width="5"/>
+<path d="M560.0 39.5 A425 425 0 0 1 750.5 149.5 L630.3 269.7 A255 255 0 0 0 516.0 203.7Z" fill="#fff" opacity="0"><animate attributeName="opacity" values="0;0;.55;0;0" keyTimes="0;0.0833;0.1233;0.2233;1" dur="12.0s" repeatCount="indefinite"/></path>
+<g transform="translate(626.0 123.2)"><circle r="22" fill="#7C5BD6" opacity=".9"/><rect x="-13" y="-11" width="26" height="24" rx="4" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M-13 -3 h26 M-6 -15 v7 M6 -15 v7 M-5 5 h4" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="626.0" y="171.2" text-anchor="middle" font-family="Poppins,Inter,Arial" font-size="17" font-weight="700" fill="#2a1458" letter-spacing=".5">CALENDAR</text>
+<circle r="7" fill="#fff" filter="url(#wgf)" opacity="0"><animate attributeName="cx" values="602.5;602.5;576.0;576.0" keyTimes="0;0.1133;0.1733;1" dur="12.0s" repeatCount="indefinite"/><animate attributeName="cy" values="185.9;185.9;231.8;231.8" keyTimes="0;0.1133;0.1733;1" dur="12.0s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.1133;0.1233;0.1683;0.1783;1" dur="12.0s" repeatCount="indefinite"/></circle>
+<path d="M750.5 149.5 A425 425 0 0 1 860.5 340.0 L696.3 384.0 A255 255 0 0 0 630.3 269.7Z" fill="url(#wgB)" stroke="#6D4FC2" stroke-width="5"/>
+<path d="M750.5 149.5 A425 425 0 0 1 860.5 340.0 L696.3 384.0 A255 255 0 0 0 630.3 269.7Z" fill="#fff" opacity="0"><animate attributeName="opacity" values="0;0;.55;0;0" keyTimes="0;0.1667;0.2067;0.3067;1" dur="12.0s" repeatCount="indefinite"/></path>
+<g transform="translate(754.8 252.0)"><circle r="22" fill="#7C5BD6" opacity=".9"/><rect x="-14" y="-10" width="28" height="20" rx="3" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M-14 -8 L0 3 L14 -8" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="754.8" y="300.0" text-anchor="middle" font-family="Poppins,Inter,Arial" font-size="17" font-weight="700" fill="#2a1458" letter-spacing=".5">EMAIL</text>
+<circle r="7" fill="#fff" filter="url(#wgf)" opacity="0"><animate attributeName="cx" values="714.1;714.1;668.2;668.2" keyTimes="0;0.1967;0.2567;1" dur="12.0s" repeatCount="indefinite"/><animate attributeName="cy" values="297.5;297.5;324.0;324.0" keyTimes="0;0.1967;0.2567;1" dur="12.0s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.1967;0.2067;0.2517;0.2617;1" dur="12.0s" repeatCount="indefinite"/></circle>
+<path d="M860.5 340.0 A425 425 0 0 1 860.5 560.0 L696.3 516.0 A255 255 0 0 0 696.3 384.0Z" fill="url(#wgA)" stroke="#6D4FC2" stroke-width="5"/>
+<path d="M860.5 340.0 A425 425 0 0 1 860.5 560.0 L696.3 516.0 A255 255 0 0 0 696.3 384.0Z" fill="#fff" opacity="0"><animate attributeName="opacity" values="0;0;.55;0;0" keyTimes="0;0.2500;0.2900;0.3900;1" dur="12.0s" repeatCount="indefinite"/></path>
+<g transform="translate(802.0 428.0)"><circle r="22" fill="#7C5BD6" opacity=".9"/><rect x="-9" y="-15" width="18" height="30" rx="4" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M-3 10 h6" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="802.0" y="476.0" text-anchor="middle" font-family="Poppins,Inter,Arial" font-size="17" font-weight="700" fill="#2a1458" letter-spacing=".5">SMS/TEXT</text>
+<circle r="7" fill="#fff" filter="url(#wgf)" opacity="0"><animate attributeName="cx" values="755.0;755.0;702.0;702.0" keyTimes="0;0.2800;0.3400;1" dur="12.0s" repeatCount="indefinite"/><animate attributeName="cy" values="450.0;450.0;450.0;450.0" keyTimes="0;0.2800;0.3400;1" dur="12.0s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.2800;0.2900;0.3350;0.3450;1" dur="12.0s" repeatCount="indefinite"/></circle>
+<path d="M860.5 560.0 A425 425 0 0 1 750.5 750.5 L630.3 630.3 A255 255 0 0 0 696.3 516.0Z" fill="url(#wgB)" stroke="#6D4FC2" stroke-width="5"/>
+<path d="M860.5 560.0 A425 425 0 0 1 750.5 750.5 L630.3 630.3 A255 255 0 0 0 696.3 516.0Z" fill="#fff" opacity="0"><animate attributeName="opacity" values="0;0;.55;0;0" keyTimes="0;0.3333;0.3733;0.4733;1" dur="12.0s" repeatCount="indefinite"/></path>
+<g transform="translate(754.8 604.0)"><circle r="22" fill="#7C5BD6" opacity=".9"/><path d="M-14 -11 h28 a3 3 0 0 1 3 3 v14 a3 3 0 0 1 -3 3 h-18 l-8 6 v-6 h-2 a3 3 0 0 1 -3 -3 v-14 a3 3 0 0 1 3 -3z" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M-6 -1 h.01 M0 -1 h.01 M6 -1 h.01" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="754.8" y="652.0" text-anchor="middle" font-family="Poppins,Inter,Arial" font-size="17" font-weight="700" fill="#2a1458" letter-spacing=".5">WEBCHAT</text>
+<circle r="7" fill="#fff" filter="url(#wgf)" opacity="0"><animate attributeName="cx" values="714.1;714.1;668.2;668.2" keyTimes="0;0.3633;0.4233;1" dur="12.0s" repeatCount="indefinite"/><animate attributeName="cy" values="602.5;602.5;576.0;576.0" keyTimes="0;0.3633;0.4233;1" dur="12.0s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.3633;0.3733;0.4183;0.4283;1" dur="12.0s" repeatCount="indefinite"/></circle>
+<path d="M750.5 750.5 A425 425 0 0 1 560.0 860.5 L516.0 696.3 A255 255 0 0 0 630.3 630.3Z" fill="url(#wgA)" stroke="#6D4FC2" stroke-width="5"/>
+<path d="M750.5 750.5 A425 425 0 0 1 560.0 860.5 L516.0 696.3 A255 255 0 0 0 630.3 630.3Z" fill="#fff" opacity="0"><animate attributeName="opacity" values="0;0;.55;0;0" keyTimes="0;0.4167;0.4567;0.5567;1" dur="12.0s" repeatCount="indefinite"/></path>
+<g transform="translate(626.0 732.8)"><circle r="22" fill="#7C5BD6" opacity=".9"/><path d="M-10 -14 c-3 0 -5 3 -4 6 c3 11 10 18 21 21 c3 1 6 -1 6 -4 v-5 l-7 -3 l-4 4 c-5 -2 -9 -6 -11 -11 l4 -4 l-3 -7z" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="626.0" y="780.8" text-anchor="middle" font-family="Poppins,Inter,Arial" font-size="17" font-weight="700" fill="#2a1458" letter-spacing=".5">PHONE</text>
+<circle r="7" fill="#fff" filter="url(#wgf)" opacity="0"><animate attributeName="cx" values="602.5;602.5;576.0;576.0" keyTimes="0;0.4467;0.5067;1" dur="12.0s" repeatCount="indefinite"/><animate attributeName="cy" values="714.1;714.1;668.2;668.2" keyTimes="0;0.4467;0.5067;1" dur="12.0s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.4467;0.4567;0.5017;0.5117;1" dur="12.0s" repeatCount="indefinite"/></circle>
+<path d="M560.0 860.5 A425 425 0 0 1 340.0 860.5 L384.0 696.3 A255 255 0 0 0 516.0 696.3Z" fill="url(#wgB)" stroke="#6D4FC2" stroke-width="5"/>
+<path d="M560.0 860.5 A425 425 0 0 1 340.0 860.5 L384.0 696.3 A255 255 0 0 0 516.0 696.3Z" fill="#fff" opacity="0"><animate attributeName="opacity" values="0;0;.55;0;0" keyTimes="0;0.5000;0.5400;0.6400;1" dur="12.0s" repeatCount="indefinite"/></path>
+<g transform="translate(450.0 780.0)"><circle r="22" fill="#7C5BD6" opacity=".9"/><rect x="-15" y="-12" width="30" height="24" rx="3" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M-15 -5 h30 M-10 -8.5 h.01 M-6 -8.5 h.01" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="450.0" y="828.0" text-anchor="middle" font-family="Poppins,Inter,Arial" font-size="17" font-weight="700" fill="#2a1458" letter-spacing=".5">WEBSITE</text>
+<circle r="7" fill="#fff" filter="url(#wgf)" opacity="0"><animate attributeName="cx" values="450.0;450.0;450.0;450.0" keyTimes="0;0.5300;0.5900;1" dur="12.0s" repeatCount="indefinite"/><animate attributeName="cy" values="755.0;755.0;702.0;702.0" keyTimes="0;0.5300;0.5900;1" dur="12.0s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.5300;0.5400;0.5850;0.5950;1" dur="12.0s" repeatCount="indefinite"/></circle>
+<path d="M340.0 860.5 A425 425 0 0 1 149.5 750.5 L269.7 630.3 A255 255 0 0 0 384.0 696.3Z" fill="url(#wgA)" stroke="#6D4FC2" stroke-width="5"/>
+<path d="M340.0 860.5 A425 425 0 0 1 149.5 750.5 L269.7 630.3 A255 255 0 0 0 384.0 696.3Z" fill="#fff" opacity="0"><animate attributeName="opacity" values="0;0;.55;0;0" keyTimes="0;0.5833;0.6233;0.7233;1" dur="12.0s" repeatCount="indefinite"/></path>
+<g transform="translate(274.0 732.8)"><circle r="22" fill="#7C5BD6" opacity=".9"/><rect x="-11" y="-14" width="22" height="28" rx="3" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M-5 -6 h10 M-5 0 h10 M-5 6 h6" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="274.0" y="780.8" text-anchor="middle" font-family="Poppins,Inter,Arial" font-size="17" font-weight="700" fill="#2a1458" letter-spacing=".5">FORMS</text>
+<circle r="7" fill="#fff" filter="url(#wgf)" opacity="0"><animate attributeName="cx" values="297.5;297.5;324.0;324.0" keyTimes="0;0.6133;0.6733;1" dur="12.0s" repeatCount="indefinite"/><animate attributeName="cy" values="714.1;714.1;668.2;668.2" keyTimes="0;0.6133;0.6733;1" dur="12.0s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.6133;0.6233;0.6683;0.6783;1" dur="12.0s" repeatCount="indefinite"/></circle>
+<path d="M149.5 750.5 A425 425 0 0 1 39.5 560.0 L203.7 516.0 A255 255 0 0 0 269.7 630.3Z" fill="url(#wgB)" stroke="#6D4FC2" stroke-width="5"/>
+<path d="M149.5 750.5 A425 425 0 0 1 39.5 560.0 L203.7 516.0 A255 255 0 0 0 269.7 630.3Z" fill="#fff" opacity="0"><animate attributeName="opacity" values="0;0;.55;0;0" keyTimes="0;0.6667;0.7067;0.8067;1" dur="12.0s" repeatCount="indefinite"/></path>
+<g transform="translate(145.2 604.0)"><circle r="22" fill="#7C5BD6" opacity=".9"/><path d="M0 -14 L4 -4.5 L14 -4.3 L6.3 2 L9 12 L0 6.3 L-9 12 L-6.3 2 L-14 -4.3 L-4 -4.5z" fill="#fff"/></g>
+<text x="145.2" y="652.0" text-anchor="middle" font-family="Poppins,Inter,Arial" font-size="17" font-weight="700" fill="#2a1458" letter-spacing=".5">REVIEWS</text>
+<circle r="7" fill="#fff" filter="url(#wgf)" opacity="0"><animate attributeName="cx" values="185.9;185.9;231.8;231.8" keyTimes="0;0.6967;0.7567;1" dur="12.0s" repeatCount="indefinite"/><animate attributeName="cy" values="602.5;602.5;576.0;576.0" keyTimes="0;0.6967;0.7567;1" dur="12.0s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.6967;0.7067;0.7517;0.7617;1" dur="12.0s" repeatCount="indefinite"/></circle>
+<path d="M39.5 560.0 A425 425 0 0 1 39.5 340.0 L203.7 384.0 A255 255 0 0 0 203.7 516.0Z" fill="url(#wgA)" stroke="#6D4FC2" stroke-width="5"/>
+<path d="M39.5 560.0 A425 425 0 0 1 39.5 340.0 L203.7 384.0 A255 255 0 0 0 203.7 516.0Z" fill="#fff" opacity="0"><animate attributeName="opacity" values="0;0;.55;0;0" keyTimes="0;0.7500;0.7900;0.8900;1" dur="12.0s" repeatCount="indefinite"/></path>
+<g transform="translate(98.0 428.0)"><circle r="22" fill="#7C5BD6" opacity=".9"/><circle r="14" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 -6 c-2 -3 -10 -3 -10 1 c0 5 10 2 10 7 c0 4 -8 4 -10 1 M0 -11 v22" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="98.0" y="476.0" text-anchor="middle" font-family="Poppins,Inter,Arial" font-size="17" font-weight="700" fill="#2a1458" letter-spacing=".5">PAYMENTS</text>
+<circle r="7" fill="#fff" filter="url(#wgf)" opacity="0"><animate attributeName="cx" values="145.0;145.0;198.0;198.0" keyTimes="0;0.7800;0.8400;1" dur="12.0s" repeatCount="indefinite"/><animate attributeName="cy" values="450.0;450.0;450.0;450.0" keyTimes="0;0.7800;0.8400;1" dur="12.0s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.7800;0.7900;0.8350;0.8450;1" dur="12.0s" repeatCount="indefinite"/></circle>
+<path d="M39.5 340.0 A425 425 0 0 1 149.5 149.5 L269.7 269.7 A255 255 0 0 0 203.7 384.0Z" fill="url(#wgB)" stroke="#6D4FC2" stroke-width="5"/>
+<path d="M39.5 340.0 A425 425 0 0 1 149.5 149.5 L269.7 269.7 A255 255 0 0 0 203.7 384.0Z" fill="#fff" opacity="0"><animate attributeName="opacity" values="0;0;.55;0;0" keyTimes="0;0.8333;0.8733;0.9733;1" dur="12.0s" repeatCount="indefinite"/></path>
+<g transform="translate(145.2 252.0)"><circle r="22" fill="#7C5BD6" opacity=".9"/><path d="M0 12 C-16 2 -16 -10 -8 -11 C-4 -11 -1 -8 0 -6 C1 -8 4 -11 8 -11 C16 -10 16 2 0 12z" fill="#fff"/></g>
+<text x="145.2" y="300.0" text-anchor="middle" font-family="Poppins,Inter,Arial" font-size="17" font-weight="700" fill="#2a1458" letter-spacing=".5">SOCIAL DMs</text>
+<circle r="7" fill="#fff" filter="url(#wgf)" opacity="0"><animate attributeName="cx" values="185.9;185.9;231.8;231.8" keyTimes="0;0.8633;0.9233;1" dur="12.0s" repeatCount="indefinite"/><animate attributeName="cy" values="297.5;297.5;324.0;324.0" keyTimes="0;0.8633;0.9233;1" dur="12.0s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.8633;0.8733;0.9183;0.9283;1" dur="12.0s" repeatCount="indefinite"/></circle>
+<path d="M149.5 149.5 A425 425 0 0 1 340.0 39.5 L384.0 203.7 A255 255 0 0 0 269.7 269.7Z" fill="url(#wgA)" stroke="#6D4FC2" stroke-width="5"/>
+<path d="M149.5 149.5 A425 425 0 0 1 340.0 39.5 L384.0 203.7 A255 255 0 0 0 269.7 269.7Z" fill="#fff" opacity="0"><animate attributeName="opacity" values="0;0;.55;0;0" keyTimes="0;0.9167;0.9567;1.0000;1" dur="12.0s" repeatCount="indefinite"/></path>
+<g transform="translate(274.0 123.2)"><circle r="22" fill="#7C5BD6" opacity=".9"/><rect x="-11" y="-14" width="22" height="28" rx="3" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M-5 0 l4 4 l7 -8" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="274.0" y="171.2" text-anchor="middle" font-family="Poppins,Inter,Arial" font-size="17" font-weight="700" fill="#2a1458" letter-spacing=".5">PROPOSALS</text>
+<circle r="7" fill="#fff" filter="url(#wgf)" opacity="0"><animate attributeName="cx" values="297.5;297.5;324.0;324.0" keyTimes="0;0.9467;1.0000;1" dur="12.0s" repeatCount="indefinite"/><animate attributeName="cy" values="185.9;185.9;231.8;231.8" keyTimes="0;0.9467;1.0000;1" dur="12.0s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.9467;0.9567;1.0000;1.0000;1" dur="12.0s" repeatCount="indefinite"/></circle>
+</g>
+<circle cx="450" cy="450" r="254" fill="#5B3FB0"/>
+<path d="M698.0 450.0 A248 248 0 0 1 698.0 450.0 L622.0 450.0 A172 172 0 0 0 622.0 450.0Z" fill="url(#wgR)"/>
+<circle cx="450" cy="450" r="210.0" fill="none" stroke="#E9DDFF" stroke-width="30" opacity=".25"/>
+<g><circle cx="450" cy="450" r="210.0" fill="none" stroke="#fff" stroke-width="10" stroke-linecap="round" stroke-dasharray="158.3 1161.1" opacity=".85" filter="url(#wgf)" transform="rotate(-156.6 450 450)"/><animateTransform attributeName="transform" type="rotate" values="0 450 450;360 450 450" dur="6s" repeatCount="indefinite"/></g>
+<path id="wt0" d="M309.3 309.3 A199.0 199.0 0 0 1 590.7 309.3" fill="none"/>
+<text fill="#2a1458" font-family="Poppins,Inter,Arial" font-size="30" font-weight="800" letter-spacing="5" text-anchor="middle"><textPath href="#wt0" startOffset="50%">REPLY</textPath></text>
+<text fill="#7C3AED" opacity="0" font-family="Poppins,Inter,Arial" font-size="30" font-weight="800" letter-spacing="5" text-anchor="middle"><textPath href="#wt0" startOffset="50%">REPLY</textPath><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.0000;0.0400;0.2100;0.2500;1" dur="6s" repeatCount="indefinite"/></text>
+<path id="wt1" d="M590.7 309.3 A199.0 199.0 0 0 1 590.7 590.7" fill="none"/>
+<text fill="#2a1458" font-family="Poppins,Inter,Arial" font-size="30" font-weight="800" letter-spacing="5" text-anchor="middle"><textPath href="#wt1" startOffset="50%">BOOK</textPath></text>
+<text fill="#7C3AED" opacity="0" font-family="Poppins,Inter,Arial" font-size="30" font-weight="800" letter-spacing="5" text-anchor="middle"><textPath href="#wt1" startOffset="50%">BOOK</textPath><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.2499;0.2900;0.4600;0.5000;1" dur="6s" repeatCount="indefinite"/></text>
+<path id="wt2" d="M293.7 606.3 A221.0 221.0 0 0 0 606.3 606.3" fill="none"/>
+<text fill="#2a1458" font-family="Poppins,Inter,Arial" font-size="30" font-weight="800" letter-spacing="5" text-anchor="middle"><textPath href="#wt2" startOffset="50%">CHASE</textPath></text>
+<text fill="#7C3AED" opacity="0" font-family="Poppins,Inter,Arial" font-size="30" font-weight="800" letter-spacing="5" text-anchor="middle"><textPath href="#wt2" startOffset="50%">CHASE</textPath><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.4999;0.5400;0.7100;0.7500;1" dur="6s" repeatCount="indefinite"/></text>
+<path id="wt3" d="M309.3 590.7 A199.0 199.0 0 0 1 309.3 309.3" fill="none"/>
+<text fill="#2a1458" font-family="Poppins,Inter,Arial" font-size="30" font-weight="800" letter-spacing="5" text-anchor="middle"><textPath href="#wt3" startOffset="50%">REPORT</textPath></text>
+<text fill="#7C3AED" opacity="0" font-family="Poppins,Inter,Arial" font-size="30" font-weight="800" letter-spacing="5" text-anchor="middle"><textPath href="#wt3" startOffset="50%">REPORT</textPath><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.7499;0.7900;0.9600;1.0000;1" dur="6s" repeatCount="indefinite"/></text>
+<g transform="translate(598.5 301.5) rotate(45)"><rect x="-24" y="-24" width="48" height="48" rx="6" fill="#6D4FC2" transform="rotate(45)"/><path d="M-9 -9 L11 0 L-9 9 L-4 0z" fill="#fff"/></g>
+<g transform="translate(598.5 598.5) rotate(135)"><rect x="-24" y="-24" width="48" height="48" rx="6" fill="#6D4FC2" transform="rotate(45)"/><path d="M-9 -9 L11 0 L-9 9 L-4 0z" fill="#fff"/></g>
+<g transform="translate(301.5 598.5) rotate(225)"><rect x="-24" y="-24" width="48" height="48" rx="6" fill="#6D4FC2" transform="rotate(45)"/><path d="M-9 -9 L11 0 L-9 9 L-4 0z" fill="#fff"/></g>
+<g transform="translate(301.5 301.5) rotate(315)"><rect x="-24" y="-24" width="48" height="48" rx="6" fill="#6D4FC2" transform="rotate(45)"/><path d="M-9 -9 L11 0 L-9 9 L-4 0z" fill="#fff"/></g>
+<circle cx="450" cy="450" r="173" fill="#5B3FB0"/><circle cx="450" cy="450" r="165" fill="url(#wgC)"/>
+<circle cx="450" cy="395" r="70" fill="url(#wgG)"><animate attributeName="r" values="56;78;56" dur="3s" repeatCount="indefinite"/><animate attributeName="opacity" values=".55;1;.55" dur="3s" repeatCount="indefinite"/></circle>
+<g><image href="/assets/logo-3d-loader.webp" x="388" y="350" width="124" height="86"/><animateTransform attributeName="transform" type="translate" values="0 0;0 -6;0 0" dur="3s" repeatCount="indefinite"/></g>
+<text x="450" y="478" text-anchor="middle" font-family="Poppins,Inter,Arial" font-size="31" font-weight="700" fill="#1e1140">YOUR TEAM</text><text x="450" y="514" text-anchor="middle" font-family="Poppins,Inter,Arial" font-size="31" font-weight="700" fill="#1e1140">IN CHARGE</text><text x="450" y="550" text-anchor="middle" font-family="Inter,Arial" font-size="13" font-weight="600" fill="#6D4FC2" letter-spacing="1.2">AGENTS HANDLE THE ROUTINE</text>
+</svg></div>
+        <p class="cap">Your tools, our agents, and your team in charge of every decision that matters.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="client-dashboard"><div class="wrap">
+<div class="section-head"><div class="eyebrow">Client Dashboard</div><h2>See every conversation, lead and booking <em>in one place.</em></h2><p>Your AI agents work around the clock, and your dashboard shows exactly what they're doing for you. You can see who reached out, what they asked, which leads are ready to buy, and how many appointments were booked, all live and in plain language. You don't need spreadsheets or to wait for reports.</p></div><figure class="dash-fig" id="dashboard-demo">
+        <div class="dash" role="img" aria-label="Sample client dashboard with demo data: leads captured, appointments booked, revenue influenced, conversations by hour, and a list of recent conversations with their outcomes.">
+          <div class="dash-top" aria-hidden="true"><span class="dash-title">Client Dashboard</span><span class="dash-live">Live</span></div>
+          <div class="dash-kpis" aria-hidden="true">
+            <div class="dash-kpi"><small>Leads captured</small><b>128</b><em>this month</em></div>
+            <div class="dash-kpi"><small>Appointments booked</small><b>46</b><em>this month</em></div>
+            <div class="dash-kpi"><small>Revenue influenced</small><b>$18,400</b><em>this month</em></div>
+          </div>
+          <div class="dash-cols" aria-hidden="true">
+            <div class="dash-panel"><h4 aria-level="3">Conversations by hour</h4><div class="dash-bars"><span class="dash-bar" style="height:18%"><i>6a</i></span><span class="dash-bar" style="height:34%"><i>8a</i></span><span class="dash-bar" style="height:52%"><i>10a</i></span><span class="dash-bar" style="height:44%"><i>12p</i></span><span class="dash-bar" style="height:38%"><i>2p</i></span><span class="dash-bar" style="height:56%"><i>4p</i></span><span class="dash-bar" style="height:72%"><i>6p</i></span><span class="dash-bar" style="height:88%"><i>8p</i></span><span class="dash-bar" style="height:64%"><i>10p</i></span><span class="dash-bar" style="height:30%"><i>12a</i></span></div></div>
+            <div class="dash-panel"><h4 aria-level="3">Recent conversations</h4><ul class="dash-list"><li><span class="dash-chan">Chat</span><span class="dash-q">Do you offer evening consultations?</span><span class="dash-st ok">Booked</span></li><li><span class="dash-chan">Call</span><span class="dash-q">How much is the monthly membership?</span><span class="dash-st hot">Lead ready</span></li><li><span class="dash-chan">Chat</span><span class="dash-q">Can I move my appointment to Friday?</span><span class="dash-st ok">Rescheduled</span></li><li><span class="dash-chan">Call</span><span class="dash-q">What should I know before my first visit?</span><span class="dash-st wait">Handed to team</span></li></ul></div>
+          </div>
+        </div>
+        <figcaption>Sample dashboard with demo data, shown for illustration only.</figcaption>
+      </figure><div class="problem-grid dash-points"><div class="problem-card"><img class="dash-3d" src="/assets/dash-results.webp" alt="" width="400" height="400" loading="lazy"><h3>Real results, in real time</h3><p>Leads captured, appointments booked and revenue influenced, updated as it happens.</p></div><div class="problem-card"><img class="dash-3d" src="/assets/dash-record.webp" alt="" width="400" height="400" loading="lazy"><h3>Every conversation, on the record</h3><p>Read or listen to any chat or call so you can see how your agents represent your brand.</p></div><div class="problem-card"><img class="dash-3d" src="/assets/dash-insights.webp" alt="" width="400" height="400" loading="lazy"><h3>Insights that make you smarter</h3><p>Spot top questions, peak hours and trends to sharpen your offers and staffing.</p></div></div><div class="cta-row" style="margin-top:36px;"><a href="#dashboard-demo" class="btn btn-primary" data-dashboard-demo>See the dashboard</a></div>
+  </div></section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head"><div class="eyebrow">How It Works</div><h2>From audit to <em>running system.</em></h2></div>
+      <div class="process-grid">
+        <div class="process-step"><div class="step-head"><div class="step-num">01</div><img class="step-3d" src="/assets/step-audit.webp" alt="" width="400" height="400" loading="lazy"></div><h4 aria-level="3">Audit the journey</h4><p>We review how customers find, choose, buy from, and return to you today.</p></div>
+        <div class="process-step"><div class="step-head"><div class="step-num">02</div><img class="step-3d" src="/assets/step-plan.webp" alt="" width="400" height="400" loading="lazy"></div><h4 aria-level="3">Plan the funnel</h4><p>Channels, creative, and agents chosen for each stage, nothing extra.</p></div>
+        <div class="process-step"><div class="step-head"><div class="step-num">03</div><img class="step-3d" src="/assets/step-build.webp" alt="" width="400" height="400" loading="lazy"></div><h4 aria-level="3">Build &amp; connect</h4><p>Agents install into the tools you already use. No rip-and-replace.</p></div>
+        <div class="process-step"><div class="step-head"><div class="step-num">04</div><img class="step-3d" src="/assets/step-improve.webp" alt="" width="400" height="400" loading="lazy"></div><h4 aria-level="3">Improve weekly</h4><p>We tune channels and agents against booked business, not a one-time setup.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tight">
+    <div class="wrap team-grid">
+      <div>
+        <div class="eyebrow">Behind Every Build</div>
+        <h2>One team behind <em>every plan we build.</em></h2>
+        <p class="team-copy">The agents are the visible layer. Behind them is one coordinated DMM team spanning marketing technology, demand generation, sales enablement, and creative. It builds on the DMM Diagnosis, connects to your tools, and keeps improving the work, so nothing stalls waiting on a handoff and every piece points at the same growth goal.</p>
+        <div class="pills" style="margin-top:24px;"><span class="pill">Marketing technology</span><span class="pill">Demand generation</span><span class="pill">Sales enablement</span><span class="pill">Creative</span></div>
+        <div class="pills pills-cred" style="margin-top:12px;"><span class="pill dark">+12 years of experience</span><span class="pill dark">GTM strategy</span><span class="pill dark">App development</span></div>
+      </div>
+      <div class="team-visual"><img src="/assets/team-oracle.webp" alt="A glowing digital crystal ball on a pedestal showing a team collaborating around laptops, surrounded by connected icons for AI, analytics, marketing funnels, and content" width="1000" height="1000" loading="lazy"></div>
+    </div>
+  </section>
+
+  <section id="industries"><div class="wrap">
+<div class="section-head"><div class="eyebrow">Who We Help</div><h2>Inbound growth, <em>built around your industry.</em></h2><p>A MedSpa, a law firm, and a contractor win clients in very different ways. We start with how potential clients in your market find and choose you, then tailor the channels, the follow-up, and the review steps to match. More of the right inquiries turn into booked business, current clients keep coming back, and every step respects the rules of your field.</p></div><div class="photo-grid"><a class="photo-card" href="/med-spas"><img class="pc-img" src="/assets/ind-med-spas.webp" alt="" loading="lazy"><span class="pc-body"><span class="pc-title">MedSpas</span><span class="pc-blurb">Instant consult booking, treatment-cadence reminders, and membership agents built around booking volume.</span><span class="pc-go">See agents →</span></span></a><a class="photo-card" href="/health-wellness"><img class="pc-img" src="/assets/ind-health-wellness.webp" alt="" loading="lazy"><span class="pc-body"><span class="pc-title">Health &amp; Wellness Brands</span><span class="pc-blurb">Longevity, peptide, and wellness clinics: inquiries answered, programs kept on schedule, members retained.</span><span class="pc-go">See agents →</span></span></a><a class="photo-card" href="/construction-home-services"><img class="pc-img" src="/assets/ind-construction.webp" alt="" loading="lazy"><span class="pc-body"><span class="pc-title">Construction &amp; Home Services</span><span class="pc-blurb">Estimate requests answered, quotes followed up, and reviews requested while the crew stays on the job.</span><span class="pc-go">See agents →</span></span></a><a class="photo-card" href="/law-firms"><img class="pc-img" src="/assets/ind-law-firms.webp" alt="" loading="lazy"><span class="pc-body"><span class="pc-title">Law Firms</span><span class="pc-blurb">Every new inquiry answered and scheduled. Attorney decisions and advice stay with attorneys.</span><span class="pc-go">See agents →</span></span></a><a class="photo-card" href="/franchises-multi-locations"><img class="pc-img" src="/assets/ind-franchises.webp" alt="" loading="lazy"><span class="pc-body"><span class="pc-title">Franchises &amp; Multi-Locations</span><span class="pc-blurb">Leads routed to the right location, responses held to a brand standard, results rolled up across locations.</span><span class="pc-go">See agents →</span></span></a><a class="photo-card" href="/other-businesses"><img class="pc-img" src="/assets/ind-other-businesses.webp" alt="" loading="lazy"><span class="pc-body"><span class="pc-title">Other Businesses</span><span class="pc-blurb">If your business runs on leads, bookings, and follow-up, the core agent stack likely fits.</span><span class="pc-go">See agents →</span></span></a><a class="photo-card" href="/real-estate"><img class="pc-img" src="/assets/ind-real-estate.webp" alt="" loading="lazy"><span class="pc-body"><span class="pc-title">Real Estate</span><span class="pc-blurb">Instant listing-inquiry response, buyer-match alerts, and transaction coordination.</span><span class="pc-go">See agents →</span></span></a><a class="photo-card" href="/architects"><img class="pc-img" src="/assets/ind-architects.webp" alt="" loading="lazy"><span class="pc-body"><span class="pc-title">Architects</span><span class="pc-blurb">Proposal drafting, client status updates, and code and permit research support.</span><span class="pc-go">See agents →</span></span></a><a class="photo-card" href="/cpas"><img class="pc-img" src="/assets/ind-cpas.webp" alt="" loading="lazy"><span class="pc-body"><span class="pc-title">CPAs</span><span class="pc-blurb">Document chasing, deadline tracking, and client FAQ triage. Drafting only, human-reviewed.</span><span class="pc-go">See agents →</span></span></a></div>
+  </div></section>
+
+    <section class="tight"><div class="wrap">
+<div class="section-head"><div class="eyebrow">The Numbers</div><h2>AI is spreading fast, <em>and customers notice who answers first.</em></h2><p>Research from third parties, linked on every figure. These are market trends, not DMM client results.</p></div>
+  </div></section>
+  <div class="stats stats-src"><div class="stat stat-src"><div class="num">~9 in 10</div><div class="lbl">organizations now use AI in at least one business function.</div><a class="src" href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai" target="_blank" rel="noopener">McKinsey, State of AI 2026 (1,719 respondents)</a></div><div class="stat stat-src"><div class="num">~7x</div><div class="lbl">more likely to qualify a web inquiry when a business replies within an hour than when it replies an hour later.</div><a class="src" href="https://hbr.org/2011/03/the-short-life-of-online-sales-leads" target="_blank" rel="noopener">Harvard Business Review, 2011 (2,241 companies)</a></div><div class="stat stat-src"><div class="num">83%</div><div class="lbl">of U.S. consumers choose the business that responds to their inquiry first.</div><a class="src" href="https://www.contractingbusiness.com/industry-news/news/55380706/fast-response-times-drive-home-services-customer-loyalty-survey-shows" target="_blank" rel="noopener">Moneypenny survey, 2026 (2,000 consumers)</a></div><div class="stat stat-src"><div class="num">~2 in 10</div><div class="lbl">organizations are already scaling AI agents, so most markets are still wide open.</div><a class="src" href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai" target="_blank" rel="noopener">McKinsey, State of AI 2026 (1,719 respondents)</a></div></div>
+
+  <section class="tight">
+    <div class="wrap">
+      <div class="price-teaser">
+        <div class="section-head">
+          <div class="eyebrow">Pricing</div>
+          <h2>Three tiers, <em>one custom quote.</em></h2>
+          <p>Foundation, Growth, and Full Journey all run on the Corestack, our central logic layer that connects your agents, your CRM, and your reporting in one place. Every engagement starts with a diagnosis, and the depth of that diagnosis scales with the tier you choose, so the plan stays attainable for your budget.</p>
+          <ul class="price-points">
+            <li><strong>Foundation:</strong> the essentials. Fast lead response, scheduling and reminders, and a monthly performance summary.</li>
+            <li><strong>Growth:</strong> adds industry intake and qualification, lead nurture, review replies, competitor benchmarking, and weekly reporting.</li>
+            <li><strong>Full Journey:</strong> every stage from awareness to loyalty, with a voice agent, content agents, paid search support, market analysis, an AI video avatar, a client dashboard, live reporting, and ongoing tuning.</li>
+          </ul>
+          <p>Each tier pairs a one-time setup with a monthly retainer, and can be combined with digital marketing, creative, lead generation, and reporting services in one bundle. Your quote reflects your volume, your tools, and the integrations we connect, and every tier carries a stated automation allowance so there are no surprises.</p>
+          <div class="cta-row" style="margin-top:22px;"><a href="/ai-agents#pricing" class="btn btn-ghost on-light">See the tiers →</a></div>
+        </div>
+        <figure class="price-art roll-in" data-roll><img src="/assets/pricing-steps.webp" alt="Three rising steps labeled Foundation, Growth and Full Journey, connected by a flow line with glossy icon tiles" width="1350" height="1026" loading="lazy"></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="tight"><div class="wrap">
+<div class="section-head"><div class="eyebrow">FAQ</div><h2>Before you <em>book a call.</em></h2></div><div><h3 class="faq-group">About DMM</h3><details class="faq-item"><summary>What does Digital Masterminds (DMM) do?</summary><p>DMM is a full-service digital marketing agency with generative and agentic AI built in. We start with a diagnosis of where your business stands, then plan advertising, SEO, AI search visibility (AEO and GEO), creative, email and text campaigns, and AI agents together across the whole customer journey, from the first click to the returning client.</p></details><details class="faq-item"><summary>What are AEO and GEO, and does DMM do them?</summary><p>Yes. AEO (Answer Engine Optimization) makes your content the direct answer in search features and voice assistants. GEO (Generative Engine Optimization) builds the signals AI tools such as ChatGPT, Gemini, Claude and Perplexity use when recommending a business. We plan both alongside SEO and never promise a ranking or citation.</p></details><details class="faq-item"><summary>Who does DMM work with?</summary><p>Service businesses that win clients through inquiries, appointments and repeat visits: MedSpas, health and wellness brands, real estate teams, law firms, CPA firms, architects, contractors and home service companies, and multi-location brands. Each industry gets its own plan and its own review steps.</p></details><details class="faq-item"><summary>What is the DMM Diagnosis?</summary><p>It is a clear picture of your business before we recommend anything: how potential clients find you, where they drop off, how often current clients come back, and how nearby competitors compare. Its depth grows with the plan you choose, so it is part of working with us, not a free full audit.</p></details><h3 class="faq-group">AI agents and your team</h3><details class="faq-item"><summary>Will AI agents replace my team?</summary><p>No. Agents handle the repeatable first steps, such as replying, booking and following up, so your team can focus on the service, the judgment calls and the relationships. People stay in charge of every decision that matters.</p></details><details class="faq-item"><summary>How is an AI agent different from a chatbot?</summary><p>A chatbot answers questions. An agent also takes action: it books the appointment, updates the record, sends the follow-up and reports what it did. Agents talk with people naturally by chat, text or voice, and every agent has a review point where your team can step in.</p></details><details class="faq-item"><summary>Which tools do the AI agents work with?</summary><p>Agents connect to the scheduling, CRM and messaging tools you already use. We map your current setup during your diagnosis and confirm compatibility before any build starts, so you aren't asked to replace systems that already work.</p></details><h3 class="faq-group">Cost and getting started</h3><details class="faq-item"><summary>How much does DMM cost?</summary><p>We quote after your diagnosis, because cost depends on your goals, volume and tools. AI agent plans come in three tiers, Foundation, Growth and Full Journey, each with a one-time setup fee and a monthly retainer. Marketing services are scoped to the channels you actually need.</p></details><details class="faq-item"><summary>How long until we see results?</summary><p>It depends on the channel. Advertising, chat and agent follow-up can show early signals sooner, while SEO, AEO, GEO and content build over months. We agree on what to measure up front and report on it regularly, so you see progress along the way.</p></details><details class="faq-item"><summary>How do I get started?</summary><p>Book a call or send a short note about your business. We talk through your goals, run your DMM Diagnosis, and come back with a plan sized to your investment. You decide what moves forward.</p></details><details class="faq-item"><summary>Does DMM work with businesses outside New Jersey?</summary><p>Yes. DMM is based in Montclair, New Jersey, and works with service businesses in New Jersey and beyond. Our diagnosis, campaigns and agents are delivered remotely, with calls and video meetings at times that suit your team.</p></details></div>
+  </div></section>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What does Digital Masterminds (DMM) do?", "acceptedAnswer": {"@type": "Answer", "text": "DMM is a full-service digital marketing agency with generative and agentic AI built in. We start with a diagnosis of where your business stands, then plan advertising, SEO, AI search visibility (AEO and GEO), creative, email and text campaigns, and AI agents together across the whole customer journey, from the first click to the returning client."}}, {"@type": "Question", "name": "What are AEO and GEO, and does DMM do them?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. AEO (Answer Engine Optimization) makes your content the direct answer in search features and voice assistants. GEO (Generative Engine Optimization) builds the signals AI tools such as ChatGPT, Gemini, Claude and Perplexity use when recommending a business. We plan both alongside SEO and never promise a ranking or citation."}}, {"@type": "Question", "name": "Who does DMM work with?", "acceptedAnswer": {"@type": "Answer", "text": "Service businesses that win clients through inquiries, appointments and repeat visits: MedSpas, health and wellness brands, real estate teams, law firms, CPA firms, architects, contractors and home service companies, and multi-location brands. Each industry gets its own plan and its own review steps."}}, {"@type": "Question", "name": "What is the DMM Diagnosis?", "acceptedAnswer": {"@type": "Answer", "text": "It is a clear picture of your business before we recommend anything: how potential clients find you, where they drop off, how often current clients come back, and how nearby competitors compare. Its depth grows with the plan you choose, so it is part of working with us, not a free full audit."}}, {"@type": "Question", "name": "Will AI agents replace my team?", "acceptedAnswer": {"@type": "Answer", "text": "No. Agents handle the repeatable first steps, such as replying, booking and following up, so your team can focus on the service, the judgment calls and the relationships. People stay in charge of every decision that matters."}}, {"@type": "Question", "name": "How is an AI agent different from a chatbot?", "acceptedAnswer": {"@type": "Answer", "text": "A chatbot answers questions. An agent also takes action: it books the appointment, updates the record, sends the follow-up and reports what it did. Agents talk with people naturally by chat, text or voice, and every agent has a review point where your team can step in."}}, {"@type": "Question", "name": "Which tools do the AI agents work with?", "acceptedAnswer": {"@type": "Answer", "text": "Agents connect to the scheduling, CRM and messaging tools you already use. We map your current setup during your diagnosis and confirm compatibility before any build starts, so you aren't asked to replace systems that already work."}}, {"@type": "Question", "name": "How much does DMM cost?", "acceptedAnswer": {"@type": "Answer", "text": "We quote after your diagnosis, because cost depends on your goals, volume and tools. AI agent plans come in three tiers, Foundation, Growth and Full Journey, each with a one-time setup fee and a monthly retainer. Marketing services are scoped to the channels you actually need."}}, {"@type": "Question", "name": "How long until we see results?", "acceptedAnswer": {"@type": "Answer", "text": "It depends on the channel. Advertising, chat and agent follow-up can show early signals sooner, while SEO, AEO, GEO and content build over months. We agree on what to measure up front and report on it regularly, so you see progress along the way."}}, {"@type": "Question", "name": "How do I get started?", "acceptedAnswer": {"@type": "Answer", "text": "Book a call or send a short note about your business. We talk through your goals, run your DMM Diagnosis, and come back with a plan sized to your investment. You decide what moves forward."}}, {"@type": "Question", "name": "Does DMM work with businesses outside New Jersey?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. DMM is based in Montclair, New Jersey, and works with service businesses in New Jersey and beyond. Our diagnosis, campaigns and agents are delivered remotely, with calls and video meetings at times that suit your team."}}]}</script>
+  <section class="final-cta" id="cta">
+    <div class="wrap">
+      <div class="eyebrow" style="justify-content:center;">Get Started</div>
+      <h2>See which <span class="rot-word" data-rotate='agents|systems|automations|programmatic tactics' aria-live="off">agents</span> your business is <em>missing.</em></h2>
+      <div class="cta-row"><a href="/contact-us#book-audit" class="btn btn-primary">Book Your Free Growth Audit →</a><a href="tel:+19174982737" class="btn btn-ghost on-light call-btn" aria-label="Call Digital Masterminds"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;margin-right:6px"><path d="M5 4h3l2 5-2.5 1.5a11 11 0 0 0 6 6L15 14l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>Call us</a></div>
+      <p class="cta-bundle">Digital marketing, creative, lead generation, AI agents, reporting and communications, planned as one bundle.</p>
+      <p class="cta-note">Want a second opinion first? <a class="textlink" href="mailto:info@dmmkt.tech">Send a short note</a> about your business and we will reply with a plain-language suggestion.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-logo"><a href="/"><img src="/assets/logo-white.webp" alt="Digital Masterminds — Martech Solutions" width="520" height="150" style="height:60px;width:auto;" loading="lazy"></a></div>
+        <p style="color:#A39DB3; font-size:13.5px; max-width:32ch; margin-top:12px;">Digital marketing and AI agent infrastructure for service businesses. Based in Montclair, NJ.</p><a class="foot-call" href="tel:+19174982737" aria-label="Call Digital Masterminds"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;margin-right:6px"><path d="M5 4h3l2 5-2.5 1.5a11 11 0 0 0 6 6L15 14l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>Call us</a>
+      </div>
+      <div class="foot-cols">
+        <div class="foot-col"><h5 aria-level="3">Services</h5><a href="/digital-marketing-solutions">Digital Marketing Solutions</a><a href="/creative">Creative</a><a href="/lead-generation">Lead Generation</a><a href="/conversion-management-hub">Conversion Management Hub</a><a href="/reports-analytics">Reports &amp; Analytics</a><a href="/communications">Communications</a><a href="/ai-agents">Our AI Agents</a></div>
+        <div class="foot-col"><h5 aria-level="3">Who We Help</h5><a href="/med-spas">MedSpas</a><a href="/health-wellness">Health &amp; Wellness Brands</a><a href="/construction-home-services">Construction &amp; Home Services</a><a href="/law-firms">Law Firms</a><a href="/franchises-multi-locations">Franchises &amp; Multi-Locations</a><a href="/other-businesses">Other Businesses</a><a href="/real-estate">Real Estate</a><a href="/architects">Architects</a><a href="/cpas">CPAs</a></div>
+        <div class="foot-col"><h5 aria-level="3">Company</h5>
+          <a href="/contact-us">Contact Us</a>
+          <a href="https://digitalmasterminds.marketing/who-we-are/">Who We Are</a>
+          <a href="https://digitalmasterminds.marketing/our-team/">Meet The Team</a>
+          <a href="/blog">Blog</a>
+          <a href="/case-studies">Case Studies</a>
+          <a href="/events">Events</a>
+          <a href="http://app.digitalmastermindshq.com/">Client Portal</a>
+          <a href="/privacy-policy">Privacy Policy</a>
+          <a href="/cookies">Cookie Policy</a>
+          <a href="/terms-and-conditions">Terms of Use</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-news">
+      <form id="newsletterForm" class="news-form" novalidate>
+        <div class="news-copy"><strong>Get the DMM newsletter</strong><span>Practical AI and marketing insights for your business.</span></div>
+        <div class="news-row"><label for="newsEmail" class="sr-only">Email address</label>
+          <input id="newsEmail" name="email" type="email" autocomplete="email" placeholder="Your email" required>
+          <button type="submit" class="btn btn-primary">Subscribe</button></div>
+        <p class="news-fine">By subscribing, you agree to receive emails from DMM. Unsubscribe anytime. See our <a href="/privacy-policy">Privacy Policy</a>.</p>
+        <p class="news-msg" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+    <div class="foot-bottom">© 2026 Digital Masterminds. Serving businesses in New Jersey and beyond.</div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var r = document.querySelector('.rot-word');
+  if (r) {
+    var w = r.getAttribute('data-rotate').split('|'), i = 0;
+    r.style.minWidth = '0';
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setInterval(function () {
+        r.classList.add('out');
+        setTimeout(function () { i = (i + 1) % w.length; r.textContent = w[i]; r.classList.remove('out'); }, 350);
+      }, 5000);
+    }
+  }
+})();
+(function () {
+  var els = document.querySelectorAll('[data-tilt]');
+  if (!els.length || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  els.forEach(function (el) {
+    var raf = null;
+    function set(px, py) {
+      el.style.setProperty('--px', px.toFixed(3)); el.style.setProperty('--py', py.toFixed(3));
+      el.style.setProperty('--ry-x', (-py * 7).toFixed(2)); el.style.setProperty('--ry-y', (px * 9).toFixed(2));
+    }
+    el.addEventListener('pointermove', function (e) {
+      if (e.pointerType === 'touch') return;
+      var r = el.getBoundingClientRect(), px = ((e.clientX - r.left) / r.width) * 2 - 1, py = ((e.clientY - r.top) / r.height) * 2 - 1;
+      el.classList.add('is-hover');
+      if (raf) cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(function () { set(Math.max(-1, Math.min(1, px)), Math.max(-1, Math.min(1, py))); });
+    });
+    el.addEventListener('pointerleave', function () { el.classList.remove('is-hover'); set(0, 0); });
+  });
+})();
+
+  document.getElementById('navToggle').addEventListener('click', function(){
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+  document.querySelectorAll('.dd-trigger').forEach(function(t){
+    if (t.tagName !== 'BUTTON') return;
+    t.addEventListener('click', function(){ t.parentElement.classList.toggle('open'); });
+  });
+</script>
+<script>
+(function(){
+  // Remember where a visit came from (UTMs and ad click IDs) for this browser session, so the contact form can pass it to the CRM.
+  try {
+    var keys = ['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid','li_fat_id','fbclid','msclkid'];
+    var q = new URLSearchParams(location.search), p = {}, found = false;
+    keys.forEach(function(k){ if (q.get(k)) { p[k] = q.get(k); found = true; } });
+    var old = sessionStorage.getItem('dmm_attr');
+    if (found || !old) {
+      var ref = document.referrer && document.referrer.indexOf(location.hostname) === -1 ? document.referrer : '';
+      if (found) sessionStorage.setItem('dmm_attr', JSON.stringify({ p: p, landing: location.pathname, referrer: ref }));
+    }
+  } catch(e) {}
+})();
+</script>
+<script>
+(function(){
+  // Newsletter sign-up -> HubSpot Forms API. Fill NEWSLETTER_FORM_GUID once the HubSpot form exists.
+  var PORTAL_ID = "246894641", NEWSLETTER_FORM_GUID = "";
+  var f = document.getElementById('newsletterForm'); if (!f) return;
+  var msg = f.querySelector('.news-msg'), email = f.querySelector('input[name=email]');
+  f.addEventListener('submit', function(e){
+    e.preventDefault();
+    var v = (email.value || '').trim();
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)) { msg.textContent = 'Please enter a valid email address.'; return; }
+    if (!NEWSLETTER_FORM_GUID) { msg.textContent = 'Newsletter sign-up is opening soon.'; return; }
+    var m = document.cookie.match(/hubspotutk=([^;]+)/);
+    fetch('https://api.hsforms.com/submissions/v3/integration/submit/' + PORTAL_ID + '/' + NEWSLETTER_FORM_GUID, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ fields:[{name:'email', value:v}], context:{ hutk: m ? m[1] : undefined, pageUri: location.href, pageName: document.title } })
+    }).then(function(r){ if(!r.ok) throw 0; msg.textContent = 'Thanks for subscribing.'; f.reset(); })
+      .catch(function(){ msg.textContent = 'Something went wrong. Please try again.'; });
+  });
+})();
+</script><script>
+(function(){
+  var els = document.querySelectorAll('[data-roll]'); if (!els.length) return;
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce || !('IntersectionObserver' in window)) { els.forEach(function(e){ e.classList.add('in'); }); return; }
+  document.documentElement.classList.add('js-roll');
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+  }, { threshold: 0.25 });
+  els.forEach(function(e){ io.observe(e); });
+})();
+</script>
+
+<script>
+(function(){
+  // Animated capability cards: play only while on screen; hold a still frame for reduced-motion users.
+  var svgs = document.querySelectorAll('.cap-anim svg'); if (!svgs.length) return;
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  svgs.forEach(function(s){ if (reduce && s.pauseAnimations) { s.pauseAnimations(); try { s.setCurrentTime(3.4); } catch(e){} } });
+  if (reduce || !('IntersectionObserver' in window)) return;
+  var io = new IntersectionObserver(function(es){ es.forEach(function(e){ var s=e.target; if(!s.pauseAnimations) return; e.isIntersecting ? s.unpauseAnimations() : s.pauseAnimations(); }); }, { threshold: 0.1 });
+  svgs.forEach(function(s){ io.observe(s); });
+})();
+</script>
+
+<!-- LinkedIn Insight Tag -->
+<script type="text/javascript">
+_linkedin_partner_id = "11122105";
+window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
+window._linkedin_data_partner_ids.push(_linkedin_partner_id);
+</script><script type="text/javascript">
+(function(l) {
+if (!l){window.lintrk = function(a,b){window.lintrk.q.push([a,b])};
+window.lintrk.q=[]}
+var s = document.getElementsByTagName("script")[0];
+var b = document.createElement("script");
+b.type = "text/javascript";b.async = true;
+b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js";
+s.parentNode.insertBefore(b, s);})(window.lintrk);
+</script>
+<noscript>
+<img height="1" width="1" style="display:none;" alt="" src="https://px.ads.linkedin.com/collect/?pid=11122105&fmt=gif" />
+</noscript>
+
+
+</body></html>

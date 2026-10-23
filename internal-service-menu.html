@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Service Menu (Internal) | Digital Masterminds</title>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap">
+<style>
+:root{--bg:#f4f1fb;--sheet:#ffffff;--ink:#171321;--ink2:#5a5170;--line:#e0d8f1;--violet:#6d28d9;--soft:#efe8fc;--on-violet:#fff;--warn:#b45309;--warn-bg:#fdf0dc;--good:#17803d;--f-d:'Poppins',system-ui,sans-serif;--f-b:'Inter',system-ui,sans-serif}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:14px/1.45 var(--f-b);margin:0;padding-block:20px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1000px;margin:0 auto}
+.banner{background:var(--warn-bg);color:var(--warn);border-radius:10px;padding:8px 12px;font-weight:600;font-size:12.5px;margin-bottom:14px}
+h1{font:700 26px/1.15 var(--f-d);margin:0 0 6px}
+h2{font:600 15px var(--f-d);margin:0 0 10px}
+.eyebrow{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--violet);font-weight:600;margin-bottom:6px}
+.card{background:var(--sheet);border:1px solid var(--line);border-radius:14px;padding:18px;margin-top:16px}
+.row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+@media(max-width:760px){.row{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.row{grid-template-columns:1fr}}
+label.f{display:block;font-size:12.5px;font-weight:600;margin:0 0 4px}
+input[type=text],select,textarea{width:100%;font:inherit;color:var(--ink);background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:9px 11px;min-height:40px}
+textarea{min-height:90px;font:12px/1.4 ui-monospace,Menlo,monospace}
+button{font:600 14px var(--f-b);border:0;border-radius:999px;padding:10px 18px;background:var(--violet);color:var(--on-violet);cursor:pointer;min-height:40px}
+button.ghost{background:var(--soft);color:var(--violet)}
+button:disabled{opacity:.5;cursor:not-allowed}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:620px}
+thead th{font:600 13px var(--f-d);text-align:center;padding:10px 6px;border-bottom:2px solid var(--ink)}
+thead th:first-child{text-align:left}
+thead th.sel{background:var(--soft);color:var(--violet);border-radius:8px 8px 0 0}
+td{padding:7px 6px;border-bottom:1px solid var(--line);text-align:center;vertical-align:middle}
+td.sel{background:var(--soft)}
+td.svc{text-align:left;width:46%}
+td.svc small{display:block;color:var(--ink2);font-size:12px}
+td.agent{width:16%;font-size:11.5px;color:var(--ink2);text-align:left}
+tr.sec th{background:var(--soft);text-align:left;font:600 13px var(--f-d);padding:8px;color:var(--violet)}
+tr.out td{opacity:.45}
+.cb{display:inline-flex;width:20px;height:20px;border:1.8px solid var(--ink2);border-radius:5px;align-items:center;justify-content:center;font-size:14px;font-weight:700;vertical-align:middle}
+.cb.on{background:var(--violet);border-color:var(--violet);color:#fff}
+input.pick{width:20px;height:20px;accent-color:var(--violet);cursor:pointer}
+.dash{color:var(--ink2)}
+.sum{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 12px}
+.chip{background:var(--soft);color:var(--violet);border-radius:999px;padding:4px 10px;font-size:12px;font-weight:600}
+pre{background:var(--soft);border-radius:10px;padding:12px;font-size:11.5px;overflow:auto;max-height:260px;margin:10px 0 0}
+.note{font-size:12.5px;color:var(--ink2)}
+:focus-visible{outline:2px solid var(--violet);outline-offset:2px}
+</style>
+</head>
+<body>
+<div class="wrap">
+ <div class="banner">Internal use only. Do not link or share. Protect this page with Cloudflare Access before launch.</div>
+ <div class="eyebrow">Digital Masterminds team</div>
+ <h1>Service menu and scope</h1>
+ <p class="note">Load a client estimate, confirm the add-ons, then send the scope to the project-management agent as tasks for the specialist agents.</p>
+
+ <section class="card" aria-labelledby="h-load">
+  <h2 id="h-load">1. Load the client estimate</h2>
+  <label class="f" for="paste">Paste the estimate JSON from the CRM note or n8n <span class="note">(or open this page with #q=... from n8n)</span></label>
+  <textarea id="paste" spellcheck="false" placeholder='{"schema":"dmm.calc.v1", ...}'></textarea>
+  <p><button type="button" id="loadBtn">Load estimate</button> <span class="note" id="loadMsg" role="status"></span></p>
+ </section>
+
+ <section class="card" aria-labelledby="h-scope">
+  <h2 id="h-scope">2. Confirm the scope</h2>
+  <div class="row">
+   <div><label class="f" for="cName">Client</label><input id="cName" type="text"></div>
+   <div><label class="f" for="cInd">Industry</label><input id="cInd" type="text"></div>
+   <div><label class="f" for="cEmail">Contact email</label><input id="cEmail" type="text"></div>
+   <div><label class="f" for="tierSel">Package</label><select id="tierSel"><option value="0">Foundation</option><option value="1">Growth</option><option value="2">Full Journey</option></select></div>
+   <div><label class="f" for="mixSel">Services</label><select id="mixSel"><option value="bundle">Marketing + AI agents</option><option value="dm">Marketing only</option><option value="ai">AI agents only</option></select></div>
+  </div>
+  <div class="tw" style="margin-top:14px"><table>
+   <thead><tr><th>Service or tactic</th><th class="tier">Foundation</th><th class="tier">Growth</th><th class="tier">Full Journey</th><th style="text-align:left;font-size:12px">Owner agent</th></tr></thead>
+   <tbody id="tbody"></tbody></table></div>
+  <p class="note">Check boxes in the highlighted column are add-ons for the selected package. Checked boxes become tasks.</p>
+ </section>
+
+ <section class="card" aria-labelledby="h-out">
+  <h2 id="h-out">3. Hand off</h2>
+  <div class="sum" id="sum"></div>
+  <button type="button" id="copyBtn">Copy project brief (JSON)</button>
+  <button type="button" class="ghost" id="pmBtn">Send to project-management agent</button>
+  <span class="note" id="copyMsg" role="status"></span> <span class="note" id="pmMsg" role="status"></span>
+  <pre id="briefOut" aria-label="Project brief JSON">The brief appears here after you copy it.</pre>
+ </section>
+</div>
+<script>
+(function(){
+var MENU=[{"sec": "dm", "title": "Digital marketing and visibility", "items": [{"id": "tracking", "label": "Tracking setup: GA4, tag manager, call and form tracking", "note": "", "st": ["I", "I", "I"], "agent": "analytics-agent", "kind": "s"}, {"id": "gbp", "label": "Google Business Profile and local listings set up and cleaned", "note": "", "st": ["I", "I", "I"], "agent": "local-presence-agent", "kind": "s"}, {"id": "review-req", "label": "Review requests after every visit or job", "note": "", "st": ["I", "I", "I"], "agent": "local-presence-agent", "kind": "r"}, {"id": "brand-ads", "label": "Brand and high-intent search ads (starter budget)", "note": "", "st": ["I", "I", "I"], "agent": "paid-media-agent", "kind": "r"}, {"id": "search-ads", "label": "Search ads on core service keywords", "note": "", "st": ["A", "I", "I"], "agent": "paid-media-agent", "kind": "r"}, {"id": "seo", "label": "Local and on-page SEO", "note": "", "st": ["A", "I", "I"], "agent": "seo-aeo-agent", "kind": "r"}, {"id": "aeo", "label": "AEO and GEO content (AI answer-engine visibility), monthly cadence", "note": "", "st": ["A", "I", "I"], "agent": "seo-aeo-agent", "kind": "r"}, {"id": "content", "label": "Content marketing and blog support", "note": "", "st": ["A", "I", "I"], "agent": "content-agent", "kind": "r"}, {"id": "meta-retarget", "label": "Meta retargeting and awareness (Facebook and Instagram)", "note": "", "st": ["A", "I", "I"], "agent": "paid-media-agent", "kind": "r"}, {"id": "goal-paid", "label": "Goal-based paid search and paid social (leads, bookings or calls)", "note": "", "st": ["N", "A", "I"], "agent": "paid-media-agent", "kind": "r"}, {"id": "plat-extra", "label": "Additional ad platforms: TikTok, Reddit, Quora", "note": "Budget is split across platforms, not multiplied", "st": ["A", "A", "A"], "agent": "paid-media-agent", "kind": "r"}, {"id": "social-organic", "label": "Organic social media management", "note": "", "st": ["A", "A", "A"], "agent": "content-agent", "kind": "r"}, {"id": "competitor", "label": "Competitor benchmarking", "note": "", "st": ["A", "I", "I"], "agent": "analytics-agent", "kind": "r"}, {"id": "market-analysis", "label": "Market analysis: share of voice and competitive intelligence", "note": "", "st": ["A", "A", "I"], "agent": "analytics-agent", "kind": "r"}, {"id": "paid-tech", "label": "Paid search technical support", "note": "", "st": ["N", "A", "I"], "agent": "paid-media-agent", "kind": "r"}]}, {"sec": "web", "title": "Creative, web and technology", "items": [{"id": "site-tuneup", "label": "Tune-up of your existing website", "note": "", "st": ["I", "I", "I"], "agent": "web-landing-agent", "kind": "s"}, {"id": "lp-included", "label": "New landing pages included", "note": "0 / 1 / up to 3", "st": ["N", "I", "I"], "agent": "web-landing-agent", "kind": "s"}, {"id": "extra-pages", "label": "Additional landing pages, based on products or services promoted", "note": "Quoted per page", "st": ["A", "A", "A"], "agent": "web-landing-agent", "kind": "s"}, {"id": "cro-test", "label": "Landing-page and creative testing", "note": "", "st": ["A", "A", "I"], "agent": "web-landing-agent", "kind": "r"}, {"id": "ad-creative", "label": "Ad creative and design", "note": "", "st": ["A", "A", "I"], "agent": "creative-agent", "kind": "r"}, {"id": "video", "label": "Video production", "note": "", "st": ["A", "A", "A"], "agent": "creative-agent", "kind": "s"}, {"id": "new-site", "label": "New website build", "note": "Scoped and quoted separately", "st": ["A", "A", "A"], "agent": "dev-lead", "kind": "s"}, {"id": "custom-app", "label": "Custom application development", "note": "Scoped and quoted separately", "st": ["N", "N", "C"], "agent": "dev-lead", "kind": "s"}]}, {"sec": "lead", "title": "Lead generation and conversion", "items": [{"id": "crm-forms", "label": "Lead capture forms connected to your CRM", "note": "", "st": ["A", "I", "I"], "agent": "crm-ops-agent", "kind": "s"}, {"id": "lead-qual", "label": "Lead qualification and routing", "note": "", "st": ["A", "I", "I"], "agent": "crm-ops-agent", "kind": "s"}, {"id": "attribution", "label": "Booking and call attribution reporting", "note": "", "st": ["A", "A", "I"], "agent": "analytics-agent", "kind": "r"}, {"id": "email-fu", "label": "Email follow-up campaigns", "note": "", "st": ["A", "I", "I"], "agent": "lifecycle-agent", "kind": "r"}, {"id": "sms-fu", "label": "SMS follow-up campaigns", "note": "", "st": ["A", "I", "I"], "agent": "lifecycle-agent", "kind": "r"}]}, {"sec": "ai", "title": "AI agents on the Corestack", "items": [{"id": "ag-lead", "label": "Lead Response Agent", "note": "", "st": ["I", "I", "I"], "agent": "agent-builder", "kind": "s"}, {"id": "ag-sched", "label": "Scheduling and Reminder Agent", "note": "", "st": ["I", "I", "I"], "agent": "agent-builder", "kind": "s"}, {"id": "ag-intake", "label": "Intake and Qualification Agent", "note": "", "st": ["A", "I", "I"], "agent": "agent-builder", "kind": "s"}, {"id": "ag-nurture", "label": "Nurture and Follow-Up Agent", "note": "", "st": ["A", "I", "I"], "agent": "agent-builder", "kind": "s"}, {"id": "ag-review", "label": "Review and Reputation Agent", "note": "", "st": ["A", "I", "I"], "agent": "agent-builder", "kind": "s"}, {"id": "ag-voice", "label": "AI Voice Agent for calls and after-hours inquiries", "note": "", "st": ["A", "A", "I"], "agent": "voice-agent-builder", "kind": "s"}, {"id": "ag-content", "label": "Content and creative agents", "note": "", "st": ["N", "A", "I"], "agent": "agent-builder", "kind": "s"}, {"id": "ag-avatar", "label": "Interactive AI video avatar with multilingual greetings", "note": "Full Journey only", "st": ["N", "N", "I"], "agent": "voice-agent-builder", "kind": "s"}, {"id": "ag-dash", "label": "Client dashboard for agent activity and results", "note": "", "st": ["N", "A", "I"], "agent": "dashboard-builder", "kind": "s"}, {"id": "ag-allow", "label": "Conversations included each month", "note": "400 / 1,200 / 3,000", "st": ["I", "I", "I"], "agent": "agent-builder", "kind": "r"}, {"id": "ag-extra", "label": "Extra conversations above the allowance", "note": "Reviewed case by case", "st": ["A", "A", "A"], "agent": "agent-builder", "kind": "r"}, {"id": "ag-integ", "label": "Added integrations with your existing tools", "note": "", "st": ["A", "A", "A"], "agent": "integration-agent", "kind": "s"}, {"id": "ag-custom", "label": "Custom agent for an industry-specific workflow", "note": "", "st": ["A", "A", "A"], "agent": "agent-builder", "kind": "s"}]}, {"sec": "comm", "title": "Communications and reporting", "items": [{"id": "sms-inbox", "label": "Two-way SMS and scheduling inbox", "note": "", "st": ["A", "I", "I"], "agent": "comms-agent", "kind": "s"}, {"id": "web-chat", "label": "Web chat on your site", "note": "", "st": ["A", "I", "I"], "agent": "comms-agent", "kind": "s"}, {"id": "consent", "label": "Consent and quiet-hours setup for messaging", "note": "", "st": ["I", "I", "I"], "agent": "comms-agent", "kind": "s"}, {"id": "diagnosis", "label": "Diagnosis of your business", "note": "Focused / adds drop-off and competitors / all five stages", "st": ["I", "I", "I"], "agent": "strategy-lead", "kind": "s"}, {"id": "reporting", "label": "Performance reporting", "note": "Monthly / weekly / live", "st": ["I", "I", "I"], "agent": "reporting-agent", "kind": "r"}, {"id": "tuning", "label": "Ongoing tuning and optimization", "note": "", "st": ["N", "A", "I"], "agent": "strategy-lead", "kind": "r"}]}];
+var PM_WEBHOOK="";   // n8n webhook for the project-management agent (empty = disabled)
+var TIERS=['foundation','growth','full'],TNAME=['Foundation','Growth','Full Journey'];
+var $=function(i){return document.getElementById(i)};
+var state={tier:1,mix:'bundle',payload:null,picked:{}};
+function out(sec){return (state.mix==='dm'&&sec==='ai')||(state.mix==='ai'&&(sec==='dm'||sec==='web'||sec==='lead'))}
+function render(){
+ var t=state.tier,h='';
+ MENU.forEach(function(S){
+  h+='<tr class="sec"><th colspan="5">'+S.title+(out(S.sec)?' (not in this scope)':'')+'</th></tr>';
+  S.items.forEach(function(it){
+   var o=out(S.sec);
+   h+='<tr class="'+(o?'out':'')+'"><td class="svc">'+it.label+(it.note?'<small>'+it.note+'</small>':'')+'</td>';
+   for(var k=0;k<3;k++){
+    var v=it.st[k],sel=k===t,c='';
+    if(sel&&!o&&(v==='A'||v==='C'))c='<input class="pick" type="checkbox" data-id="'+it.id+'" aria-label="'+it.label+'"'+(state.picked[it.id]?' checked':'')+'>';
+    else c=v==='I'?'<span class="cb on">&#10003;</span>':(v==='A'?'<span class="cb"></span>':(v==='C'?'<span class="cb" style="border-style:dashed">?</span>':'<span class="dash">&ndash;</span>'));
+    h+='<td class="'+(sel?'sel':'')+'">'+c+'</td>';
+   }
+   h+='<td class="agent">'+it.agent+'</td></tr>';
+  });
+ });
+ $('tbody').innerHTML=h;
+ var ths=document.querySelectorAll('thead th.tier');for(var i=0;i<ths.length;i++)ths[i].className='tier'+(i===t?' sel':'');
+ summary();
+}
+function tasks(){
+ var t=state.tier,L=[];
+ MENU.forEach(function(S){S.items.forEach(function(it){
+  if(out(S.sec))return;
+  var v=it.st[t];
+  if(v==='I')L.push({id:it.id,service:it.label,category:S.title,agent:it.agent,kind:it.kind==='s'?'setup':'recurring',status:'included'});
+  else if((v==='A'||v==='C')&&state.picked[it.id])L.push({id:it.id,service:it.label,category:S.title,agent:it.agent,kind:it.kind==='s'?'setup':'recurring',status:v==='C'?'custom_quote_requested':'add_on_selected'});
+ })});
+ return L;
+}
+function brief(){
+ var P=state.payload||{},L=tasks();
+ return {schema:'dmm.project-brief.v1',createdAt:new Date().toISOString(),
+  client:{name:$('cName').value,industry:$('cInd').value,contactEmail:$('cEmail').value},
+  scope:{package:TIERS[state.tier],packageName:TNAME[state.tier],servicesMix:state.mix,platforms:(P.inputs&&P.inputs.platforms)||[],productsOrServices:(P.inputs&&P.inputs.productsOrServices)||null},
+  estimate:P.results||null,
+  taskCounts:{total:L.length,included:L.filter(function(x){return x.status==='included'}).length,addOns:L.filter(function(x){return x.status!=='included'}).length},
+  tasks:L};
+}
+function summary(){
+ var L=tasks(),by={};L.forEach(function(x){by[x.agent]=(by[x.agent]||0)+1});
+ $('sum').innerHTML='<span class="chip">'+L.length+' tasks</span>'+Object.keys(by).sort().map(function(a){return '<span class="chip">'+a+' · '+by[a]+'</span>'}).join('');
+}
+function load(p){
+ state.payload=p;var i=p.inputs||{};
+ state.tier=Math.max(0,TIERS.indexOf(i.package));state.mix=i.servicesMix||'bundle';
+ $('tierSel').value=state.tier;$('mixSel').value=state.mix;
+ $('cInd').value=i.industryName||'';
+ var c=p.contact||{};$('cName').value=c.company||'';$('cEmail').value=c.email||'';
+ state.picked={};var a=p.addOns||{};
+ if(a.extraLandingPages>0)state.picked['extra-pages']=true;
+ if(a.newWebsite)state.picked['new-site']=true;
+ if(a.customApp)state.picked['custom-app']=true;
+ if(a.extraAdPlatforms&&a.extraAdPlatforms.length)state.picked['plat-extra']=true;
+ render();
+}
+function tryLoad(txt){
+ try{var p=JSON.parse(txt);if(p.schema!=='dmm.calc.v1')throw 0;load(p);$('loadMsg').textContent='Loaded estimate for '+(p.inputs.industryName||'client')+'.'}
+ catch(e){$('loadMsg').textContent='That is not a calculator estimate. Paste the JSON from the CRM note or the n8n payload.'}
+}
+$('loadBtn').addEventListener('click',function(){tryLoad($('paste').value)});
+$('tierSel').addEventListener('change',function(){state.tier=+this.value;render()});
+$('mixSel').addEventListener('change',function(){state.mix=this.value;render()});
+$('tbody').addEventListener('change',function(e){var id=e.target.getAttribute('data-id');if(!id)return;state.picked[id]=e.target.checked;summary()});
+$('copyBtn').addEventListener('click',function(){
+ var j=JSON.stringify(brief(),null,2);$('briefOut').textContent=j;
+ var done=function(){$('copyMsg').textContent='Copied.'};
+ if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(j).then(done,function(){$('copyMsg').textContent='Copy blocked here. Select the text below.'});else $('copyMsg').textContent='Select the text below to copy.';
+});
+$('pmBtn').addEventListener('click',function(){
+ var b=brief(),m=$('pmMsg');
+ fetch(PM_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)}).then(function(r){if(!r.ok)throw 0;m.textContent='Sent to the project-management agent.'}).catch(function(){m.textContent='Could not reach the project-management agent.'});
+});
+if(!PM_WEBHOOK){$('pmBtn').disabled=true;$('pmMsg').textContent='Not connected yet. Set PM_WEBHOOK to the n8n webhook once the agent exists.'}
+try{var m=location.hash.match(/^#q=(.+)$/);if(m){var s=decodeURIComponent(m[1]).replace(/-/g,'+').replace(/_/g,'/');tryLoad(decodeURIComponent(escape(atob(s))))}}catch(e){}
+$('tierSel').value=state.tier;render();
+})();
+</script>
+</body>
+</html>
