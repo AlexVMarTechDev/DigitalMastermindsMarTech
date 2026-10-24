@@ -889,9 +889,9 @@ mark.ph{ background:#fff0a8; color:#4a3b00; padding:0 4px; border-radius:4px; }
           <script>
           // Carry campaign attribution (UTMs, ad click IDs) from the visitor's first page into the form via the URL, so HubSpot can read it.
           (function(){ try {
-            var s = sessionStorage.getItem('dmm_attr'); if (!s) return;
+            var s = sessionStorage.getItem('dmm_attr') || '{"p":{}}';
             var a = JSON.parse(s), u = new URL(location.href), changed = false;
-            Object.keys(a.p || {}).forEach(function(k){ if (!u.searchParams.has(k)) { u.searchParams.set(k, a.p[k]); changed = true; } });
+            Object.keys(a.p || {}).forEach(function(k){ if (!u.searchParams.has(k)) { u.searchParams.set(k, a.p[k]); changed = true; } }); var v = sessionStorage.getItem('dmm_vertical'); if (v && !u.searchParams.has('dmm_vertical')) { u.searchParams.set('dmm_vertical', v); changed = true; }
             if (changed) history.replaceState(null, '', u.toString());
           } catch(e){} })();
           </script>
