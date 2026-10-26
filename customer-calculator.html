@@ -603,7 +603,7 @@ init();
 <script>
 (function(){
   var PORTAL_ID="246894641";
-  var CALC_FORM_GUID="";      // HubSpot form GUID for the calculator form (create it, then paste the GUID here)
+  var CALC_FORM_GUID="d505892b-d738-44fc-a509-80b6a89fff54";  // HubSpot form: DMM Calculator (website)
   var N8N_WEBHOOK="";         // n8n webhook URL (production) that receives the full JSON payload
   var $=function(i){return document.getElementById(i)};
   var preview=!CALC_FORM_GUID&&!N8N_WEBHOOK;
@@ -614,9 +614,9 @@ init();
   function unlock(){$('gate').hidden=true;$('calcApp').hidden=false;try{sessionStorage.setItem('dmm_calc_unlocked','1')}catch(e){}window.scrollTo(0,0)}
   function hsPost(fields){
     if(!CALC_FORM_GUID)return Promise.resolve('skipped');
-    var a=attr().p||{};['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid','fbclid','msclkid','li_fat_id'].forEach(function(k){if(a[k])fields.push({name:k,value:a[k]})});
+    try{var dv=sessionStorage.getItem('dmm_vertical');if(dv&&!fields.some(function(x){return x.name==='dmm_vertical'}))fields.push({name:'dmm_vertical',value:dv})}catch(e){}
     return fetch('https://api.hsforms.com/submissions/v3/integration/submit/'+PORTAL_ID+'/'+CALC_FORM_GUID,{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({fields:fields,context:{hutk:hutk(),pageUri:location.href,pageName:document.title}})}).then(function(r){if(!r.ok)throw new Error('hubspot '+r.status);return 'ok'});
+      body:JSON.stringify({fields:fields,context:{hutk:hutk(),pageUri:location.href,pageName:document.title},legalConsentOptions:{consent:{consentToProcess:true,text:'I agree that Digital Masterminds may contact me about my estimate. See our Privacy Policy.'}}})}).then(function(r){if(!r.ok)throw new Error('hubspot '+r.status);return 'ok'});
   }
   function hook(obj){
     if(!N8N_WEBHOOK)return Promise.resolve('skipped');
@@ -652,7 +652,7 @@ init();
       f('calc_existing_inquiries',i.existingInquiries),f('calc_products_services',i.productsOrServices),f('calc_website_status',i.websiteStatus),f('calc_custom_app_interest',i.customAppInterest),
       f('calc_setup_fee',r.setupFee),f('calc_monthly_retainer',r.monthlyRetainer),f('calc_total_investment',r.totalInvestment),f('calc_est_return',r.estimatedReturn),
       f('calc_est_roi_pct',r.estimatedRoiPct),f('calc_payback_month',r.paybackMonth),f('calc_est_leads_month',r.leadsPerMonth),f('calc_est_customers_month',r.customersPerMonth),
-      f('calc_est_conversations',r.aiConversationsPerMonth),f('calc_add_on_pages',p.addOns.extraLandingPages),f('calc_submitted_at',p.submittedAt),f('calc_payload_json',JSON.stringify(p))];
+      f('calc_est_conversations',r.aiConversationsPerMonth),f('calc_add_on_pages',p.addOns.extraLandingPages),f('calc_payload_json',JSON.stringify(p))];
     if(!c.email){msg.textContent='Please unlock the calculator first.';return}
     if(preview){$('sendJson').textContent=JSON.stringify(p,null,2);$('sendPreview').hidden=false;msg.textContent='Preview mode: nothing was sent. The data below is what would go to the CRM.';return}
     btn.disabled=true;msg.textContent='Sending...';
