@@ -773,6 +773,7 @@ mark.ph{ background:#fff0a8; color:#4a3b00; padding:0 4px; border-radius:4px; }
 .hero-split:has(.hero-art-3d){ grid-template-columns:minmax(0,1fr) minmax(0,500px); }
 .hero-art-3d img{ aspect-ratio:1/1; border-radius:0; box-shadow:none; background:none; }
 @media (max-width:1000px){ .hero-art-3d{ max-width:460px; margin:0 auto; } }
+@media (max-width:1000px){ .hero-split:has(.hero-art-3d), .hero-split:has(.hero-art-sq){ grid-template-columns:minmax(0,1fr); gap:28px; } }
 
 /* Layered hero with hover tilt + parallax */
 .hero-art-3d{ position:relative; aspect-ratio:1/1; width:100%; transform-style:preserve-3d; transform:perspective(1100px) rotateX(calc(var(--ry-x,0) * 1deg)) rotateY(calc(var(--ry-y,0) * 1deg)); transition:transform .25s ease-out; will-change:transform; touch-action:pan-y; }
