@@ -279,7 +279,7 @@ body{padding-top:0}
 
       <section class="panel" id="sendPanel" aria-labelledby="h-send">
         <h2 id="h-send">Send this estimate to a strategist</h2>
-        <p class="note">We save your selections and numbers so your diagnosis starts from them. Nothing is purchased by sending.</p>
+        <p class="note">We save your selections and numbers so your diagnosis starts from them, and a strategist replies by email within one business day. Nothing is purchased by sending.</p>
         <button class="btn" type="button" id="sendBtn">Send my estimate</button>
         <p class="note" id="sendMsg" role="status"></p>
         <details id="sendPreview" hidden><summary>What would be sent (preview mode)</summary><pre id="sendJson" style="white-space:pre-wrap;font-size:11.5px;overflow-x:auto"></pre></details>
@@ -657,7 +657,7 @@ init();
     if(!c.email){msg.textContent='Please unlock the calculator first.';return}
     if(preview){$('sendJson').textContent=JSON.stringify(p,null,2);$('sendPreview').hidden=false;msg.textContent='Preview mode: nothing was sent. The data below is what would go to the CRM.';return}
     btn.disabled=true;msg.textContent='Sending...';
-    Promise.all([hsPost(fields),hook(p)]).then(function(){msg.textContent='Sent. Next step: book your discovery call below.';try{$('bookPanel').scrollIntoView({behavior:'smooth',block:'center'});$('bookBtn').focus({preventScroll:true})}catch(e){}}).catch(function(){btn.disabled=false;msg.textContent='Something went wrong. Please try again, or email us.'});
+    Promise.all([hsPost(fields),hook(p)]).then(function(){msg.textContent='Sent. A Digital Masterminds strategist will review your estimate and reply by email within one business day. Want to talk sooner? Book your discovery call below.';try{$('bookPanel').scrollIntoView({behavior:'smooth',block:'center'});$('bookBtn').focus({preventScroll:true})}catch(e){}}).catch(function(){btn.disabled=false;msg.textContent='Something went wrong. Please try again, or email us.'});
   });
 })();
 </script>
