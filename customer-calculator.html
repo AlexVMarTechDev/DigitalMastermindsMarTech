@@ -185,7 +185,7 @@ body{padding-top:0}
         <div><label class="f" for="gEmail">Work email</label><input id="gEmail" name="email" type="email" autocomplete="email" required></div>
         <div><label class="f" for="gCompany">Business name</label><input id="gCompany" name="company" type="text" autocomplete="organization" required></div>
         <div><label class="f" for="gPhone">Phone <span class="hint">optional</span></label><input id="gPhone" name="phone" type="tel" autocomplete="tel"></div>
-        <div><label class="f" for="gSite">Website <span class="hint">optional</span></label><input id="gSite" name="website" type="text" autocomplete="url"></div>
+        <div><label class="f" for="gSite">Website <span class="hint">optional</span></label><input id="gSite" name="website" type="text" autocomplete="url"><div aria-hidden="true" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden"><label for="gHp">Leave this field empty</label><input id="gHp" name="dmm_hp" type="text" tabindex="-1" autocomplete="off"></div></div>
       </div>
       <label class="chkrow"><input type="checkbox" id="gConsent"> <span>I agree that Digital Masterminds may contact me about my estimate. See our <a href="/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a>.*</span></label>
       <button class="btn" type="submit">Unlock the calculator</button>
@@ -631,6 +631,7 @@ init();
     if(!c.firstname||!c.lastname||!c.company){m.textContent='Please fill in your name and business name.';return}
     if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(c.email)){m.textContent='Please enter a valid email address.';return}
     if(!$('gConsent').checked){m.textContent='Please agree to be contacted so we can send your estimate.';return}
+    if($('gHp')&&$('gHp').value){unlock();return}
     m.textContent='One moment...';
     var fields=Object.keys(c).filter(function(k){return c[k]}).map(function(k){return f(k,c[k])});
     Promise.all([hsPost(fields),hook({schema:'dmm.calc.lead.v1',submittedAt:new Date().toISOString(),contact:c,attribution:attr(),page:location.pathname})])
