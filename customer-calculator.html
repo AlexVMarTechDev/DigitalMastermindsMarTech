@@ -284,6 +284,12 @@ body{padding-top:0}
         <p class="note" id="sendMsg" role="status"></p>
         <details id="sendPreview" hidden><summary>What would be sent (preview mode)</summary><pre id="sendJson" style="white-space:pre-wrap;font-size:11.5px;overflow-x:auto"></pre></details>
       </section>
+
+      <section class="panel" id="bookPanel" aria-labelledby="h-book">
+        <h2 id="h-book">Book your discovery call</h2>
+        <p class="note">Pick a time on our calendar for a free 30-minute call. We&#8217;ll walk through this estimate, your goals and where follow-up slips today.</p>
+        <a class="btn" id="bookBtn" style="display:inline-block;text-decoration:none" href="https://meetings-na2.hubspot.com/digital-masterminds?utm_source=website&amp;utm_medium=calculator&amp;utm_campaign=discovery-call" target="_blank" rel="noopener">Book my discovery call &#8594;</a>
+      </section>
     </div>
   </div>
 
@@ -632,6 +638,10 @@ init();
       .catch(function(){m.textContent='Something went wrong. Please try again, or email us.'});
   });
   try{if(sessionStorage.getItem('dmm_calc_unlocked')==='1')unlock()}catch(e){}
+  function bookLink(){var c=contact()||{},u='https://meetings-na2.hubspot.com/digital-masterminds?utm_source=website&utm_medium=calculator&utm_campaign=discovery-call';
+    ['firstname','lastname','email'].forEach(function(k){if(c[k])u+='&'+k+'='+encodeURIComponent(c[k])});$('bookBtn').href=u}
+  try{bookLink()}catch(e){}
+  $('bookBtn').addEventListener('click',function(){try{bookLink()}catch(e){}});
   $('sendBtn').addEventListener('click',function(){
     var c=contact()||{},p=window.DMM_CALC.payload(),msg=$('sendMsg'),btn=this;
     p.contact=c;p.attribution=attr();p.submittedAt=new Date().toISOString();p.page=location.pathname;
@@ -646,7 +656,7 @@ init();
     if(!c.email){msg.textContent='Please unlock the calculator first.';return}
     if(preview){$('sendJson').textContent=JSON.stringify(p,null,2);$('sendPreview').hidden=false;msg.textContent='Preview mode: nothing was sent. The data below is what would go to the CRM.';return}
     btn.disabled=true;msg.textContent='Sending...';
-    Promise.all([hsPost(fields),hook(p)]).then(function(){msg.textContent='Sent. A DMM strategist will follow up by email.';}).catch(function(){btn.disabled=false;msg.textContent='Something went wrong. Please try again, or email us.'});
+    Promise.all([hsPost(fields),hook(p)]).then(function(){msg.textContent='Sent. Next step: book your discovery call below.';try{$('bookPanel').scrollIntoView({behavior:'smooth',block:'center'});$('bookBtn').focus({preventScroll:true})}catch(e){}}).catch(function(){btn.disabled=false;msg.textContent='Something went wrong. Please try again, or email us.'});
   });
 })();
 </script>
